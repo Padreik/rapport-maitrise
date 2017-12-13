@@ -1,14 +1,14 @@
 \chapter{Introduction à Moodle}
 
-Moodle est un environnement d'apprentissage en ligne (LMS, Learning Management System) développé par Martin Dougiamas.
-Cette plateforme est un logiciel libre développé en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (GNU Public License)} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
+Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) développé par Martin Dougiamas.
+Cette plateforme est un logiciel libre développé en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
 
-Moodle est un outil très modulaire, chaque enseignant peut créer ses cours comme il le souhaite.
-Chaque cours est séparé en sections définies en semaine, module, thème ou plusieurs autres configurations possibles.
-Pour chaque section on peut créer des activités: un texte à lire, des documents à télécharger, un forum, un sondage, un questionnaire en ligne, un devoir à remettre et plus encore.
+Moodle est un outil modulaire où chaque enseignant peut créer ses cours comme il le souhaite.
+Chaque cours est séparé en sections définies en semaine, module, thème ou selon plusieurs autres configurations possibles.
+Chaque section comporte plusieurs activités: un texte à lire, des documents à télécharger, un forum pour échanger, un sondage à compléter, un questionnaire en ligne, un devoir à remettre et plus encore.
 Chaque activité est hautement configurable.
 Par exemple, un devoir peut être fait individuellement ou en équipe, avoir une date et une heure de début et de fin de disponibilité avec un délai de retard permis.
-Dans les questionnaires en ligne un enseignant peut créer une banque de questions et sélectionner les questions désirées ou laisser le système en choisir aléatoirement.
+Dans les questionnaires en ligne, un enseignant peut créer une banque de questions et sélectionner les questions désirées ou laisser le système en choisir aléatoirement.
 
 \section{Activité questionnaire}
 
@@ -17,7 +17,7 @@ Tout d'abord, qu'est-ce qu'une activité Questionnaire?
 Cette activité permet à l'enseignant de créer un formulaire en ligne auquel les étudiants devront répondre.
 Il peut s'agir, par exemple, d'une évaluation sommative qui sera cumulée au carnet de notes Moodle, d'une évaluation formative ou d'un atelier qui pourra être refait plusieurs fois jusqu'à ce que l'étudiant atteigne une note prédéfinie.
 
-Parmi les options les plus utiles de cette activité nous avons (toutes optionnelles): Début et fin de disponibilité du questionnaire, le temps disponible à partir de l'ouverture du questionnaire, note pour passer, mélanger aléatoirement les questions, nombre de tentatives possibles, etc.
+Parmi les options les plus utiles de cette activité on retrouve (toutes optionnelles): début et fin de disponibilité du questionnaire, temps disponible à partir de l'ouverture du questionnaire, note pour passer, ordre aléatoire des questions, nombre de tentatives possibles, etc.
 
 Chaque questionnaire est composé d'un nombre de questions choisies dans une banque de questions.
 Les questions peuvent avoir un ordre précis ou être choisies aléatoirement parmi un ensemble de questions.
@@ -26,24 +26,24 @@ Voici une liste non exhaustive des types de questions:
 \begin{description}
   \item[Choix multiple]
   
-  Génère une liste de boutons radio ou de case à cocher.
-  Chaque bouton vaut un nombre de points entre -100\% et 100\% de la valeur de la question.
+  Génère une liste de boutons radio ou de cases à cocher.
+  Chaque bouton vaut un nombre de points entre -100\% et 100\% de la valeur de la question;
   
   \item[Réponse courte]
   
-  Affiche un champ texte corrigé à l'aide de réponses possibles ou d'expression régulière
+  Affiche un champ texte corrigé à l'aide de réponses possibles ou d'expressions régulières;
   
   \item[Numérique]
   
-  Affiche un champ texte pour valeur numérique pouvant prendre en compte une unité de mesure (km, cm et m par exemple).
+  Affiche un champ texte pour valeur numérique pouvant prendre en compte une unité de mesure (km, cm ou m par exemple);
   
   \item[Question Cloze]
   
-  Permets de créer un texte troué permettant plusieurs sous-questions de types choix multiples, réponse courte et numérique.
+  Permet de créer un texte troué permettant plusieurs sous-questions de types choix multiples, réponse courte ou numérique;
   
   \item[Composition]
   
-  Affiche un champ texte multiligne, multiligne avec police monospace ou WYSIWYG (What You See Is What You Get).
+  Affiche un champ texte multiligne, multiligne avec police monospace ou WYSIWYG (\textit{What You See Is What You Get}).
   L'étudiant doit écrire un texte à développement.
 \end{description}
 
@@ -53,15 +53,15 @@ Dû à sa nature, le type de question Composition est le seul qui ne peut pas se
 L'enseignant doit donc corriger manuellement toutes les réponses.
 Heureusement, Moodle inclut un module de correction manuelle qui permet au correcteur de corriger les questions de ce type.
 L'enseignant peut choisir de corriger étudiant par étudiant, évaluant chaque question d'un étudiant une après l'autre.
-Il peut aussi corriger question par question, la réponse de tous les étudiants à une question se retrouve sur une seule page, une en dessous de l'autre.
-Cette dernière méthode est très appréciée de certains enseignants, car elle permet de comparer toutes les réponses données et ainsi corriger de manière juste.
+Il peut aussi corriger question par question, la réponse de tous les étudiants à une question se retrouvant sur une seule page, une en dessous de l'autre.
+Cette dernière méthode est appréciée de certains enseignants, car elle permet de comparer toutes les réponses données et ainsi corriger de manière uniforme.
 
-Ce projet consiste donc de faciliter le travail du correcteur en créant un nouveau module Moodle qui:
+Ce projet consiste donc à faciliter le travail du correcteur en créant un nouveau module Moodle qui:
 
 \begin{enumerate}
-  \item Affichera la réponse de l'étudiant et la réponse de l'enseignant côte à côte afin de faciliter la tâche au correcteur.
-  \item Surlignera les mots clés donnés par l'enseignant dans la réponse de l'étudiant et de l'enseignant
-  \item Utilisera la racination ou la lemmisation afin de surligner les mots, peu importe leur accord
+  \item Affichera la réponse de l'étudiant et la réponse de l'enseignant côte à côte afin de faciliter la tâche au correcteur;
+  \item Surlignera les mots clés donnés par l'enseignant dans la réponse de l'étudiant et de l'enseignant;
+  \item Utilisera la racination ou la lemmisation afin de surligner les mots, peu importe leur accord.
 \end{enumerate}
 
-L'extension sera donc utile pour les questions à développement pour les textes descriptifs et pour des fonctions de programmations, mais le sera moins pour les textes d'opinion où il n'y a pas de \og bonne \fg{} réponse.
+Le module d'extension sera donc utile pour les questions à développement pour les textes descriptifs et pour des fonctions de programmation, mais le sera moins pour les textes d'opinion où il n'y a pas de \og bonne \fg{} réponse.

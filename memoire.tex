@@ -6,6 +6,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{float}
+\usepackage{caption}
 
 \usepackage{color}
 
@@ -31,6 +33,9 @@
   keywordstyle = \color{dkblue},
   style=default}
 
+\newfloat{lstfloat}{h}{lstfloat}
+\floatname{lstfloat}{Code}
+
 %\input macro  % Pour les définitions personnelles
 
 \begin{document}
@@ -38,7 +43,7 @@
 %%%%%%%%%%%%%%%%%%%%
 % Pour la page titre
 %%%%%%%%%%%%%%%%%%%%
-\title{Développement d'un module complémentaire Moodle d'aide à la correction des questions de type \og texte~long \fg{}}
+\title{Développement d'un module d'extension Moodle d'aide à la correction des questions de type \og texte~long \fg{}}
 % Votre nom complet tel qu'il apparaît à votre dossier du registrariat de l'UQAM
 \author{Philippe Girard}
 % Année et mois courant sauf si spécifié autrement pas \degreemonth et \degreeyear
@@ -68,6 +73,7 @@
 \tableofcontents % Pour générer la table des matières
 \listoftables % Pour générer la liste des tableaux
 \listoffigures % Pour générer la liste des figures
+\listof{lstfloat}{Liste des exemples de code}
 \include{resume}
 % Utilisez l'environnement  abstract pour rédiger votre résumé
 
