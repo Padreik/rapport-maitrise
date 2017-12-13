@@ -36,6 +36,15 @@
 \newfloat{lstfloat}{h}{lstfloat}
 \floatname{lstfloat}{Code}
 
+\renewcommand\listcodename{Liste des exemples de code}
+\renewcommand\listofcodes{% Pris de memoireuqam1.3.cls
+{
+    \listof{lstfloat}{\listcodename}
+    \addtocontents{toc}{\protect\vspace{1.5ex}}
+    \addcontentsline{toc}{chapter}{\UpperRef{\listcodename}}
+    }
+}
+
 %\input macro  % Pour les définitions personnelles
 
 \begin{document}
@@ -73,7 +82,7 @@
 \tableofcontents % Pour générer la table des matières
 \listoftables % Pour générer la liste des tableaux
 \listoffigures % Pour générer la liste des figures
-\listof{lstfloat}{Liste des exemples de code}
+\listofcodes % Pour générer la liste des exemples de code
 \include{resume}
 % Utilisez l'environnement  abstract pour rédiger votre résumé
 
@@ -85,7 +94,8 @@
 \include{introduction}
 % Utilisez l'environnement  introduction pour rédiger votre introduction
 \include{chapitre_introduction_moodle}
-\include{chapitre_moodle_extension}
+\include{chapitre_snowball}
+\include{chapitre_test}
 \include{chapitre_developpement}
 % \include{nom_de_fichier_du_chapitre_suivant}
 

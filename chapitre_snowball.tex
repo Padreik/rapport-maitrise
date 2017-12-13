@@ -1,0 +1,153 @@
+\chapter{Détection des mots clés}
+
+TODO: Introduire la lemmatisation et la racination
+
+\section{La lemmatisation}
+
+TODO: Décrire la lemmatisation et pourquoi on ne l'utilise pas
+
+\section{La racination}
+
+TODO: Décrire la racination et pourquoi on l'utilise
+
+\section{Snowball}
+
+Snowball est un petit langage de traitement de texte pour la racination de texte.
+Une application Snowball peut être compilée en C ou en Java.
+Le site web de Snowball donne l'algorithme de racination pour plusieurs langues: anglais, français, espagnol, allemand, russe, etc.
+L'algorithme pour la langue anglaise se base sur l'algorithme de Porter.
+L'auteur a créé une deuxième version en se basant sur les algorithmes des langues latines.
+L'origine des algorithmes donnés pour les langues latines, ce qui inclut la langue française, n'est pas donnée, mais semble venir aussi de Porter avec l'aide de contributeurs.
+La libraire PHP utilisée a été écrite en PHP par Wamania en se basant sur les algorithmes écrits en Snowball.
+Le reste de cette section tente d'expliquer la logique derrière l'algorithme de Snowball pour le français.
+L'algorithme est séparé en six étapes en plus d'une étape de préparation et d'une étape finale.
+
+\subsection*{Préparation}
+
+Premièrement, le mot est transformé en minuscule par php-stemmer.
+Les lettres u et i précédées et suivies par une voyelle, les lettres y précédées ou suivies par une voyelle ainsi que les u précédées de q sont mises en majuscules.
+Les lettres en majuscules sont considérées en tant que consonnes dans l'algorithme.
+Par exemple, dans le mot \og joUer \fg{}, le U ne sera pas considéré comme une minuscule.
+Pour déterminer si une lettre est une voyelle, l'algorithme utilise une liste de lettres (a, e, i, o, u, y, â, à, ë, é, ê, è, ï, î, ô, û et ù).
+Donc une voyelle en majuscule ne fera pas partie de la liste.
+
+Ensuite il faut trouver trois sections dans le mot: RV (right vowel), R1 (right 1) et R2 (right 2).
+Dans les exemples qui suivent, les lettres soulignées indiquent les lettres faisant partie du groupe.
+
+\begin{description}
+  \item[RV]
+  
+  Si le mot débute par deux voyelles, RV débute après la troisième lettre (oub\underline{lier}).
+  Si le mot commence par \og par, col ou tap \fg{}, RV définit les lettres qui suivent (col\underline{onne}).
+  Dans les autres cas, RV débute après la première voyelle excluant la première lettre (bo\underline{njour}, algo\underline{rithme}).
+  Si aucune de ses règles ne s'applique, RV est vide (un sigle comme IBN).
+  RV n'existe pas dans l'algorithme de la langue anglaise.
+  
+  \item[R1]
+  
+  R1 débute après la première consonne précédée d'une voyelle (aim\underline{er}, tap\underline{is}).
+  R1 est vide s'il n'y a pas de telle consonne.
+  
+  \item[R2]
+  
+  R2 débute après la première consonne précédée d'une voyelle dans R1 (fameus\underline{ement}).
+  R2 est vide s'il n'y a pas de telle consonne.
+\end{description}
+
+RV peut contenir R1 et inversement.
+Les lettres qui ne sont pas dans R1 ni dans RV ne seront pas touchées sauf pour quelques exceptions.
+
+\subsection*{Étape 1: Suffixes standards}
+
+Cette étape sert à trouver la racine des mots, adjectifs, adverbes, etc.
+
+Trouver le suffixe le plus long parmi une liste donnée et faire l'action correspondante.
+Voici des exemples de la liste qui compte 43 suffixes et 24 règles.
+
+\begin{itemize}
+  \item \textbf{ance iqUe isme able ...}: Supprimer si dans R2;
+  \item \textbf{atrice ateur ation ...}: Supprimer si dans R2. Si précédé de \textbf{ic}, supprimer si dans R2, sinon remplacer par \textbf{iqU};
+  \item \textbf{logie logies}: Remplacer par \textbf{log} si dans R2;
+  \item \textbf{eaux}: Remplacer par \textbf{eau};
+  \item \textbf{aux}: Remplacer par \textbf{al} si dans R1;
+  \item \textbf{amment}: Remplacer par \textbf{ant} si dans RV;
+  \item \textbf{emment}: Remplacer par \textbf{ent} si dans RV;
+  \item \textbf{ment ments}: Supprimer si dans RV.
+\end{itemize}
+
+\subsection*{Étape 2: Suffixes de verbes}
+
+Cette étape trouve la racine d'un verbe.
+On cherche et enlève les suffixes standards.
+
+Faire cette étape seulement si l'étape 1 n'a rien changé ou si un des suffixes suivants a été trouvé: amment, emment, ment et ments.
+
+\subsubsection*{Étape 2a: Suffixes débutant par i}
+
+Trouver le suffixe le plus long parmi la liste ci-dessous.
+S'il est précédé d'une consonne et que le tout est dans RV, supprimer le suffixe excluant la consonne supplémentaire.
+
+îmes, ît, îtes, i, ie, ies, ir, ira, irai, iraIent etc.
+
+\subsubsection*{Étape 2b: Autres suffixes de verbes}
+
+Trouver le suffixe le plus long parmi les trois listes ci-dessous.
+Les listes sont non-exaustives afin d'alléger le texte.
+
+\begin{description}
+  \item[ions]
+  
+  Supprimer si dans RV et R2;
+  
+  \item[é ée ées és èrent er era erai eraIent ...]
+  
+  Supprimer si dans RV;
+  
+  \item[âmes ât âtes a ai aIent ...]
+  
+  Supprimer si dans RV. Si la lettre e précède le suffixe et qu'elle se trouve aussi dans RV, la supprimer.
+\end{description}
+
+\subsection*{Étape 3: Dernière lettre}
+
+Si les étapes 1 ou 2 ont modifié le mot, faire cette étape, sinon passer à l'étape 4.
+
+Si la dernière lettre est un Y, la remplacer par i.
+Si c'est un ç, la remplacer par c.
+
+\subsection*{Étape 4: Résidue du suffixe}
+
+Faire cette étape seulement si les étapes 1 à 3 n'ont pas modifié le mot.
+Cette étape sert à enlever le pluriel et le féminin des mots proches de leurs racines.
+
+Si un mot se termine par \textbf{s} et n'est pas précédé de \textbf{a, i, o, u, è ou s}, supprimer ce s final.
+
+Si un mot se termine par \textbf{ion}, que cette finale se trouve dans RV et dans R2 et qu'elle est précédée de la lettre \textbf{s ou t} (cette dernière doit se trouver dans RV), supprimer la finale \textbf{ion}.
+
+Si un mot se termine par \textbf{ier, ière, Ier ou Ière} et que cette finale se trouve dans RV, remplacer cette dernière par \textbf{i}.
+
+Si un mot se termine par \textbf{e} et que cette lettre ce trouve dans RV, la supprimer.
+
+Si un mot se termine par \textbf{ë}, que cette lettre se trouve dans RV et qu'elle est précédée de \textbf{qu}, la supprimer.
+
+\subsection*{Étape 5: Dédoubler la lettre finale}
+
+Les suppressions et remplacements des étapes précédentes peuvent laisser une faute dans la racine du mot.
+Cette étape sert à enlever les lettres doubles de certaines finales de mots.
+
+Si un mot se termine par \textbf{enn, onn, ett, ell ou eill}, supprimer la dernière lettre.
+
+\subsection*{Étape 6: Accent final}
+
+Cette étape aussi sert a nettoyer la racine du mot.
+
+Si un mot se termine par la lettre \textbf{è ou é} suivit d'une ou de plusieurs consonnes, enlever l'accent de ce \textbf{e}.
+
+\subsection*{Finalisation}
+
+Finalement, on enlève les majuscules sur les voyelles ajoutées durant l'étape de préparation.
+
+Au final, on obtient la racine du mot.
+Lors de la comparaison de texte, il peut y avoir quelques problèmes.
+Par exemple les mots \og acceptables \fg{} et \og accepté \fg{} ont la même racine: \og accept \fg{}.
+Par contre le sens des 2 mots est différent.
