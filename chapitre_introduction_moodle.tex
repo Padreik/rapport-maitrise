@@ -1,6 +1,6 @@
 \chapter{Introduction à Moodle}
 
-Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) développé par Martin Dougiamas.
+Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) créé par Martin Dougiamas.
 Cette plateforme est un logiciel libre développé en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
 
 Moodle est un outil modulaire où chaque enseignant peut créer ses cours comme il le souhaite.
@@ -17,7 +17,7 @@ Tout d'abord, qu'est-ce qu'une activité Questionnaire?
 Cette activité permet à l'enseignant de créer un formulaire en ligne auquel les étudiants devront répondre.
 Il peut s'agir, par exemple, d'une évaluation sommative qui sera cumulée au carnet de notes Moodle, d'une évaluation formative ou d'un atelier qui pourra être refait plusieurs fois jusqu'à ce que l'étudiant atteigne une note prédéfinie.
 
-Parmi les options les plus utiles de cette activité on retrouve (toutes optionnelles): début et fin de disponibilité du questionnaire, temps disponible à partir de l'ouverture du questionnaire, note pour passer, ordre aléatoire des questions, nombre de tentatives possibles, etc.
+Parmi les options les plus utiles de cette activité, on retrouve (toutes optionnelles): début et fin de disponibilité du questionnaire, temps disponible à partir de l'ouverture du questionnaire, note de passage, ordre aléatoire des questions, nombre de tentatives possibles, etc.
 
 Chaque questionnaire est composé d'un nombre de questions choisies dans une banque de questions.
 Les questions peuvent avoir un ordre précis ou être choisies aléatoirement parmi un ensemble de questions.
@@ -39,7 +39,7 @@ Voici une liste non exhaustive des types de questions:
   
   \item[Question Cloze]
   
-  Permet de créer un texte troué permettant plusieurs sous-questions de types choix multiples, réponse courte ou numérique;
+  Permets de créer un texte lacunaire, chaque \og trou \fg{} peut être remplis avec une sous-question de type choix multiples, réponse courte ou numérique;
   
   \item[Composition]
   
@@ -52,8 +52,8 @@ Voici une liste non exhaustive des types de questions:
 Dû à sa nature, le type de question Composition est le seul qui ne peut pas se corriger automatiquement par Moodle.
 L'enseignant doit donc corriger manuellement toutes les réponses.
 Heureusement, Moodle inclut un module de correction manuelle qui permet au correcteur de corriger les questions de ce type.
-L'enseignant peut choisir de corriger étudiant par étudiant, évaluant chaque question d'un étudiant une après l'autre.
-Il peut aussi corriger question par question, la réponse de tous les étudiants à une question se retrouvant sur une seule page, une en dessous de l'autre.
+L'enseignant peut choisir de corriger le questionnaire en entier, un étudiant après l'autre.
+Il peut aussi corriger une question à la fois, affichant ainsi les réponses de tous les étudiants à cette question sur une seule page.
 Cette dernière méthode est appréciée de certains enseignants, car elle permet de comparer toutes les réponses données et ainsi corriger de manière uniforme.
 
 Ce projet consiste donc à faciliter le travail du correcteur en créant un nouveau module Moodle qui:
@@ -68,14 +68,19 @@ Le module d'extension sera donc utile pour les questions à développement pour 
 
 \section{Les modules d'extensions Moodle}
 
-Le côté modulaire de Moodle est aussi développé pour les enseignants que pour les programmeurs.
+Le côté modulaire de Moodle existe autant pour les enseignants que pour les programmeurs.
 Presque toutes les fonctionnalités de Moodle sont configurées à l'aide de modules d'extensions.
 Il y a des modules d'extensions pour changer l'apparence du site, pour gérer les compétences SCORM, pour exporter les données, pour changer le fonctionnement des questions, etc.
-Chaque module d'extension est développée par un membre de la communauté et est approuvée par un comité Moodle.
+Chaque module d'extension est développé par un membre de la communauté.
+La plupart de ceux-ci ce retrouve sur GitHub et quelques uns se retrouvent sur le \href{https://moodle.org/plugins/}{répertoire de module d'extensions Moodle}.
+Pour ajouter un nouveau module d'extension à ce répertoire, il faut qu'il soit approuvé par un comité Moodle.
+Le processus d'approbation est affiché à la figure \ref{plugin-workflow}.
+Il est possible d'installer un module d'extension non officiel en installant les fichiers au bon endroit dans l'arborescence Moodle.
 
 \begin{figure}[h!]
   \includegraphics[scale=0.7]{images/plugin-contribution-workflow.png}
   \caption[Flux d'acception d'un module d'extension Moodle]{Flux d'acception d'un module d'extension Moodle, \href{https://docs.moodle.org/dev/Plugin_contribution}{\mbox{https://docs.moodle.org/dev/Plugin\_contribution}}}
+  \label{plugin-workflow}
 \end{figure}
 
 Pour ajouter des fonctionnalités à l'activité questionnaires, il y a trois types de module d'extensions à considérer: un rapport de questionnaire, un type de question et un comportement de question.
@@ -87,7 +92,7 @@ On peut aussi se servir de ce type de module d'extension pour afficher les répo
 On peut aussi s'en servir afin de modifier les champs disponibles dans la configuration de base d'un questionnaire.
 
 Lors de l'analyse initiale du projet; il était prévu de se servir uniquement de ce type de module d'extension, car nous voulons uniquement modifier l'interface de correction.
-Par contre, comme nous voulons ajouter une liste de mots clés à une question et que ce type de module d'extension permet de modifier seulement le questionnaire, un seul module d'extension de ce type ne sera pas suffisante.
+Par contre, comme nous voulons ajouter une liste de mots clés à une question et que ce type de module d'extension permet de modifier seulement le questionnaire, un seul module d'extension de ce type ne sera pas suffisant.
 
 \subsection{Module d'extension type de question (\textit{Question type})}
 
@@ -112,7 +117,7 @@ Un comportement de question permet de:
 \end{enumerate}
 
 Comme nous désirons une correction manuelle, nous pouvons utiliser le comportement \og ManualGraded \fg{}.
-De plus, comme il est possible de contrôler directement l'apparence de la réponse et de la question avec le module d'extension \og Question type \fg{}, il n'est pas nécessaire de créer un module d'extension \og Comportement de question \fg{} pour modifier l'apparence de la question.
+De plus, comme il est possible de contrôler directement l'apparence de la réponse et de la question avec un module d'extension type de question, il n'est pas nécessaire de créer un module d'extension \og Comportement de question \fg{}.
 
 \section{Choix des modules d'extensions à créer}
 
@@ -122,5 +127,5 @@ Il reste à déterminer s'il faut utiliser un module d'extension rapport de ques
 
 En analysant le code du module d'extension de correction manuelle fournie de base avec Moodle (quiz\_grading) on découvre qu'elle fournit l'interface de correction, mais que la réponse de chaque étudiant est gérée par le type de question dans un affichage en lecture seulement.
 Les fonctionnalités prévues peuvent donc se trouver autant dans le type de question que dans un rapport de questionnaire, la complexité du code est la même pour les deux cas.
-Puisqu'il doit y avoir obligatoirement un module d'extension type de question et qu'une nouveau module d'extension rapport de questionnaire est facultative, il a été décidé de faire un seul module d'extension.
+Puisqu'il doit y avoir obligatoirement un module d'extension type de question et qu'un nouveau module d'extension rapport de questionnaire est facultative, il a été décidé de ne faire qu'un seul module d'extension.
 Le fait d'avoir un seul module d'extension facilite grandement l'installation pour d'autres administrateurs Moodle.

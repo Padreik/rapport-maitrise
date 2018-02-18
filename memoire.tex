@@ -36,8 +36,8 @@
 \newfloat{lstfloat}{h}{lstfloat}
 \floatname{lstfloat}{Code}
 
-\renewcommand\listcodename{Liste des exemples de code}
-\renewcommand\listofcodes{% Pris de memoireuqam1.3.cls
+\newcommand\listcodename{Liste des exemples de code}
+\newcommand\listofcodes{% Pris de memoireuqam1.3.cls
 {
     \listof{lstfloat}{\listcodename}
     \addtocontents{toc}{\protect\vspace{1.5ex}}
@@ -106,7 +106,8 @@
 % Page liminaires
 %%%%%%%%%%%%%%%%%%%%
 
-% \include{nom_de_fichier_d_une_annexe}
+% \include{annexe}
+\nocite{*}
 \bibliographystyle{apalike-uqam}
 \bibliography{bibliographie}
 \end{document}

@@ -1,5 +1,16 @@
 \begin{abstract}
 
-Résumé
+Ce projet consiste à développer un module d'extension (\textit{plugin}) Moodle pour aider la correction des textes à développement dans une activité de type \og questionnaire \fg{}.
+
+Le module d'extension développé est de type \og Type de question \fg{} basé sur le module d'extension \og \textit{qtype\_essay} \fg{}.
+Le nouveau type de question se comporte exactement comme \og \textit{qtype\_essay} \fg{} hormis qu'il ne permet pas la remise de fichiers et l'utilisation du \textit{WYSIWYG (What You See Is What You Get)}.
+Il ajoute les fonctionnalités suivantes dans le module de correction manuelle: mise en évidence de mots-clés trouvés par racination (\textit{stemming}) et affichage de la réponse de l'enseignant adjacent à la réponse de l'étudiant.
+
+Des tests unitaires ainsi que des tests d'acceptation ont été écrits afin de valider le fonctionnement de ce module d'extension.
+
+Les fonctionnalités de ce module d'extension ne sont pas suffisantes afin d'apporter une aide notable au correcteur.
+Des ajouts sont nécessaires tels que: remplacer la racination pour la lemmatisation afin d'améliorer la recherche de mots-clés, comparer les textes des étudiants entre eux afin de détecter le plagiat et faire de l'analyse syntaxique afin de donner une estimation de la note que mérite un texte basé sur les réponses précédemment corrigées.
+
+MOTS-CLÉS: Moodle, Test unitaire, Test d'acceptation, Racination, \textit{Snowball}
 
 \end{abstract}

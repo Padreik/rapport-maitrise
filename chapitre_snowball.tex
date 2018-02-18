@@ -1,14 +1,47 @@
-\chapter{Détection des mots clés}
+\chapter{Détection des mots-clés}
+\label{chap:keywords}
 
-TODO: Introduire la lemmatisation et la racination
+Afin de détecter les mots-clés, nous avons décidé d'utiliser la racine de chaque mot.
+En utilisant la racine de chaque mot, nous pouvons trouver les mots-clés, peu importe leur accord ou le temps de verbe.
+Deux techniques de recherche de racine d'un mot ont été retenus: la lemmatisation et la racination (\textit{stemming}).
+
+Lors du choix de la technique utilisée, nous avons considéré que:
+
+\begin{enumerate}
+  \item Le but du projet n'étant pas de faire de l'analyse linguistique, une librairie devra être utilisée si possible;
+  \item La librairie doit être écrite en PHP, langage utilisé par Moodle, afin de faciliter l'installation du module d'extension développé;
+  \item La librairie doit permettre de trouver la racine des mots en français, en anglais et plusieurs autres langues si possible afin de permettre l'utilisation du module d'extension à travers le monde.
+\end{enumerate}
 
 \section{La lemmatisation}
 
-TODO: Décrire la lemmatisation et pourquoi on ne l'utilise pas
+La lemmatisation consiste à trouver le lemme de chaque mot.
+Le lemme est la forme canonique d'un mot, soit l'infinitif pour un verbe, le masculin singulier pour un adjectif, etc.
+Par exemple, le lemme du verbe \og aimerait \fg{} est \og aimer \fg{}.
+Cette technique utilise habituellement un dictionnaire qui associe toutes les conjugaisons possibles d'un mot à leur lemme.
+Certaines librairies vont même considérer le contexte afin de trouver le bon lemme.
+
+Les librairies de lemmatisation écrites en PHP sont très rares.
+Lors de nos recherches, aucune de ces librairies ne supportait le français et l'anglais.
 
 \section{La racination}
 
-TODO: Décrire la racination et pourquoi on l'utilise
+La racination consiste à trouver la racine (parfois appelé radical ou stemme) de chaque mot.
+La racine est trouvée par algorithme en enlevant la fin du mot.
+Par exemple, la racine de \og aimerait \fg{} est \og aim \fg{}.
+Cette technique ignore la plupart des exceptions.
+
+La racination est moins précise que la lemmatisation.
+Par exemple la racine de \og courons \fg{} est la même que la racine de \og couronnement \fg{}, soit \og couron \fg{}.
+La lemmatisation ne fera pas la même erreur et trouvera les lemmes \og courir \fg{} et \og couronne \fg{}.
+En contrepartie, la recherche de la racine sera plus rapide avec un algorithme de racination qu'une recherche dans un dictionnaire de lemmes.
+
+Il existe quelques librairies de racination en PHP.
+Une d'elles est \href{https://github.com/wamania/php-stemmer}{php-stemmer} qui fait la racination en français, anglais, et 10 autres langues.
+Les algorithmes utilisés par php-stemmer sont basés sur les algorithmes écrits en Snowball, un langage développé pour la racination.
+L'algorithme de racination en anglais ainsi que Snowball ont été développés par Martin Porter.
+
+Comme nous avons trouvé une librairie de racination qui satisfait tous les critères et aucune librairie de lemmatisation n'en fait autant, ce projet va utiliser php-stemmer pour la découverte de mots-clés.
 
 \section{Snowball}
 
@@ -18,7 +51,8 @@ Le site web de Snowball donne l'algorithme de racination pour plusieurs langues:
 L'algorithme pour la langue anglaise se base sur l'algorithme de Porter.
 L'auteur a créé une deuxième version en se basant sur les algorithmes des langues latines.
 L'origine des algorithmes donnés pour les langues latines, ce qui inclut la langue française, n'est pas donnée, mais semble venir aussi de Porter avec l'aide de contributeurs.
-La libraire PHP utilisée a été écrite en PHP par Wamania en se basant sur les algorithmes écrits en Snowball.
+
+La libraire php-stemmer a été écrite en PHP par Wamania en se basant sur les algorithmes écrits en Snowball.
 Le reste de cette section tente d'expliquer la logique derrière l'algorithme de Snowball pour le français.
 L'algorithme est séparé en six étapes en plus d'une étape de préparation et d'une étape finale.
 

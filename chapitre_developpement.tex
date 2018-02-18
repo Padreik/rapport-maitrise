@@ -14,7 +14,7 @@ Les commentaires de copyrights ont été ajustés comme illustré à l'exemple d
  *
  * @package    qtype
  * @subpackage essayhelper
- * @copyright  2017 Philippe Girard
+ * @copyright  2018 Philippe Girard
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * Inspired by:
@@ -80,39 +80,16 @@ Finalement, les fonctionnalités suivantes ont été ajoutées:
 
 \section{Détection des mots clés}
 
-Un module d'extension Moodle est programmée avec le langage PHP.
-Le module d'extension développé devrait pouvoir fonctionner avec plusieurs langues afin de pouvoir le déployer sur le répertoire de modules d'extensions Moodle.
-
-Les mots-clés peuvent avoir des différences d'accord ou de conjugaison dans le texte de l'étudiant lorsqu'on les compare avec les mots-clés fournis par l'enseignant.
-Il faut donc ramener les mots à leur forme la plus simple.
-Deux techniques existent, la lemmatisation et la racination (\og stemming \fg{} en anglais).
-
-\begin{description}
-  \item[Lemmatisation]
-  
-  La lemmatisation met le mot dans sa forme la plus simple (singulier, masculin, infinitif, etc.).
-  Par exemple le verbe \og aimerait \fg{} sera transformé en \og aimer \fg{}.
-  
-  \item[Racination]
-  
-  La racination enlève la fin du mot afin d'en conserver seulement la racine.
-  Par exemple le verbe \og aimerait \fg{} sera transformé en \og aim \fg{}.
-\end{description}
-
-La lemmatisation est une solution plus exacte que la racination, mais beaucoup plus complexe.
-Mes recherches n'ont identifié aucune librairie PHP de lemmatisation fonctionnant avec plusieurs langues.
-Par contre il existe une librairie de racination libre de droits appelés php-stemmer \cite{phpstemmer}.
-Elle est sous \href{https://raw.githubusercontent.com/wamania/php-stemmer/master/LICENSE}{licence MIT} et utilise un algorithme développé par Martin Porter écrite dans un langage appelé Snowball \cite{snowball}.
-php-stemmer permet de faire la racination des mots en français, anglais, espagnol, allemand, italien, russe et plusieurs autres.
-
-Pour trouver la racine de tous les mots du texte, les caractères non alphanumériques sont remplacés par des espaces et le texte est découpé par les caractères d'espacements (espace, saut de ligne, tabulation, etc.).
+Comme cité dans le chapitre \autoref{chap:keywords}, nous utilisons la librairie \og php-stemmer \fg{} afin de trouver la racine de chaque mot.
+Pour trouver la racine de tous les mots du texte, il faut débuter par isoler tous les mots.
+Les caractères non alphanumériques sont remplacés par des espaces et le texte est découpé par les caractères d'espacements (espace, saut de ligne, tabulation, etc.).
 
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $sentence));
 \end{lstlisting}
 \caption{Isoler les mots du texte.}
-\label{code:commentaire}
+\label{code:isoler}
 \end{lstfloat}
 
 Ensuite, chaque mot est associé avec sa racine trouvée avec l'algorithme Snowball.
@@ -158,10 +135,20 @@ foreach ($usedKeywords as $keyword) {
 \label{code:commentaire}
 \end{lstfloat}
 
+\section{Tests}
+
+Les tests du module d'extension \og qtype\_essay \fg{} ont été conservés et adaptés à ce nouveau module d'extension.
+Le fonctionnement de base d'un module d'extension (création de question, modification de question, répondre à la question, etc.) a donc facilement été testé.
+Il ne restait plus qu'à tester les nouvelles foncitonnalités de mots-clés et d'affichage de la réponse de l'enseignant.
+
 \section{Tests d'acceptation}
 
-TODO: Tests effectués dans mon module d'extension...
+Les tests d'acceptation récupérés du module d'extension \textit{qtype\_essay} ont permis de trouver quelques problèmes le nouveau module d'extension.
+Par exemple, la fonctionnalité \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \textit{qtype\_essayhelper}.
+Le problème venait d'un dossier manquant dans le nouveau module d'extension.
+Le dossier \textit{backup} dans le module d'extension \textit{qtype\_essayhelper} ne contient pas des copies de sauvegardes du module d'extension mais plusieurs versions de la fonctionnalité \textit{Backup and restore}.
 
 \section{Tests unitaires}
 
-TODO: Tests effectués dans mon module d'extension...
+La librairie de racination \og php-stemmer \fg{} est déjà testé unitairement et validé à l'aide d'un dictionnaire qui associe les mots à leurs racines.
+Il ne restait donc qu'à tester la jointure entre Moodle et la librairie de racination.
