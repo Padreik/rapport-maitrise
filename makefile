@@ -10,5 +10,11 @@ full:
 	pdflatex memoire
 
 clean:
-	\rm -f *.aux
+	\rm -f *.aux *.log *.lof *.lot *.out *.toc
+	\rm -f *~
 
+cleanxtra: clean
+	\rm -f memoire.pdf
+
+xv:
+	evince memoire.pdf&
