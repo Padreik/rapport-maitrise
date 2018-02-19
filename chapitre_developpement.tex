@@ -2,10 +2,10 @@
 
 Le développement d'un module d'extension Moodle n'est pas intuitif.
 La documentation n'est pas toujours complète et l'interaction dans le code entre les types de modules d'extensions \og Rapport de questionnaire \fg{}, \og Type de question \fg{} et \og Comportement de question \fg{} n'est pas toujours claire.
-Dans le développement de ce module d'extension, le code du module d'extension \og qtype\_essay \fg{} a été utilisé comme documentation.
-En prenant ce module d'extension comme base, il a été facile de construire ce qui était désiré.
+Dans le développement de notre module d'extension, le code du module d'extension \og qtype\_essay \fg{} a été utilisé comme documentation.
+En prenant ce module d'extension comme base, il a ensuite été plus facile de construire ce qui était désiré.
 
-Les commentaires de copyrights ont été ajustés comme illustré à l'exemple de code~\ref{code:commentaire}
+Les commentaires de \emph{copyrights} ont été ajustés comme illustré à l'exemple de code~\ref{code:commentaire}.
 
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -24,7 +24,7 @@ Les commentaires de copyrights ont été ajustés comme illustré à l'exemple d
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 \end{lstlisting}
-\caption{Exemple des commentaires dans les fichiers du module d\'extension.}
+\caption{Exemple des commentaires dans les fichiers du module d'extension.}
 \label{code:commentaire}
 \end{lstfloat}
 
@@ -35,9 +35,9 @@ Plusieurs fonctionnalités du module d'extension \og qtype\_essay \fg{} ont ét�
 \begin{description}
   \item[Éditeur de texte WYSIWIG]
   
-  Il permet de modifier l'apparence du texte facilement.
-  Ça permet, entre autres, de surligner, de souligner, de mettre en gras, de mettre en italique et plus encore.
-  Comme on ne peut pas enlever des options WYSIWIG pour un seul module d'extension, ça devient complexe de trouver une mise en forme qui permettra de mettre en évidence les mots clés, car un étudiant pourrait, par erreur, reproduire la même mise en forme.
+  Cet \'editeur permet de modifier facilement l'apparence du texte.
+  Ceci permet, entre autres, de surligner, de souligner, de mettre en gras, de mettre en italique et plus encore.
+  Comme on ne peut pas enlever des options WYSIWIG pour un seul module d'extension, cela devient complexe de trouver une mise en forme qui permet de mettre en évidence les mots clés, car un étudiant pourrait, par erreur, reproduire la même mise en forme.
   
   \item[Remise de fichier]
   
@@ -50,17 +50,17 @@ Plusieurs fonctionnalités sont restées dans le nouveau module d'extension:
 \begin{description}
   \item[Rétroaction générale]
   
-  Permet de laisser un commentaire à l'étudiant une fois que la correction est disponible.
-  Par exemple, l'enseignant pourrait laisser des explications pour les erreurs courantes.
+  Cette fonctionnalit\'e permet de laisser un commentaire à l'étudiant une fois que la correction est termin\'ee.
+  Par exemple, l'enseignant pourrait laisser des explications sur les erreurs courantes.
   
   \item[Modèle de réponse]
   
-  Prérempli la zone de texte de l'étudiant avec le texte donné.
+  Ceci permet de préremplir la zone de texte de l'étudiant avec le texte donné.
   Par exemple, un en-tête de fonction pour une question de programmation ou la liste des mots à définir.
   
   \item[Information de l'évaluateur]
   
-  Affiche un texte pour le correcteur seulement.
+  Ceci affiche un texte pour le correcteur seulement.
   Utile pour voir facilement le barème de correction ou donner des instructions au correcteur.
   Est affiché sous la réponse de l'étudiant lors de la correction.
 \end{description}
@@ -70,19 +70,24 @@ Finalement, les fonctionnalités suivantes ont été ajoutées:
 \begin{description}
   \item[Mots-clés]
   
-  Les mots-clés seront mis en évidence dans la réponse de l'étudiant lors de la correction manuelle
+  Les mots-clés sont mis en évidence dans la réponse de l'étudiant lors de la correction manuelle.
 
   \item[Réponse officielle de l'enseignant]
   
   Affiche ce texte à droite de la réponse de l'étudiant lors de la correction.
-  Les mots-clés seront mis en évidence aussi dans ce texte.
+  Les mots-clés sont mis en évidence aussi dans ce texte.
 \end{description}
 
 \section{Détection des mots clés}
 
-Comme cité dans le chapitre \autoref{chap:keywords}, nous utilisons la librairie \og php-stemmer \fg{} afin de trouver la racine de chaque mot.
+Comme cité dans le chapitre \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
 Pour trouver la racine de tous les mots du texte, il faut débuter par isoler tous les mots.
-Les caractères non alphanumériques sont remplacés par des espaces et le texte est découpé par les caractères d'espacements (espace, saut de ligne, tabulation, etc.).
+Les caractères non alphanumériques sont remplacés par des espaces et le texte est découpé par des caractères d'espacement (espace, saut de ligne, tabulation, etc.).
+
+\GT{Quand tu mets une figure ou un extrait de code, alors tu dois y
+r\'ef\'erer dans le texte, en donnant quelques
+informations/explications et en mettant une r\'ef\'erence
+$\backslash$ref\{\}.}
 
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -93,7 +98,7 @@ $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $
 \end{lstfloat}
 
 Ensuite, chaque mot est associé avec sa racine trouvée avec l'algorithme Snowball.
-Chaque mot-clé a, préalablement, aussi été réduit à leur racine avec l'algorithme Snowball.
+Chaque mot-clé a, préalablement, aussi été réduit à sa racine avec l'algorithme Snowball.
 
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -132,23 +137,23 @@ foreach ($usedKeywords as $keyword) {
 }
 \end{lstlisting}
 \caption{Mise en évidence des mots-clés trouvés.}
-\label{code:commentaire}
+\label{code:mots-cles}
 \end{lstfloat}
 
 \section{Tests}
 
 Les tests du module d'extension \og qtype\_essay \fg{} ont été conservés et adaptés à ce nouveau module d'extension.
 Le fonctionnement de base d'un module d'extension (création de question, modification de question, répondre à la question, etc.) a donc facilement été testé.
-Il ne restait plus qu'à tester les nouvelles foncitonnalités de mots-clés et d'affichage de la réponse de l'enseignant.
+Il ne restait plus qu'à tester les nouvelles fonctionnalités de mots-clés et d'affichage de la réponse de l'enseignant.
 
 \section{Tests d'acceptation}
 
-Les tests d'acceptation récupérés du module d'extension \textit{qtype\_essay} ont permis de trouver quelques problèmes le nouveau module d'extension.
+Les tests d'acceptation récupérés du module d'extension \textit{qtype\_essay} ont permis de trouver quelques problèmes  dans le nouveau module d'extension.
 Par exemple, la fonctionnalité \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \textit{qtype\_essayhelper}.
 Le problème venait d'un dossier manquant dans le nouveau module d'extension.
 Le dossier \textit{backup} dans le module d'extension \textit{qtype\_essayhelper} ne contient pas des copies de sauvegardes du module d'extension mais plusieurs versions de la fonctionnalité \textit{Backup and restore}.
 
 \section{Tests unitaires}
 
-La librairie de racination \og php-stemmer \fg{} est déjà testé unitairement et validé à l'aide d'un dictionnaire qui associe les mots à leurs racines.
-Il ne restait donc qu'à tester la jointure entre Moodle et la librairie de racination.
+La biblioth\`eque de racination \texttt{php-stemmer} est déjà testé unitairement et validé à l'aide d'un dictionnaire qui associe les mots à leurs racines.
+Il ne restait donc qu'à tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
