@@ -620,6 +620,13 @@ July\or August\or September\or October\or November\or December\fi}}
    \gdef\accord{}
 }
 
+\def\uqamprojet{
+   %\isthesisfalse
+   \gdef\thesetype{RAPPORT DE PROJET DE SYNTH\`ESE}
+   \gdef\theseprog{DE LA MA\^ITRISE EN \expandafter\MakeUppercase\expandafter{\@matiere}}
+   \gdef\accord{}
+}
+
 
 \def\maketitle{\begin{titlepage}
 \begin{doublespace}
