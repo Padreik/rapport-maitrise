@@ -5,6 +5,12 @@ Afin d'identifier les mots-clés pr\'esents dans le texte d'un \'etudiant et les
 En utilisant la racine de chaque mot, nous pouvons trouver les mots-clés, peu importe leur accord ou le temps de verbe.
 Deux techniques de recherche de racine d'un mot ont été retenues: la lemmatisation et la racination (\textit{stemming}).
 
+\GT{Je crois qu'il pourrait \^etre int\'eressant d'illustrer \`a quoi
+ressemble un petit programme Snowball. De plus, la distinction entre
+Snowball et php-stemmer n'est pas claire: ce dernier s'inspire
+simplement de Snowball pour l'algorithme ou utilise directement le
+langage?}
+
 Lors du choix de la technique utilisée, nous avons pris en considération les points suivants:
 
 \begin{enumerate}
@@ -62,6 +68,20 @@ L'origine des algorithmes pour les langues latines, incluant la langue français
 La biblioth\`eque \texttt{php-stemmer} a été écrite en PHP par Wamania en se basant sur les algorithmes écrits en Snowball.
 Le reste de cette section tente d'expliquer la logique derrière l'algorithme de Snowball pour le français.
 L'algorithme est séparé en six étapes, en plus d'une étape de préparation et d'une étape finale.
+
+
+\GT{Je crois qu'il y a trop de d\'etails dans ce qui suit.  Je crois
+qu'il serait pr\'ef\'erable d'avoir tout d'abord un algorithme <<de
+haut niveau>>, i.e., une vue d'ensemble sans trop de d\'etails, par
+exemple, avec du pseudocode ou, peut-\^etre m\^eme, avec du code
+Snowball si c'est compr\'ehensible. Ensuite, les d\'etails pourraient
+\^etre donn\'es, mais soit dans une ou des figures, soit en annexe.
+Parce que lorsqu'on lit un rapport/m\'emoire, ce qu'on lit devrait
+\^etre du texte relativement <<lisible>>, et pas trop de d\'etails ---
+trop d'arbres qui emp\^echent de voir la for\^et!}
+
+
+
 
 \begin{itemize}
 
@@ -200,3 +220,8 @@ Au final, on obtient la racine du mot.
 Lors de la comparaison de texte, il peut y avoir quelques problèmes.
 Par exemple les mots \og acceptables \fg{} et \og accepté \fg{} ont la même racine: \og accept \fg{}.
 Par contre, le sens des deux mots est différent.
+
+
+\GT{Tu discutes beaucoup de la racination pour obtenir <<l'essence>>
+des mots-cl\'es.  Mais tu n'expliques peut-\^etre pas assez comment
+cela est utilis\'e dans ton processus/outil.}
