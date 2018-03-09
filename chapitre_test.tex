@@ -1,28 +1,28 @@
-\chapter{Tests avec Moodle}
-
+﻿\chapter{Tests avec Moodle}
 Moodle offre du support pour deux types de tests: des tests unitaires et des tests d'acceptation.
-
-L'environnement utilisé afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise à jour en date du 14 décembre 2017.
+La plateforme inclut plusieurs centaines de ces deux types de tests automatis\'es d\`es son installation.
+Ils seront tous effectu\'es avant le d\'ebut du d\'eveloppement afin de s'assurer que Moodle fonctionne correctement sans le nouveau module d'extension.
+Une fois le d\'eveloppement termin\'e, les tests seront effectu\'es de nouveau afin de valider que le nouveau module d'extension ne r\'egresse pas les autres fonctionnalit\'es de Moodle.
+L'environnement utilis\'e afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise \`a jour en date du 14 d\'ecembre 2017.
 La version de PHP est 7.0.22.
-Le moteur de base de données est MySQL version~5.7.20 installé avec les paquets Ubuntu.
-La base de données utilise la collation \textit{utf8mb4\_unicode\_ci} comme conseillée dans \href{https://docs.moodle.org/34/en/MySQL}{la documentation}.
-La version de Moodle est la dernière version stable à ce jour, soit la version~3.4.
-Moodle a été installé avec \texttt{git} à partir de la branche \textit{MOODLE\_34\_STABLE}, \textit{commit} \href{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}{a45c466} déployé le 14 décembre 2017.
-Les tests ont été exécutés une seule fois avant le développement du module d'extension afin de confirmer le fonctionnement de l'environnement.
-
+Le moteur de base de donn\'ees est MySQL version~5.7.20 install\'e avec les paquets Ubuntu.
+La base de donn\'ees utilise la collation \textit{utf8mb4\_unicode\_ci} comme conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
+La version de Moodle est la derni\`ere version stable \`a ce jour, soit la version~3.4.
+Moodle a \'et\'e install\'e avec \texttt{git} \`a partir de la branche \textit{MOODLE\_34\_STABLE}, \textit{commit} a45c466\footnote{\url{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}} d\'eploy\'e le 14 d\'ecembre 2017.
+Les tests ont \'et\'e ex\'ecut\'es une seule fois avant le d\'eveloppement du module d'extension afin de confirmer le fonctionnement de l'environnement.
 \section{Tests unitaires}
-
-Les tests unitaires effectuent des vérifications à petite échelle.
-Chaque fonction dans le code est testée de fa\c{c}on isol\'ee.
-Dans certains cas, pour tester de fa\c{c}on isol\'ee une fonction, il faut remplacer les dépendances par des \textit{mocks}.
-Un \textit{mock} va simuler la dépendance utilisée par la fonction en retournant une valeur fixe.
-De cette manière, il est possible de tester cette fonction uniquement sans être impacté par les autres fonctions.
-Plusieurs tests peuvent être effectués afin de valider tous les cas possibles.
-
+Les tests unitaires effectuent des v\'erifications \`a petite \'echelle.
+Chaque fonction dans le code est test\'ee de fa\c{c}on isol\'ee.
+Dans certains cas, pour tester de fa\c{c}on isol\'ee une fonction, il faut remplacer les d\'ependances par des \textit{mocks}.
+Un \textit{mock} va simuler la d\'ependance utilis\'ee par la fonction en retournant une valeur fixe.
+De cette mani\`ere, il est possible de tester cette fonction uniquement sans \^etre impact\'e par les autres fonctions.
+Plusieurs tests peuvent \^etre effectu\'es afin de valider tous les cas possibles. \cite{tremblay16}
 Une installation \og vanille \fg\ de Moodle vient avec plusieurs tests unitaires.
-Le code de base ainsi que les modules d'extensions de base sont déjà testés.
+Le code de base ainsi que les modules d'extensions de base sont d\'ej\`a test\'es.
 Ces tests fonctionnent avec \textit{PHPUnit}, un \textit{framework} de tests unitaires pour PHP.
-
+Un exemple de test unitaire est illustr\'e \`a l'extrait de code \ref{code:unittest}.
+Cet exemple v\'erifie la validit\'e du r\'esum\'e de la question qui est le texte de la question sans images et sans mise en forme.
+Le r\'esum\'e de la question va \^etre utilis\'e dans la banque de question, afin de la retrouver facilement dans une liste.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 class qtype_essay_question_test extends advanced_testcase {
@@ -31,79 +31,65 @@ class qtype_essay_question_test extends advanced_testcase {
         $essay->questiontext = 'Hello <img src="http://example.com/globe.png" alt="world" />';
         $this->assertEquals('Hello [world]', $essay->get_question_summary());
     }
+}
 \end{lstlisting}
 \caption{Exemple de test unitaire du module d'extension \textit{qtype\_essay}.}
 \label{code:unittest}
 \end{lstfloat}
-
-Avant de déployer le module d'extension, la suite de tests \textit{PHPUnit} a été exécutée.
-Il y a 8750 tests et 90~575 vérifications (\textit{assertions}) à exécuter.
-8682 tests ont réussi (\textit{success}), 67 tests ont été ignorés (\textit{skipped}) et un test a échoué (\textit{failures}).
-Les tests ignorés sont, par exemple, les tests pour LDAP et les tests pour Redis, deux technologies qui n'ont pas été configurées dans notre cas.
-
-Il y avait malheureusement une erreur causée par l'encodage des caractères dans la base de données MySQL.
-Le test vérifie que la base de données fonctionne en UTF8 et considère la casse (\textit{case-sensitive}) lors de la comparaison de texte.
-La version de la base de données MySQL utilisée pour les tests est 5.7.
-Or, il n'y a pas d'encodage UTF8 sensible à la casse pour les versions précédentes à MySQL~5.8.
-L'erreur est connue et détaillée \href{https://docs.moodle.org/dev/Database_collation_issue}{sur le site de référence Moodle}.
-
-\GT{Ci-haut: pas une bonne fa\c{c}on d'avoir une r\'ef\'erence car on
-ne voit pas le lien dans le PDF, en tout cas, moi je ne le vois
-pas. Soit tu mets une citation ($\backslash$cite), soit une note en
-bas de page ($\backslash$footnote).}
-
-Cette erreur peut poser problème dans les questions de type numérique ainsi que pour les remises de fichiers.
-Par exemple, on ne peut pas entrer les unités \og km \fg{} et \og Km \fg{} dans les réponses possibles, car la base de données considère ces unités comme \'etant identiques.
-Par contre, la correction de la question, exécutée en PHP, fait la différence entre les deux unités.
-Un étudiant qui répond avec l'unité \og 10~KM \fg{} alors que l'enseignant a enregistré la réponse \og 10~km \fg{} aura une erreur.
-Comme le module d'extension développé n'utilisera pas la comparaison de texte à partir de la base de données, le développement peut continuer sans problème.
-
-Si notre application est entièrement testée avec des tests unitaires, nous sommes assurés qu'il ne devrait pas y avoir de problème de code dans les fonctions.
-Par contre, si on compare les tests à une équipe sportive, les tests unitaires analysent chaque joueur, mais ne considèrent pas le travail d'équipe.
-Il faut donc ajouter un autre type de test, les tests d'acceptation, afin de s'assurer de l'efficacité du travail d'équipe.
-
+Avant de d\'eployer le module d'extension, la suite de tests \textit{PHPUnit}, fournis de base avec Moodle, a \'et\'e ex\'ecut\'ee.
+Il y a 8750 tests et 90~575 v\'erifications (\textit{assertions}) \`a ex\'ecuter.
+8682 tests ont r\'eussi (\textit{success}), 67 tests ont \'et\'e ignor\'es (\textit{skipped}) et un test a \'echou\'e (\textit{failures}).
+Les tests ignor\'es sont, par exemple, les tests pour LDAP et les tests pour Redis, deux technologies qui n'ont pas \'et\'e configur\'ees dans notre cas.
+Il y avait malheureusement une erreur caus\'ee par l'encodage des caract\`eres dans la base de donn\'ees MySQL.
+Le test v\'erifie que la base de donn\'ees fonctionne en UTF8 et consid\`ere la casse (\textit{case-sensitive}) lors de la comparaison de texte.
+La version de la base de donn\'ees MySQL utilis\'ee pour les tests est 5.7.
+Or, il n'y a pas d'encodage UTF8 sensible \`a la casse pour les versions pr\'ec\'edentes \`a MySQL~5.8.
+L'erreur est connue et d\'etaill\'ee sur le site de r\'ef\'erence Moodle\footnote{\url{https://docs.moodle.org/dev/Database_collation_issue}}.
+Cette erreur peut poser probl\`eme dans les questions de type num\'erique ainsi que pour les remises de fichiers.
+Par exemple, on ne peut pas entrer les unit\'es \og km \fg{} et \og Km \fg{} dans les r\'eponses possibles, car la base de donn\'ees consid\`ere ces unit\'es comme \'etant identiques.
+Par contre, la correction de la question, ex\'ecut\'ee en PHP, fait la diff\'erence entre les deux unit\'es.
+Un \'etudiant qui r\'epond avec l'unit\'e \og 10~KM \fg{} alors que l'enseignant a enregistr\'e la r\'eponse \og 10~km \fg{} aura une erreur.
+Comme le module d'extension d\'evelopp\'e n'utilisera pas la comparaison de texte \`a partir de la base de donn\'ees, le d\'eveloppement peut continuer sans probl\`eme.
+Si notre application est enti\`erement test\'ee avec des tests unitaires, nous sommes assur\'es qu'il ne devrait pas y avoir de probl\`eme de code dans les fonctions.
+Par contre, si on compare les tests \`a une \'equipe sportive, les tests unitaires analysent chaque joueur, mais ne consid\`erent pas le travail d'\'equipe.
+Il faut donc ajouter un autre type de test, les tests d'acceptation, afin de s'assurer de l'efficacit\'e du travail d'\'equipe.
 \section{Tests d'acceptation}
-
 Un test d'acceptation valide que l'application satisfait aux exigences du logiciel.
-Ce type de test peut s'exécuter à partir de l'interface, de la même manière qu'un humain pourrait tester le logiciel --- il s'agit donc d'un test qui ex\'ecute le logiciel <<de bout en bout>>.
-
+Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`ere qu'un humain pourrait tester le logiciel --- il s'agit donc d'un test qui ex\'ecute le logiciel <<de bout en bout>>.  \cite{tremblay16}
 
 \GT{Il faudrait donner une r\'ef\'erence pour tests unitaires, BDD, etc.}
-
+\PG{J'ai ajout\'e des r\'ef\'erences vers vos notes de cours. J'ai un peu ajust\'e mes d\'efinitions apr\`es mes lectures.}
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extensions qui en ont.
 %
-Les tests d'acceptation sont exécutés à l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}.
-Un serveur ou une application Selenium exécutera les tests en ligne de commande ou dans un navigateur web, selon le besoin.
-Les tests sont écrits en anglais, compréhensibles par tous.
-Chaque instruction et vérification doit être, préalablement, configurée en PHP.
-
-La structure des tests d'acceptation avec \texttt{behat} est comme suit:
-
+Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}. \PG{R\'ef\'erence BDD \`a venir...}
+Un serveur ou une application Selenium ex\'ecutera les tests en ligne de commande ou dans un navigateur web, selon le besoin.
+Les tests sont \'ecrits en anglais, compr\'ehensibles par tous.
+Chaque instruction et v\'erification doit \^etre, pr\'ealablement, configur\'ee en PHP.
+La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exemple se trouve \`a l'extrait de code \ref{code:behattest}):
 \begin{itemize}
-  \item La première ligne avec les \verb|@| permet de catégoriser chaque fichier de test.
-        Ceci permet d'exécuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
+  \item La premi\`ere ligne avec les \verb|@| permet de cat\'egoriser chaque fichier de test.
+        Ceci permet d'ex\'ecuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
         
-  \item Débutant par \textit{Feature}, le titre du test afin de le retrouver facilement;
+  \item D\'ebutant par \textit{Feature}, le titre du test afin de le retrouver facilement;
   
-  \item Les trois lignes suivantes permettent de décrire le test au lecteur.
-        En Moodle, comme dans de nombreux autres formes de tests d'acceptation, on les écrit habituellement comme suit:
+  \item Les trois lignes suivantes permettent de d\'ecrire le test au lecteur.
+        En Moodle, comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit:
         
         \begin{itemize}
-          \item \og \textit{As a ...} \fg{} décrit quel type d'utilisateur est ciblé par ce test;
-          \item \og \textit{In order to ...} \fg{} décrit l'action à tester;
-          \item \og \textit{I need to ...} \fg{} décrit ce qu'il faut vérifier.
+          \item \og \textit{As a ...} \fg{} d\'ecrit quel type d'utilisateur est cibl\'e par ce test;
+          \item \og \textit{In order to ...} \fg{} d\'ecrit l'action \`a tester;
+          \item \og \textit{I need to ...} \fg{} d\'ecrit ce qu'il faut v\'erifier.
         \end{itemize}
         
-  \item Ensuite, on débute le \textit{Background} qui prépare le test.
-        La première action de cette section débutera par \textit{Given} et toutes les autres par \textit{And}.
-        Chaque action prépare l'environnement pour le test, par exemple: ajouter un enregistrement dans la base de données, naviguer à une certaine page, cliquer sur un bouton, etc;
+  \item Ensuite, on d\'ebute le \textit{Background} qui pr\'epare le test.
+        La premi\`ere action de cette section d\'ebutera par \textit{Given} et toutes les autres par \textit{And}.
+        Chaque action pr\'epare l'environnement pour le test, par exemple: ajouter un enregistrement dans la base de donn\'ees, naviguer \`a une certaine page, cliquer sur un bouton, etc;
         
-  \item Ensuite, il y a une ou plusieurs sections \textit{Scenario} qui définissent chaque test à effectuer.
-        Sur la même ligne que le \textit{Scenario}, il y a une description du test pour le lecteur.
-        Ensuite, le \textit{When} définit l'action à tester.
-        Finalement, le \textit{Then} définit le comportement entendu suite au test.
+  \item Ensuite, il y a une ou plusieurs sections \textit{Scenario} qui d\'efinissent chaque test \`a effectuer.
+        Sur la m\^eme ligne que le \textit{Scenario}, il y a une description du test pour le lecteur.
+        Ensuite, le \textit{When} d\'efinit l'action \`a tester.
+        Finalement, le \textit{Then} d\'efinit le comportement entendu suite au test.
 \end{itemize}
-
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 @qtype @qtype_essay
@@ -111,7 +97,6 @@ Feature: Test creating an Essay question
   As a teacher
   In order to test my students
   I need to be able to create an Essay question
-
   Background:
     Given the following "users" exist:
       | username | firstname | lastname | email               |
@@ -125,7 +110,6 @@ Feature: Test creating an Essay question
     And I log in as "teacher1"
     And I follow "Course 1"
     And I navigate to "Question bank" node in "Course administration"
-
   Scenario: Create an Essay question with Response format set to 'HTML editor'
     When I add a "Essay" question filling the form with:
       | Question name            | essay-001                      |
@@ -134,41 +118,39 @@ Feature: Test creating an Essay question
       | Response format          | HTML editor                    |
     Then I should see "essay-001"
 \end{lstlisting}
-\caption{Test d'acceptation du module d\'extension \textit{qtype\_essay}.}
+\caption{Test d'acceptation du module d'extension \textit{qtype\_essay}.}
 \label{code:behattest}
 \end{lstfloat}
-
-La série de tests d'acceptation de Moodle a été exécutée avant le développement du module d'extension.
-Il y a un total de 1~771 scénarios pour un total de 43~824~étapes.
-Parmi ceux-ci, 4 scénarios et 102 étapes ont été ignorés et 6 étapes et 6 scénarios ont échoué.
-
-Voici une description des erreurs rencontr\'ees ainsi que leur influence sur le développement dans ce projet:
-
+La s\'erie de tests d'acceptation de Moodle a \'et\'e ex\'ecut\'ee avant le d\'eveloppement du module d'extension.
+Il y a un total de 1~771 sc\'enarios pour un total de 43~824~\'etapes.
+Parmi ceux-ci, 4 sc\'enarios et 102 \'etapes ont \'et\'e ignor\'es et 6 \'etapes et 6 sc\'enarios ont \'echou\'e.
+Voici une description des erreurs rencontr\'ees ainsi que leur influence sur le d\'eveloppement dans ce projet:
 \begin{enumerate}
-  \item Erreur lorsqu'un étudiant passe d'une activité à une autre.
-        Notre module d'extension se concentre sur une seule activité, ce cas n'est donc pas problématique.
+  \item Erreur lorsqu'un \'etudiant passe d'une activit\'e \`a une autre.
+        Notre module d'extension se concentre sur une seule activit\'e, ce cas n'est donc pas probl\'ematique.
         
   \item Erreur dans le filtre du calendrier mensuel.
-        Notre module d'extension ne touche pas au calendrier, ce cas n'est donc pas problématique.
+        Notre module d'extension ne touche pas au calendrier, ce cas n'est donc pas probl\'ematique.
         
   \item Erreur dans la navigation entre les modes de groupes.
-        Notre module d'extension ne touche pas aux modes de groupes, ce cas n'est donc pas problématique.
+        Notre module d'extension ne touche pas aux modes de groupes, ce cas n'est donc pas probl\'ematique.
         
-  \item \texttt{Solr} (engin de recherche) n'est pas installé sur l'environnement de test.
-        Notre module d'extension ne touche pas à la recherche, ce cas n'est donc pas problématique.
+  \item \texttt{Solr} (engin de recherche) n'est pas install\'e sur l'environnement de test.
+        Notre module d'extension ne touche pas \`a la recherche, ce cas n'est donc pas probl\'ematique.
         
-  \item Erreur \texttt{Solr} identique à la précédente.
+  \item Erreur \texttt{Solr} identique \`a la pr\'ec\'edente.
   
-  \item Erreur dans la liste des étudiants, l'enseignant ne voit pas quels étudiants sont actifs.
-        Notre module d'extension ne touche pas à la liste des étudiants, ce cas n'est donc pas problématique.
+  \item Erreur dans la liste des \'etudiants, l'enseignant ne voit pas quels \'etudiants sont actifs.
+        Notre module d'extension ne touche pas \`a la liste des \'etudiants, ce cas n'est donc pas probl\'ematique.
 \end{enumerate}
-
-Comme aucun des six cas n'est problématique, le développement peut se poursuivre sans problème.
-Lors de l'exécution finale des tests, il ne devrait y avoir que ces six mêmes erreurs.
-
+Comme aucun des six cas n'est probl\'ematique, le d\'eveloppement peut se poursuivre sans probl\`eme.
+Lors de l'ex\'ecution finale des tests, il ne devrait y avoir que ces six m\^emes erreurs.
 \GT{De ce que tu \'ecrit plus haut, ce n'est pas clair si tu as
 uniquement ex\'ecut\'e les tests d\'ej\`a disponibles ou si tu en as
 toi-m\^eme d\'efini d'autres.  De ce qu'on comprend de ce que tu
 \'ecris dans le chapitre suivant, tu en as d\'efini donc il faudrait
 clarifier cela d\`es \`a pr\'esent.}
-
+\section{Tests dans un module d'extension}
+Chaque module d'extension d\'efinit ces propres tests unitaires et d'acceptation.
+Le nouveau module d'extension devra donc lui aussi d\'efinir des tests unitaires et d'acceptation afin de valider son bon fonctionnement.
+L'ajout de tests est d\'etaill\'e au \`a la section \ref{dev_test}.

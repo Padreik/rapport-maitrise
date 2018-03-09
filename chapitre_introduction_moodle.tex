@@ -1,141 +1,142 @@
-\chapter{Introduction à Moodle}
-
-Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) créé par Martin Dougiamas.
-Cette plateforme est un logiciel libre développé en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
-
-Moodle est un outil modulaire où chaque enseignant peut créer ses cours comme il le souhaite.
-Chaque cours est séparé en sections définies en semaine, module, thème ou selon plusieurs autres configurations possibles.
-Chaque section comporte plusieurs activités: un texte à lire, des documents à télécharger, un forum pour échanger, un sondage ou questionnaire en ligne à compléter, un devoir à remettre, et plus encore.
-Chaque activité est hautement configurable.
-Par exemple, un devoir peut être fait individuellement ou en équipe, avoir une date et une heure de début et de fin de disponibilité avec un délai de retard permis, etc.
-Dans les questionnaires en ligne, un enseignant peut créer une banque de questions et sélectionner les questions désirées ou laisser le système choisir les questions aléatoirement.
-
-\section{Activité questionnaire}
-
-Ce projet s'attarde à l'activité Questionnaire de Moodle, plus spécifiquement sur la question de type Texte long (parfois appelé Composition, selon la version de Moodle).
-Tout d'abord, qu'est-ce qu'une activité Questionnaire?
-Une telle activité permet à l'enseignant de créer un formulaire en ligne auquel les étudiants devront répondre.
-Il peut s'agir, par exemple, d'une évaluation sommative qui sera cumulée au carnet de notes Moodle, d'une évaluation formative ou d'un atelier qui pourra être refait plusieurs fois jusqu'à ce que l'étudiant atteigne une note prédéfinie.
-
-Parmi les options les plus utiles de cette activité, on retrouve (toutes optionnelles): début et fin de disponibilité du questionnaire, temps disponible à partir de l'ouverture du questionnaire, note de passage, ordre aléatoire des questions, nombre de tentatives possibles, etc.
-
-Chaque questionnaire est composé d'un nombre de questions choisies dans une banque de questions.
-Les questions peuvent avoir un ordre précis ou être choisies aléatoirement parmi un ensemble de questions.
+﻿\chapter{Introduction \`a Moodle}
+Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) cr\'e\'e par Martin Dougiamas.
+Cette plateforme est un logiciel libre d\'evelopp\'e en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
+Moodle est un outil modulaire o\`u chaque enseignant peut cr\'eer ses cours comme il le souhaite.
+Chaque cours est s\'epar\'e en sections d\'efinies en semaine, module, th\`eme ou selon plusieurs autres configurations possibles.
+Chaque section comporte plusieurs activit\'es: un texte \`a lire, des documents \`a t\'el\'echarger, un forum pour \'echanger, un sondage ou questionnaire en ligne \`a compl\'eter, un devoir \`a remettre, et plus encore.
+Chaque activit\'e est hautement configurable.
+Par exemple, un devoir peut \^etre fait individuellement ou en \'equipe, avoir une date et une heure de d\'ebut et de fin de disponibilit\'e avec un d\'elai de retard permis, etc.
+Dans les questionnaires en ligne, un enseignant peut cr\'eer une banque de questions et s\'electionner les questions d\'esir\'ees ou laisser le syst\`eme choisir les questions al\'eatoirement.
+\section{Activit\'e questionnaire}
+Ce projet s'attarde \`a l'activit\'e Questionnaire de Moodle, plus sp\'ecifiquement sur la question de type Texte long (parfois appel\'e Composition, selon la version de Moodle).
+Tout d'abord, qu'est-ce qu'une activit\'e Questionnaire?
+Une telle activit\'e permet \`a l'enseignant de cr\'eer un formulaire en ligne auquel les \'etudiants devront r\'epondre.
+Il peut s'agir, par exemple, d'une \'evaluation sommative qui sera cumul\'ee au carnet de notes Moodle, d'une \'evaluation formative ou d'un atelier qui pourra \^etre refait plusieurs fois jusqu'\`a ce que l'\'etudiant atteigne une note pr\'ed\'efinie.
+Parmi les options les plus utiles de cette activit\'e, on retrouve (toutes optionnelles): d\'ebut et fin de disponibilit\'e du questionnaire, temps disponible \`a partir de l'ouverture du questionnaire, note de passage, ordre al\'eatoire des questions, nombre de tentatives possibles, etc.
+Chaque questionnaire est compos\'e d'un nombre de questions choisies dans une banque de questions.
+Les questions peuvent avoir un ordre pr\'ecis ou \^etre choisies al\'eatoirement parmi un ensemble de questions.
 Voici une liste non exhaustive des types de questions:
-
 \begin{description}
   \item[Choix multiple]
   
-  Génère une liste de boutons radio ou de cases à cocher.
-  Chaque bouton vaut un nombre de points entre -100\% et 100\% de la valeur de la question;
+  G\'en\`ere une liste de boutons radio ou de cases \`a cocher;
   
-  \item[Réponse courte]
+  \item[R\'eponse courte]
   
-  Affiche un champ texte corrigé à l'aide de réponses possibles ou d'expressions régulières;
+  Affiche un champ texte pouvant accueillir quelques mots;
   
-  \item[Numérique]
+  \item[Num\'erique]
   
-  Affiche un champ texte pour valeur numérique pouvant prendre en compte une unité de mesure (km, cm ou m par exemple);
+  Affiche un champ texte pour valeur num\'erique pouvant prendre en compte une unit\'e de mesure (km, cm ou m par exemple);
   
   \item[Question Cloze]
   
-  Permet de créer un texte lacunaire, chaque \og trou \fg{} pouvant être rempli avec une sous-question de type choix multiples, réponse courte ou numérique;
+  Permets de cr\'eer un texte lacunaire, chaque \og trou \fg{} pouvant \^etre rempli avec une sous-question de type choix multiple, r\'eponse courte ou num\'erique;
   
   \item[Composition]
   
   Affiche un champ texte multiligne, multiligne avec police monospace ou WYSIWYG (\textit{What You See Is What You Get}).
-  L'étudiant doit écrire un texte à développement.
+  L'\'etudiant doit \'ecrire un texte \`a d\'eveloppement.
 \end{description}
-
+Toute question, except\'e celles de type Composition, peut se corriger automatiquement \`a un moment d\'ecid\'e par l'enseignant.
+La correction peut se faire \`a la saisie de la r\'eponse pour une r\'etroaction en direct ou apr\`es la soumission du questionnaire.
+Par exemple, dans un examen \`a choix de r\'eponses, les \'etudiants pourraient voir leur note d\`es qu'ils ont termin\'e leur examen.
+Chaque type de question se corrige de mani\`ere un peu diff\'erente:
+\begin{description}
+  \item[Choix multiple]
+  
+  Chaque bouton radio ou case \`a cocher vaut un certain nombre de points, allant de -100\% \`a 100\% de la valeur de la question.
+  Par exemple, dans une question valant 2 points avec plusieurs choix possibles, chacune des deux bonnes r\'eponses ajoute 1 point et chacune des mauvaises r\'eponses enl\`eve 1 point.
+  Dans cet exemple, l'\'etudiant pourrait avoir une note n\'egative;
+  
+  \item[R\'eponse courte]
+  
+  L'enseignant peut donner plusieurs mots ou expressions r\'eguli\`eres qui valent un certain nombre de points.
+  \`a la question \og{} \`a quelle ann\'ee Christophe Colomb a-t-il d\'ecouvert l'Am\'erique? \fg{}, une r\'eponse contenant \og 1492 \fg{} pourrait donner tous les points alors qu'une r\'eponse correspondant \`a l'expression r\'eguli\`ere \og 15(.*)si\`ecle \fg{} pourrait donner la moiti\'e des points;
+  
+  \item[Num\'erique]
+  
+  L'enseignant peut donner plusieurs bonnes r\'eponses en tenant compte de plusieurs unit\'es.
+  Par exemple les r\'eponses \og 2 km \fg{} et  \og 2000 m \fg{} pourraient \^etre accept\'es;
+  
+  \item[Question Cloze]
+  
+  Chaque \og trou \fg{} du texte lacunaire est corrig\'e selon le type de question utilis\'e dans ce \og trou \fg{}.
+  Si on utilise une question de type R\'eponse courte dans un \og trou \fg{}, Moodle utilisera la correction correspondante \`a ce type de question.
+  
+  \item[Composition]
+  
+  Moodle ne corrige pas automatiquement ce type de question.
+  L'enseignant ou le correcteur doit donc corriger manuellement chaque copie.
+\end{description}
 \section{Question de type Composition}
-
 \GT{Partie plus bas pas claire~: Tu dis qu'il faut corriger
 manuellement, mais tu dis que Moodle fournit un module de correction
 manuelle. Reformuler!  Du genre, fournit un module qui aide \`a
 effectuer la correction manuelle, qui aide le correcteur \`a traiter
 l'ensemble des r\'eponses, ou quelque chose du genre!?}
+\PG{J'ai ajout\'e plus de d\'etail sur la correction automatique dans le chapitre pr\'ec\'edent et enlev\'e une phrase douteuse dans le chapitre qui suit.}
 
-
-Dû à sa nature, le type de question Composition est le seul qui ne peut pas se corriger automatiquement par Moodle.
-L'enseignant doit donc corriger manuellement toutes les réponses.
-Heureusement, Moodle inclut un module de correction manuelle qui permet au correcteur de corriger les questions de ce type.
-Par exemple, l'enseignant peut choisir de corriger le questionnaire en entier, un étudiant après l'autre.
-Ou il peut aussi corriger une question à la fois, affichant ainsi les réponses de tous les étudiants à cette question sur une seule page.
-Cette dernière méthode est appréciée de plusieurs enseignants, car elle permet de comparer toutes les réponses données et ainsi corriger de manière plus uniforme.
-
-Notre projet consiste donc à faciliter le travail du correcteur en créant un nouveau module Moodle qui:
-
+DÃ» \`a sa nature, le type de question Composition est le seul qui ne peut pas se corriger automatiquement par Moodle.
+L'enseignant doit donc corriger manuellement toutes les r\'eponses \`a l'aide du module de correction manuelle.
+L'enseignant peut choisir de corriger le questionnaire en entier, un \'etudiant apr\`es l'autre.
+Il peut aussi corriger une question \`a la fois, affichant ainsi les r\'eponses de tous les \'etudiants \`a cette question sur une seule page.
+Cette derni\`ere m\'ethode est appr\'eci\'ee de plusieurs enseignants, car elle permet de comparer toutes les r\'eponses donn\'ees et ainsi corriger de mani\`ere plus uniforme.
+Notre projet consiste donc \`a faciliter le travail du correcteur en cr\'eant un nouveau module Moodle qui:
 \begin{enumerate}
-  \item Affichera la réponse de l'étudiant et la réponse de l'enseignant côte à côte afin de faciliter la tâche au correcteur;
-  \item Surlignera les mots clés, fournis par l'enseignant, dans la réponse de l'étudiant et de l'enseignant;
+  \item Affichera la r\'eponse de l'\'etudiant et la r\'eponse de l'enseignant cÃ´te \`a cÃ´te afin de faciliter la tÃ¢che au correcteur;
+  \item Surlignera les mots cl\'es, fournis par l'enseignant, dans la r\'eponse de l'\'etudiant et de l'enseignant;
   \item Utilisera la racination ou la lemmisation afin de surligner les mots, peu importe leur accord.
 \end{enumerate}
-
-Le module d'extension propos\'e sera donc utile pour les questions à développement pour les textes descriptifs, et aussi pour des segments de code (cours  de programmation), mais le sera moins pour les textes d'opinion où il n'y a pas de \og bonne \fg{} réponse.
-
+Le module d'extension propos\'e sera donc utile pour les questions \`a d\'eveloppement pour les textes descriptifs, et aussi pour des segments de code (cours  de programmation), mais le sera moins pour les textes d'opinion o\`u il n'y a pas de \og bonne \fg{} r\'eponse.
 \section{Les modules d'extensions Moodle}
-
 \GT{Soit tu donnes, dans une note en bas de page, ce qui signifie
 SCORM, soit tu laisses tomber compl\`etement cet acronyme.}
-
+\PG{J'ai laiss\'e tomb\'e l'acronyme, \c{c}a n'a pas vraiment d'importance dans le cadre du projet.}
 L'aspect modulaire de Moodle existe tant pour les enseignants que pour les programmeurs.
-Presque toutes les fonctionnalités de Moodle sont configurées à l'aide de modules d'extensions.
-Il y a des modules d'extensions pour changer l'apparence du site, pour gérer les compétences SCORM, pour exporter les données, pour changer le fonctionnement des questions, etc.
-Chaque module d'extension est développé par un membre de la communauté.
-La plupart de ces modules d'extension se retrouvent sur GitHub et quelques-uns se retrouvent sur le \href{https://moodle.org/plugins/}{répertoire de module d'extensions Moodle}.
-Pour ajouter un nouveau module d'extension à ce répertoire, il faut qu'il soit approuvé par un comité Moodle.
-Le processus d'approbation est pr\'esent\'e à la figure~\ref{plugin-workflow}.
+Presque toutes les fonctionnalit\'es de Moodle sont configur\'ees \`a l'aide de modules d'extensions.
+Il y a des modules d'extensions pour changer l'apparence du site, pour exporter les donn\'ees, pour changer le fonctionnement des questions, etc.
+Chaque module d'extension est d\'evelopp\'e par un membre de la communaut\'e.
+La plupart de ces modules d'extension se retrouvent sur GitHub et quelques-uns se retrouvent sur le r\'epertoire de module d'extensions Moodle\footnote{\url{https://moodle.org/plugins/}}.
+Pour ajouter un nouveau module d'extension \`a ce r\'epertoire, il faut qu'il soit approuv\'e par un comit\'e Moodle.
+Le processus d'approbation est pr\'esent\'e \`a la figure~\ref{plugin-workflow}.
 Il est possible d'installer un module d'extension non officiel en installant les fichiers au bon endroit dans l'arborescence Moodle.
-
 \begin{figure}[h!]
   \includegraphics[scale=0.7]{images/plugin-contribution-workflow.png}
   \caption[Flux d'acception d'un module d'extension Moodle]{Flux d'acception d'un module d'extension Moodle (\href{https://docs.moodle.org/dev/Plugin_contribution}{\url{https://docs.moodle.org/dev/Plugin\_contribution}}).}
   \label{plugin-workflow}
 \end{figure}
-
-Pour ajouter des fonctionnalités à l'activité questionnaires, il y a trois types de module d'extensions à considérer: un rapport de questionnaire, un type de question et un comportement de question.
-
+Pour ajouter des fonctionnalit\'es \`a l'activit\'e questionnaires, il y a trois types de modules d'extensions \`a consid\'erer: un rapport de questionnaire, un type de question et un comportement de question.
 \subsection{Module d'extension rapport de questionnaire (\textit{Quiz report})}
-
-Un rapport de questionnaire sert principalement à corriger les réponses des étudiants.
-On peut aussi se servir de ce type de module d'extension pour afficher les réponses et les notes des étudiants pour un questionnaire sous forme de rapport.
+Un rapport de questionnaire sert principalement \`a corriger les r\'eponses des \'etudiants.
+On peut aussi se servir de ce type de module d'extension pour afficher les r\'eponses et les notes des \'etudiants pour un questionnaire sous forme de rapport.
 Finalement, on peut aussi s'en servir afin de modifier les champs disponibles dans la configuration de base d'un questionnaire.
-
-Lors de l'analyse initiale du projet, il avait \'et\'e prévu de se servir uniquement de ce type de module d'extension, car nous voulons uniquement modifier l'interface de correction.
-Par contre, comme nous voulions ajouter une liste de mots clés à une question et que ce type de module d'extension permet de modifier seulement le questionnaire, d\'evelopper uniquement un module d'extension de ce type n'\'etait pas suffisant.
-
+Lors de l'analyse initiale du projet, il avait \'et\'e pr\'evu de se servir uniquement de ce type de module d'extension, car nous voulons uniquement modifier l'interface de correction.
+Par contre, comme nous voulions ajouter une liste de mots cl\'es \`a une question et que ce type de module d'extension permet de modifier seulement le questionnaire, d\'evelopper uniquement un module d'extension de ce type n'\'etait pas suffisant.
 \subsection{Module d'extension type de question (\textit{Question type})}
-
-Chaque question est définie par un type de question (voir la liste à la section~1.1).
-Un nouveau type de question ajoute donc plus de choix à l'enseignant désirant créer un questionnaire.
-Chaque type de question possède des champs personnalisés et change l'apparence de la question pour l'étudiant et l'enseignant.
-
-On ne voulait pas modifier le module d'extension \og Type de question Composition \fg{} car les nouvelles fonctionnalités ne seront pas utiles pour tous les types de texte: un texte d'opinion pour un cours de philosophie, par exemple, n'aura pas n\'ecessairement besoin d'une liste de mots-clés et d'une fonctionalit\'e de comparaison de textes.
-La possibilité de créer un module d'extension qui ajoute un nouveau type de question qui étend les fonctionnalités du \og Type de question Composition \fg{} par héritage a été analysé, mais il semble que ce n'est pas possible avec Moodle.
-Seule alternative restante: se baser sur le \og Type de question Composition \fg{} pour créer un tout nouveau module d'extension.
-Ce nouveau module d'extension utilise les mêmes fonctionnalités que le \og Type de question Composition \fg{}, mais en enlevant quelques fonctionnalités (remise de pièce jointe et écriture dans un WYSIWIG) et en ajoutant quelques autres (mots-clés et réponse de l'enseignant).
-
+Chaque question est d\'efinie par un type de question (voir la liste \`a la section~1.1).
+Un nouveau type de question ajoute donc plus de choix \`a l'enseignant d\'esirant cr\'eer un questionnaire.
+Chaque type de question poss\`ede des champs personnalis\'es et change l'apparence de la question pour l'\'etudiant et l'enseignant.
+On ne voulait pas modifier le module d'extension \og Type de question Composition \fg{} car les nouvelles fonctionnalit\'es ne seront pas utiles pour tous les types de texte: un texte d'opinion pour un cours de philosophie, par exemple, n'aura pas n\'ecessairement besoin d'une liste de mots-cl\'es et d'une fonctionnalit\'e de comparaison de textes.
+La possibilit\'e de cr\'eer un module d'extension qui ajoute un nouveau type de question qui \'etend les fonctionnalit\'es du \og Type de question Composition \fg{} par h\'eritage a \'et\'e analys\'ee, mais il semble que ce n'est pas possible avec Moodle.
+Seule alternative restante: se baser sur le \og Type de question Composition \fg{} pour cr\'eer un tout nouveau module d'extension.
+Ce nouveau module d'extension utilise les m\^emes fonctionnalit\'es que le \og Type de question Composition \fg{}, mais en enlevant quelques fonctionnalit\'es (remise de pi\`ece jointe et \'ecriture dans un WYSIWIG) et en ajoutant quelques autres (mots-cl\'es et r\'eponse de l'enseignant).
 \subsection{Module d'extension comportement de question (\textit{Question behaviour})}
-
 Un comportement de question permet les op\'erations suivantes:
 \begin{enumerate}
-  \item Ajouter du code à la suite de la question, par exemple, un bouton \og Vérifier \fg{} ou une zone de texte commentaire;
+  \item Ajouter du code \`a la suite de la question, par exemple, un bouton \og V\'erifier \fg{} ou une zone de texte commentaire;
   
-  \item Modifier la méthode de correction, par exemple, une correction manuelle, une correction automatique instantanée quand l'étudiant répond ou une correction automatique lorsque le test est terminé;
+  \item Modifier la m\'ethode de correction, par exemple, une correction manuelle, une correction automatique instantan\'ee quand l'\'etudiant r\'epond ou une correction automatique lorsque le test est termin\'e;
   
-  \item Modifier l'affichage des questions, par exemple, afficher une question supplémentaire si l'étudiant a plusieurs fautes ou donner des indices à l'étudiant sous r\'eserve d'une perte de points.
+  \item Modifier l'affichage des questions, par exemple, afficher une question suppl\'ementaire si l'\'etudiant a plusieurs fautes ou donner des indices \`a l'\'etudiant sous r\'eserve d'une perte de points.
 \end{enumerate}
-
-Comme nous désirons une correction manuelle, nous pouvons utiliser le comportement \og ManualGraded \fg{}.
-De plus, comme il est possible de contrôler directement l'apparence de la réponse et de la question avec un module d'extension type de question, il n'est pas nécessaire de créer un module d'extension \og Comportement de question \fg{}.
-
-\section{Choix des modules d'extensions à créer}
-
-Un module d'extension type de question est obligatoire dans ce projet afin d'ajouter les champs mots-clés et réponse de l'enseignant.
-Nous n'avons pas besoin des fonctionnalités qu'offre le module d'extension comportement de question.
-Il reste à déterminer s'il faut utiliser un module d'extension rapport de questionnaire ou non.
-
-En analysant le code du module d'extension de correction manuelle fournie de base avec Moodle (\texttt{quiz\_grading}), on découvre que ce module fournit l'interface de correction, mais que la réponse de chaque étudiant est gérée par le type de question dans un affichage en lecture seulement.
-Les fonctionnalités prévues peuvent donc se trouver autant dans le type de question que dans un rapport de questionnaire, la complexité du code est la même pour les deux cas.
-Puisqu'il doit y avoir obligatoirement un module d'extension type de question et qu'un nouveau module d'extension rapport de questionnaire est facultatif, nous avons décidé de ne faire qu'un seul module d'extension.
+Comme nous d\'esirons une correction manuelle, nous pouvons utiliser le comportement \og ManualGraded \fg{}.
+De plus, comme il est possible de contr\^oler directement l'apparence de la r\'eponse et de la question avec un module d'extension type de question, il n'est pas n\'ecessaire de cr\'eer un module d'extension \og Comportement de question \fg{}.
+\section{Choix des modules d'extensions \`a cr\'eer}
+Un module d'extension type de question est obligatoire dans ce projet afin d'ajouter les champs mots-cl\'es et r\'eponse de l'enseignant.
+Nous n'avons pas besoin des fonctionnalit\'es qu'offre le module d'extension comportement de question.
+Il reste \`a d\'eterminer s'il faut utiliser un module d'extension rapport de questionnaire ou non.
+En analysant le code du module d'extension de correction manuelle fournie de base avec Moodle (\texttt{quiz\_grading}), on d\'ecouvre que ce module fournit l'interface de correction, mais que la r\'eponse de chaque \'etudiant est g\'er\'ee par le type de question dans un affichage en lecture seulement.
+Les fonctionnalit\'es pr\'evues peuvent donc se trouver autant dans le type de question que dans un rapport de questionnaire, la complexit\'e du code est la m\^eme pour les deux cas.
+Puisqu'il doit y avoir obligatoirement un module d'extension type de question et qu'un nouveau module d'extension rapport de questionnaire est facultatif, nous avons d\'ecid\'e de ne faire qu'un seul module d'extension.
 En outre, le fait d'avoir un seul module d'extension facilite grandement l'installation pour d'autres administrateurs Moodle.
