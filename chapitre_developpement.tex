@@ -1,5 +1,4 @@
-\chapter{Développement du module d'extension \og qtype\_essayhelper \fg{} }
-
+\chapter{D\'eveloppement du module d'extension \og qtype\_essayhelper \fg{} }
 \GT{Tu parles des fonctionnalit\'es, et des tests, mais tu ne parles
 pas vraiment de ce que tu as fait --- c'est comme si tu d\'ecrivais le
 <<quoi>> (fonctionnalit\'es et tests, les tests pouvant aussi \^etre
@@ -14,14 +13,11 @@ architecture modulaire.  Ensuite, ici, tu pourrais pr\'esenter de
 fa\c{c}on un peu plus sp\'ecifique la structure, l'organisation du
 code que tu as d\'evelopp\'e.  Parce que ce n'est pas clair je trouve.
 On voit mal l'envergure, le style d'organisation du code, etc.}
-
-Le développement d'un module d'extension Moodle n'est pas intuitif.
-La documentation n'est pas toujours complète et l'interaction dans le code entre les types de modules d'extensions \og Rapport de questionnaire \fg{}, \og Type de question \fg{} et \og Comportement de question \fg{} n'est pas toujours claire.
-Dans le développement de notre module d'extension, le code du module d'extension \og qtype\_essay \fg{} a été utilisé comme documentation.
-En prenant ce module d'extension comme base, il a ensuite été plus facile de construire ce qui était désiré.
-
-Les commentaires de \emph{copyrights} ont été ajustés comme illustré à l'exemple de code~\ref{code:commentaire}.
-
+\PG{J'ai ajout\'e une section architecture plus bas afin d'aider \`a comprendre un peu plus le <<Comment>>}
+Le site de Moodle donne une br\`eve introduction \`a la cr\'eation d'un nouveau type de question \footnote{\url{https://docs.moodle.org/dev/Question\_types\#Question\_type\_plug\_in\_development}}.
+Un gabarit est disponible afin d'aider \`a d\'ebuter, mais le site conseille de modifier ou copier un type de question existant s'il est similaire au type de question que nous voulons d\'evelopper.
+Dans notre cas, nous allons utiliser le type de question \og qtype\_essay \fg{} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
+Les commentaires de \emph{copyrights} ont \'et\'e ajust\'es comme illustr\'e \`a l'exemple de code~\ref{code:commentaire}.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 /**
@@ -42,68 +38,202 @@ Les commentaires de \emph{copyrights} ont été ajustés comme illustré à l'ex
 \caption{Exemple des commentaires dans les fichiers du module d'extension.}
 \label{code:commentaire}
 \end{lstfloat}
-
-\section{Fonctionnalités}
-
-Plusieurs fonctionnalités du module d'extension \og qtype\_essay \fg{} ont été enlevées:
-
+\section{Fonctionnalit\'es de qtype\_essayhelper}
+Plusieurs fonctionnalit\'es du module d'extension \og qtype\_essay \fg{} ont \'et\'e enlev\'ees:
 \begin{description}
-  \item[Éditeur de texte WYSIWIG]
+  \item[\'editeur de texte WYSIWIG]
   
   Cet \'editeur permet de modifier facilement l'apparence du texte.
   Ceci permet, entre autres, de surligner, de souligner, de mettre en gras, de mettre en italique et plus encore.
-  Comme on ne peut pas enlever des options WYSIWIG pour un seul module d'extension, cela devient complexe de trouver une mise en forme qui permet de mettre en évidence les mots clés, car un étudiant pourrait, par erreur, reproduire la même mise en forme.
+  Comme on ne peut pas enlever des options WYSIWIG pour un seul module d'extension, cela devient complexe de trouver une mise en forme qui permet de mettre en \'evidence les mots cl\'es, car un \'etudiant pourrait, par erreur, reproduire la m\^eme mise en forme.
   
   \item[Remise de fichier]
   
-  Il est possible d'écrire directement dans la zone de texte ou de remettre un document texte (configurable par l'enseignant).
-  Comme le module d'extension n'aidera pas à corriger les textes remis par fichier, cette option a été enlevée.
+  Il est possible d'\'ecrire directement dans la zone de texte ou de remettre un document texte (configurable par l'enseignant).
+  Comme le module d'extension n'aidera pas \`a corriger les textes remis par fichier, cette option a \'et\'e enlev\'ee.
 \end{description}
-
-Plusieurs fonctionnalités sont restées dans le nouveau module d'extension:
-
+Plusieurs fonctionnalit\'es sont rest\'ees dans le nouveau module d'extension:
 \begin{description}
-  \item[Rétroaction générale]
+  \item[R\'etroaction g\'en\'erale]
   
-  Cette fonctionnalit\'e permet de laisser un commentaire à l'étudiant une fois que la correction est termin\'ee.
+  Cette fonctionnalit\'e permet de laisser un commentaire \`a l'\'etudiant une fois que la correction est termin\'ee.
   Par exemple, l'enseignant pourrait laisser des explications sur les erreurs courantes.
   
-  \item[Modèle de réponse]
+  \item[Mod\`ele de r\'eponse]
   
-  Ceci permet de préremplir la zone de texte de l'étudiant avec le texte donné.
-  Par exemple, un en-tête de fonction pour une question de programmation ou la liste des mots à définir.
+  Ceci permet de pr\'eremplir la zone de texte de l'\'etudiant avec le texte donn\'e.
+  Par exemple, un en-t\^ete de fonction pour une question de programmation ou la liste des mots \`a d\'efinir.
   
-  \item[Information de l'évaluateur]
+  \item[Information de l'\'evaluateur]
   
   Ceci affiche un texte pour le correcteur seulement.
-  Utile pour voir facilement le barème de correction ou donner des instructions au correcteur.
-  Est affiché sous la réponse de l'étudiant lors de la correction.
+  Utile pour voir facilement le bar\`eme de correction ou donner des instructions au correcteur.
+  Est affich\'e sous la r\'eponse de l'\'etudiant lors de la correction.
 \end{description}
-
-Finalement, les fonctionnalités suivantes ont été ajoutées:
-
+Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
 \begin{description}
-  \item[Mots-clés]
+  \item[Mots-cl\'es]
   
-  Les mots-clés sont mis en évidence dans la réponse de l'étudiant lors de la correction manuelle.
-
-  \item[Réponse officielle de l'enseignant]
+  Les mots-cl\'es sont mis en \'evidence dans la r\'eponse de l'\'etudiant lors de la correction manuelle.
+  \item[R\'eponse officielle de l'enseignant]
   
-  Affiche ce texte à droite de la réponse de l'étudiant lors de la correction.
-  Les mots-clés sont mis en évidence aussi dans ce texte.
+  Affiche ce texte \`a droite de la r\'eponse de l'\'etudiant lors de la correction.
+  Les mots-cl\'es sont mis en \'evidence aussi dans ce texte.
 \end{description}
-
-\section{Détection des mots clés}
-
-Comme cité dans le chapitre \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
-Pour trouver la racine de tous les mots du texte, il faut débuter par isoler tous les mots.
-Les caractères non alphanumériques sont remplacés par des espaces et le texte est découpé par des caractères d'espacement (espace, saut de ligne, tabulation, etc.).
-
-\GT{Quand tu mets une figure ou un extrait de code, alors tu dois y
-r\'ef\'erer dans le texte, en donnant quelques
-informations/explications et en mettant une r\'ef\'erence
-$\backslash$ref\{\}.}
-
+\section{Architecture de qtype\_essayhelper}
+L'installation d'un module d'extension dans Moodle est tr\`es simple.
+Premi\`erement il faut mettre le r\'epertoire du module d'extension au bon endroit.
+Par exemple, un type de question doit se trouver dans le dossier \og question/type \fg{}.
+Deuxi\`emement il faut se connecter sur Moodle en tant qu'administrateur.
+Moodle d\'etectera automatiquement qu'il y a un nouveau module d'extension.
+Finalement, Moodle proposera \`a l'administrateur d'installer le nouveau module d'extension avant que l'administrateur puisse acc\'eder au syst\`eme.
+\`A l'int\'erieur du r\'epertoire du module d'extension, les fichiers doivent avoir le bon nom et \^etre au bon endroit.
+L'architecture est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite ci-dessous.
+\begin{figure}[h!]
+  \includegraphics[scale=0.7]{images/architecture.png}
+  \caption{Processus de racination Snowball pour la langue fran\c{c}aise.}
+  \label{dev-architecture}
+\end{figure}
+\begin{description}
+ \item[backup/moodle2]
+ 
+ Fichier qui g\`ere la sauvegarde et la restauration des questions de ce type.
+ Le sous-dossier moodle2 indique que cette fonctionnalit\'e existe seulement pour la version 2 de Moodle et les suivantes.
+ 
+ \item[db]
+ 
+ Contiens un fichier \og install.xml \fg{} qui d\'efinit la table de base de donn\'ees \`a cr\'eer pour ce module d'extension.
+ 
+ \item[lang]
+ 
+ Contient un sous-dossier par langue support\'ee sois \og fr \fg{} et \og en \fg{} dans ce projet.
+ Chaque sous-dossier contient un fichier PHP qui d\'efini les cha\^ines de traductions.
+ Ce dossier de traduction est valide pour les fonctionnalit\'es Moodle, pas pour la racination.
+ 
+ \item[php-stemmer]
+ 
+ Sous-module git pour ce projet uniquement.
+ Pointe vers la librairie de racination utilis\'e et d\'ecrit au chapitre \ref{chap:phpstemmer}.
+ 
+ \item[pix]
+ 
+ Contiens l'icône du type de question.
+ Cette icône est uniquement visible lorsque l'enseignant choisit le type de question pour une nouvelle question.
+ 
+ \item[tests]
+ 
+ Ce dossier contient tous les tests unitaires et d'acception du module d'extension.
+ Pour plus de d\'etail, voir la section \ref{dev_test}.
+ 
+ \item[edit\_essayhelper\_form.php]
+ 
+ D\'efini le formulaire que l'enseignant remplis lorsqu'il cr\'e une question de ce type.
+ Il faut uniquement d\'efinir les champs sp\'ecifiques au type de question actuel, Moodle ajoute ajoute automatiquement les champs de base comme le nom de la question et la valeur en point de la question dans le questionnaire.
+ 
+ \item[question.php]
+ 
+ G\`ere la r\'eponse \`a une question.
+ D\'efini le comportement de question \`a utiliser, comment afficher la r\'eponse (appel renderer.php) et valide la pr\'esence d'une r\'eponse.
+ 
+ \item[questiontype.php]
+ 
+ G\`ere la cr\'eation, modification et suppression d'une question de ce type.
+ 
+ \item[renderer.php]
+ 
+ G\`ere l'affiche d'une question et des r\'eponses.
+ Permets de contr\^oler la zone de texte pour une nouvelle r\'eponse ou pour la modifier.
+ Permets aussi de changer l'affichage de la r\'eponse pour le correcteur.
+ C'est dans ce fichier que nous allons surtout travailler.
+ 
+ \item[stemmer.php]
+ 
+ Fichier sp\'ecialement con\c{c}u pour ce module d'extension.
+ C'est dans ce fichier que nous g\'erons le lien entre Moodle et \texttt{php-stemmer}.
+ 
+ \item[styles.css]
+ 
+ Fichier css pour notre module d'extension.
+ 
+ \item[version.php]
+ 
+ Fichier contenant 4 informations:
+ \begin{itemize}
+   \item \og component \fg{}
+   
+   Nom du module d'extension qui sera utilis\'e dans la base de donn\'ees Moodle.
+   Dans ce projet il s'agit de \og qtype\_essayhelper \fg{}.
+   
+   \item \og version \fg{}
+   
+   Num\'ero de version du module d'extension dans le format \og aaaammjj00 \fg{} utilisant la date.
+   Les deux derniers \og 0 \fg{} sont utilis\'es pour faire plus qu'une version par jour.
+   Pour que Moodle prenne en compte les changements au fichier \og install.xml \fg{} (pour la base de donn\'ees), il faut changer le num\'ero de version.
+   
+   \item \og requires \fg{}
+   
+   Num\'ero de version Moodle n\'ecessaire au bon fonctionnement du module d'extension utilisant aussi le format \og aaaammjj00 \fg{}.
+   Notre module d'extension utilise la m\^eme d\'ependance que \og qtype\_essay \fg{} soit \og 2015111600 \fg{} qui repr\'esente Moodle 3.0.
+   
+   \item \og maturity \fg{}
+   
+   La maturit\'e du module d'extension.
+   Notre module d'extension se trouve encore en \textit{MATURITY\_ALPHA}.
+ \end{itemize}
+\end{description}
+Dans tous les fichiers il y a eu un peu d'adaptation du code afin de passer de qtype\_essay \`a qtype\_essayhelper.
+\section{Code Moodle de qtype\_essayhelper}
+La plus grande partie du travail a \'et\'e d'int\'egrer mon module d'extension \`a Moodle.
+Cette section d\'ecrit les grandes lignes du travail effectu\'e.
+\subsection*{Classe qtype\_essayhelper\_edit\_form}
+Cette classe g\`ere le formulaire de cr\'eation et modification de question pour ce type de question.
+Elle poss\`ede deux fonctions, la premi\`ere est \og definition\_inner \fg{} qui permet d'ajouter des champs au formulaire de base de cr\'eation de questions.
+Le formulaire de base comporte quelques champs tels que le titre de la question, le texte de la question ainsi que le nombre de points que vaut cette question.
+La gestion des champs de base se fait automatiquement par Moodle, il ne reste donc qu'\`a ajouter nos champs suppl\'ementaires pour notre type de question.
+L'ajout de champs se fait avec un objet formulaire fourni par Moodle.
+L'exemple de code \ref{code:formdefinition} illustre l'ajout des champs d'aide \`a la correction dans le formulaire de notre module d'extension.
+La fonction principale de cet objet est addElement qui prend 4 param\`etres:
+\begin{enumerate}
+  \item Le type d'\'el\'ement;
+  \item Le nom du champ doit \^etre le m\^eme que dans la base de donn\'ees;
+  \item Le texte \`a afficher, la fonction \textit{get\_string} traduit la cha\^ine donn\'ee en premier param\`etre dans les fichiers de traductions du module d'extension donn\'e dans le deuxi\`eme param\`etre;
+  \item Optionnellement, des options suppl\'ementaires.
+\end{enumerate}
+\begin{lstfloat}
+\begin{lstlisting}[frame=l]
+$qtype = question_bank::get_qtype('essayhelper');
+$mform->addElement('header', 'essayhelper', get_string('essayhelperheader', 'qtype_essayhelper'));
+$mform->setExpanded('essayhelper');
+$mform->addElement('textarea', 'officialanswer', get_string('officialanswer', 'qtype_essayhelper'),
+ array('rows' => 10, 'cols' => 100));
+$mform->addElement('textarea', 'keywords', get_string('keywords', 'qtype_essayhelper'),
+ array('rows' => 10, 'cols' => 60));
+$mform->addHelpButton('keywords', 'keywords', 'qtype_essayhelper');
+\end{lstlisting}
+\caption{Extrait du code de la fonction definition\_inner de la classe qtype\_essayhelper\_edit\_form.}
+\label{code:formdefinition}
+\end{lstfloat}
+La deuxi\`eme fonction de cette classe permet de sauvegarder les champs du formulaire.
+Tous les champs non reconnus par Moodle doivent \^etre trait\'es manuellement dans cette fonction comme illustr\'ee \`a l'exemple de code \ref{code:formpreprocessing}.
+\begin{lstfloat}
+\begin{lstlisting}[frame=l]
+$question->responsetemplate = $question->options->responsetemplate;
+$question->officialanswer = $question->options->officialanswer;
+$question->keywords = $question->options->keywords;
+\end{lstlisting}
+\caption{Extrait du code de la fonction data\_preprocessing de la classe qtype\_essayhelper\_edit\_form.}
+\label{code:formpreprocessing}
+\end{lstfloat}
+\subsection*{Classe qtype\_essayhelper\_question}
+TODO
+\subsection*{Classe qtype\_essayhelper}
+TODO
+\subsection*{Classe qtype\_essayhelper\_renderer}
+TODO
+\section{D\'etection des mots cl\'es}
+Comme cit\'e dans le \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
+Pour trouver la racine de tous les mots du texte, il faut d\'ebuter par les isoler.
+Les caract\`eres non alphanum\'eriques sont remplac\'es par des espaces et le texte est d\'ecoup\'e par des caract\`eres d'espacement (espace, saut de ligne, tabulation, etc.) tel qu'illustr\'e dans l'extrait de code \ref{code:isoler}.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $sentence));
@@ -111,64 +241,53 @@ $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $
 \caption{Isoler les mots du texte.}
 \label{code:isoler}
 \end{lstfloat}
-
-Ensuite, chaque mot est associé avec sa racine trouvée avec l'algorithme Snowball.
-Chaque mot-clé a, préalablement, aussi été réduit à sa racine avec l'algorithme Snowball.
-
+Ensuite, chaque mot est associ\'e avec sa racine trouv\'ee avec l'algorithme Snowball tel qu'illustr\'e dans l'extrait de code \ref{code:racinationsnowball}.
+Chaque mot-cl\'e a, pr\'ealablement, aussi \'et\'e r\'eduit \`a sa racine avec l'algorithme Snowball.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 foreach ($words as $word) {
-	if ($word) {
-		if (Wamania\Snowball\Utf8::check($word)) {
-			$stem = $stemmer->stem($word);
-			if (isset($stems[$stem])) {
-				if (!in_array($word, $stems[$stem])) {
-					$stems[$stem][] = $word;
-				}
-			} else {
-				$stems[$stem] = array($word);
-			}
-		} else {
-			$stems[] = $word;
-		}
-	}
+ if ($word) {
+  if (Wamania\Snowball\Utf8::check($word)) {
+   $stem = $stemmer->stem($word);
+   if (isset($stems[$stem])) {
+    if (!in_array($word, $stems[$stem])) {
+     $stems[$stem][] = $word;
+    }
+   } else {
+    $stems[$stem] = array($word);
+   }
+  } else {
+   $stems[] = $word;
+  }
+ }
 }
 \end{lstlisting}
 \caption{Racination des mots avec Snowball.}
 \label{code:racinationsnowball}
 \end{lstfloat}
-
-Finalement les mots-clés trouvés dans le texte sont mis en évidence.
-
+Finalement les mots-cl\'es trouv\'es dans le texte sont mis en \'evidence.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 $usedKeywords = array_intersect(array_keys($stems), $keywords);
-
 foreach ($usedKeywords as $keyword) {
-	$words = $answerWords[$keyword];
-	foreach ($words as $word) {
-		$studentAnswer = str_replace($word, '<b><u>' . $word . '</u></b>', $studentAnswer);
-	}
+ $words = $answerWords[$keyword];
+ foreach ($words as $word) {
+  $studentAnswer = str_replace($word, '<b><u>' . $word . '</u></b>', $studentAnswer);
+ }
 }
 \end{lstlisting}
-\caption{Mise en évidence des mots-clés trouvés.}
+\caption{Mise en \'evidence des mots-cl\'es trouv\'es.}
 \label{code:mots-cles}
 \end{lstfloat}
-
-\section{Tests}
-
-Les tests du module d'extension \og qtype\_essay \fg{} ont été conservés et adaptés à ce nouveau module d'extension.
-Le fonctionnement de base d'un module d'extension (création de question, modification de question, répondre à la question, etc.) a donc facilement été testé.
-Il ne restait plus qu'à tester les nouvelles fonctionnalités de mots-clés et d'affichage de la réponse de l'enseignant.
-
+\section{Tests} \label{dev_test}
+Les tests du module d'extension \og qtype\_essay \fg{} ont \'et\'e conserv\'es et adapt\'es \`a ce nouveau module d'extension.
+Le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a donc facilement \'et\'e test\'e.
+Il ne restait plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
 \section{Tests d'acceptation}
-
-Les tests d'acceptation récupérés du module d'extension \textit{qtype\_essay} ont permis de trouver quelques problèmes  dans le nouveau module d'extension.
-Par exemple, la fonctionnalité \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \textit{qtype\_essayhelper}.
-Le problème venait d'un dossier manquant dans le nouveau module d'extension.
-Le dossier \textit{backup} dans le module d'extension \textit{qtype\_essayhelper} ne contient pas des copies de sauvegardes du module d'extension mais plusieurs versions de la fonctionnalité \textit{Backup and restore}.
-
+Les tests d'acceptation r\'ecup\'er\'es du module d'extension \textit{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
+Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \textit{qtype\_essayhelper}.
+Le probl\`eme venait d'un dossier manquant dans le nouveau module d'extension.
+Le dossier \textit{backup} dans le module d'extension \textit{qtype\_essayhelper} ne contiens pas des copies de sauvegardes du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
 \section{Tests unitaires}
-
-La biblioth\`eque de racination \texttt{php-stemmer} est déjà testé unitairement et validé à l'aide d'un dictionnaire qui associe les mots à leurs racines.
-Il ne restait donc qu'à tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
+La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'e unitairement et valid\'e \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
+Il ne restait donc qu'\`a tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
