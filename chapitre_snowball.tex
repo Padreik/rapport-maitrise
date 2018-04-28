@@ -10,6 +10,7 @@ ressemble un petit programme Snowball. De plus, la distinction entre
 Snowball et php-stemmer n'est pas claire: ce dernier s'inspire
 simplement de Snowball pour l'algorithme ou utilise directement le
 langage?}
+\PG{J'ai clarifi\'e et ajout\'e un exemple plus bas.}
 Lors du choix de la technique utilis\'ee, nous avons pris en consid\'eration les points suivants:
 \begin{enumerate}
   \item Le but du projet n'\'etant pas de faire de l'analyse linguistique, une biblioth\`eque devra \^etre utilis\'ee si possible;
@@ -52,7 +53,7 @@ L'origine des algorithmes pour les langues latines, incluant la langue fran\c{c}
 Les algorithmes Snowball sont plut\^ot simples comme on peut le voir \`a l'exemple \ref{code:snowball-exemple}.
 Cet exemple ex\'ecute une \'etape pr\'eliminaire \`a la racination, soit la gestion des voyelles.
 Les lettres en majuscules ne seront plus consid\'er\'ees comme des voyelles pour la racination.
-L'algorithme au complet est disponible \`a l'adresse \href{https://raw.githubusercontent.com/snowballstem/snowball/master/algorithms/french/stem_ISO_8859_1.sbl}.
+L'algorithme au complet est disponible \`a l'adresse \url{https://raw.githubusercontent.com/snowballstem/snowball/master/algorithms/french.sbl}.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 define v 'aeiouy{a^}{a`}{e"}{e'}{e^}{e`}{i"}{i^}{o^}{u^}{u`}'
@@ -128,6 +129,7 @@ Par contre, le sens des deux mots est diff\'erent.
 \GT{Tu discutes beaucoup de la racination pour obtenir <<l'essence>>
 des mots-cl\'es.  Mais tu n'expliques peut-\^etre pas assez comment
 cela est utilis\'e dans ton processus/outil.}
+\PG{Voir chapitre ci-dessous.}
 \section{\texttt{php-stemmer} et son utilisation}
 \label{chap:phpstemmer}
 Le fichier \textit{README.md} du git de \texttt{php-stemmer} le d\'ecrit : \og \textit{PHP5 native implementation of Snowball stemmer} \fg{} \cite{phpstemmer}.

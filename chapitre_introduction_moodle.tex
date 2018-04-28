@@ -1,4 +1,4 @@
-﻿\chapter{Introduction \`a Moodle}
+\chapter{Introduction \`a Moodle}
 Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) cr\'e\'e par Martin Dougiamas.
 Cette plateforme est un logiciel libre d\'evelopp\'e en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
 Moodle est un outil modulaire o\`u chaque enseignant peut cr\'eer ses cours comme il le souhaite.
@@ -77,16 +77,21 @@ effectuer la correction manuelle, qui aide le correcteur \`a traiter
 l'ensemble des r\'eponses, ou quelque chose du genre!?}
 \PG{J'ai ajout\'e plus de d\'etail sur la correction automatique dans le chapitre pr\'ec\'edent et enlev\'e une phrase douteuse dans le chapitre qui suit.}
 
-DÃ» \`a sa nature, le type de question Composition est le seul qui ne peut pas se corriger automatiquement par Moodle.
-L'enseignant doit donc corriger manuellement toutes les r\'eponses \`a l'aide du module de correction manuelle.
+D\`u \`a sa nature, le type de question Composition est le seul qui ne peut pas se corriger automatiquement par Moodle.
+L'enseignant doit donc corriger manuellement toutes les r\'eponses \`a l'aide du module de correction manuelle tel qu'illustr\'e \`a la figure \ref{correction-manuelle}.
+\begin{figure}[b!]
+  \includegraphics[scale=0.6]{images/correction-manuelle.png}
+  \caption{Interface du module de correction manuelle de Moodle.}
+  \label{correction-manuelle}
+\end{figure}
 L'enseignant peut choisir de corriger le questionnaire en entier, un \'etudiant apr\`es l'autre.
 Il peut aussi corriger une question \`a la fois, affichant ainsi les r\'eponses de tous les \'etudiants \`a cette question sur une seule page.
 Cette derni\`ere m\'ethode est appr\'eci\'ee de plusieurs enseignants, car elle permet de comparer toutes les r\'eponses donn\'ees et ainsi corriger de mani\`ere plus uniforme.
 Notre projet consiste donc \`a faciliter le travail du correcteur en cr\'eant un nouveau module Moodle qui:
 \begin{enumerate}
-  \item Affichera la r\'eponse de l'\'etudiant et la r\'eponse de l'enseignant cÃ´te \`a cÃ´te afin de faciliter la tÃ¢che au correcteur;
+  \item Affichera la r\'eponse de l'\'etudiant et la r\'eponse de l'enseignant c\^ote \`a c\^ote afin de faciliter la t\^ache au correcteur;
   \item Surlignera les mots cl\'es, fournis par l'enseignant, dans la r\'eponse de l'\'etudiant et de l'enseignant;
-  \item Utilisera la racination ou la lemmisation afin de surligner les mots, peu importe leur accord.
+  \item Utilisera la racination ou la lemmisation afin de surligner les mots cl\'es, peu importe leur accord.
 \end{enumerate}
 Le module d'extension propos\'e sera donc utile pour les questions \`a d\'eveloppement pour les textes descriptifs, et aussi pour des segments de code (cours  de programmation), mais le sera moins pour les textes d'opinion o\`u il n'y a pas de \og bonne \fg{} r\'eponse.
 \section{Les modules d'extensions Moodle}

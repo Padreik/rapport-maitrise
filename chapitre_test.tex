@@ -1,4 +1,4 @@
-﻿\chapter{Tests avec Moodle}
+\chapter{Tests avec Moodle}
 Moodle offre du support pour deux types de tests: des tests unitaires et des tests d'acceptation.
 La plateforme inclut plusieurs centaines de ces deux types de tests automatis\'es d\`es son installation.
 Ils seront tous effectu\'es avant le d\'ebut du d\'eveloppement afin de s'assurer que Moodle fonctionne correctement sans le nouveau module d'extension.
@@ -61,7 +61,7 @@ Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`
 \PG{J'ai ajout\'e des r\'ef\'erences vers vos notes de cours. J'ai un peu ajust\'e mes d\'efinitions apr\`es mes lectures.}
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extensions qui en ont.
 %
-Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}. \PG{R\'ef\'erence BDD \`a venir...}
+Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}. \PG{Je ne retrouve plus mon livre de BDD que j'ai lu...}
 Un serveur ou une application Selenium ex\'ecutera les tests en ligne de commande ou dans un navigateur web, selon le besoin.
 Les tests sont \'ecrits en anglais, compr\'ehensibles par tous.
 Chaque instruction et v\'erification doit \^etre, pr\'ealablement, configur\'ee en PHP.
@@ -73,7 +73,7 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
   \item D\'ebutant par \textit{Feature}, le titre du test afin de le retrouver facilement;
   
   \item Les trois lignes suivantes permettent de d\'ecrire le test au lecteur.
-        En Moodle, comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit:
+        Comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit:
         
         \begin{itemize}
           \item \og \textit{As a ...} \fg{} d\'ecrit quel type d'utilisateur est cibl\'e par ce test;
@@ -150,6 +150,7 @@ uniquement ex\'ecut\'e les tests d\'ej\`a disponibles ou si tu en as
 toi-m\^eme d\'efini d'autres.  De ce qu'on comprend de ce que tu
 \'ecris dans le chapitre suivant, tu en as d\'efini donc il faudrait
 clarifier cela d\`es \`a pr\'esent.}
+\PG{Voir prochain chapitre.}
 \section{Tests dans un module d'extension}
 Chaque module d'extension d\'efinit ces propres tests unitaires et d'acceptation.
 Le nouveau module d'extension devra donc lui aussi d\'efinir des tests unitaires et d'acceptation afin de valider son bon fonctionnement.
