@@ -4,7 +4,7 @@
 Dois-je continuer mes recherches pour trouver une source ou dans ma conclusion j'indique mon manque de recherche avant de commencer?}
 Afin d'identifier les mots-cl\'es pr\'esents dans le texte d'un \'etudiant et les comparer avec ceux fournis par l'enseignant, nous avons d\'ecid\'e d'utiliser la racine de chaque mot.
 En utilisant la racine de chaque mot, nous pouvons trouver les mots-cl\'es, peu importe leur accord ou le temps de verbe.
-Deux techniques de recherche de racine d'un mot ont \'et\'e retenues: la lemmatisation et la racination (\textit{stemming}).
+Deux techniques de recherche de racine d'un mot ont \'et\'e exammin\'ees: la lemmatisation et la racination (\textit{stemming}).
 \GT{Je crois qu'il pourrait \^etre int\'eressant d'illustrer \`a quoi
 ressemble un petit programme Snowball. De plus, la distinction entre
 Snowball et php-stemmer n'est pas claire: ce dernier s'inspire
@@ -17,14 +17,16 @@ Lors du choix de la technique utilis\'ee, nous avons pris en consid\'eration les
   \item La biblioth\`eque doit \^etre \'ecrite en PHP, langage utilis\'e par Moodle, afin de faciliter l'installation du module d'extension d\'evelopp\'e;
   \item La biblioth\`eque doit permettre de trouver la racine des mots en fran\c{c}ais, en anglais, et en plusieurs autres langues si possible, et ce afin de permettre l'utilisation du module d'extension \`a travers le monde.
 \end{enumerate}
+
 \section{La lemmatisation}
 La lemmatisation consiste \`a trouver le lemme de chaque mot.
 Le lemme est la forme canonique d'un mot, soit l'infinitif pour un verbe, le masculin singulier pour un adjectif, etc.
 Par exemple, le lemme du verbe \og aimerait \fg{} est \og aimer \fg{}.
-La  technique de lemmatisation utilise habituellement un dictionnaire qui associe toutes les conjugaisons possibles d'un mot \`a leur lemme.
+La  technique de lemmatisation utilise habituellement un dictionnaire qui associe toutes les conjugaisons possibles d'un mot \`a son lemme.
 Certaines biblioth\`eques vont m\^eme consid\'erer le contexte afin de trouver le bon lemme.
 Les biblioth\`eques de lemmatisation \'ecrites en PHP sont rares.
 Lors de nos recherches, aucune de ces biblioth\`eques ne supportait le fran\c{c}ais et l'anglais.
+
 \section{La racination}
 La racination consiste \`a trouver la racine (parfois appel\'e radical, ou \emph{stem} en anglais) de chaque mot.
 La racine est trouv\'ee par un algorithme en enlevant la fin du mot.
@@ -35,14 +37,15 @@ Par exemple, la racine de \og courons \fg{} est la m\^eme que la racine de \og c
 La lemmatisation ne fera pas la m\^eme erreur et trouvera les lemmes \og courir \fg{} et \og couronne \fg{}.
 En contrepartie, la recherche de la racine sera plus rapide avec un algorithme de racination qu'une recherche dans un dictionnaire de lemmes.
 Il existe quelques biblioth\`eques de racination en PHP.
-Une d'elles est \texttt{php-stemmer}\cite{phpstemmer} qui fait la racination en fran\c{c}ais, en anglais, et dans dix autres langues.
+L'une d'entre elles est \texttt{php-stemmer}~\cite{phpstemmer} qui fait la racination en fran\c{c}ais, en anglais, et dans dix autres langues.
 Les algorithmes utilis\'es par \texttt{php-stemmer} sont une traduction en PHP des algorithmes \'ecrits en Snowball, un langage d\'evelopp\'e pour la racination.
 \GT{Il faudrait indiquer une r\'ef\'erence ci-haut. Celle indiqu\'ee
 par href n'est pas visible on dirait dans le PDF.}
 \PG{J'ai remplac\'e tous les href par des footnote-url. J'ai aussi essay\'e de clarifi\'e le lien entre php-stemmer et Snowball.}
-Comme nous avons trouv\'e une biblioth\`eque de racination qui satisfait tous les crit\`eres et aucune biblioth\`eque de lemmatisation n'en fait autant, ce projet va utiliser \texttt{php-stemmer} pour la d\'ecouverte de mots-cl\'es.
+Comme nous avons trouv\'e une biblioth\`eque de racination qui satisfait tous les crit\`eres et aucune biblioth\`eque de lemmatisation n'en fait autant, pour ce projet nous avons d\'ecid\'e d'utiliser \texttt{php-stemmer} pour la d\'ecouverte de mots-cl\'es.
+
 \section{Snowball}
-Snowball est un petit langage de traitement de texte pour la racination de texte.
+Snowball est un petit langage de traitement de texte pour la racination des mots.
 Une application Snowball peut \^etre compil\'ee en C ou en Java.
 Le site web de Snowball donne l'algorithme de racination pour plusieurs langues: anglais, fran\c{c}ais, espagnol, allemand, russe, etc.
 Le langage ainsi que l'algorithme pour la langue anglaise ont \'et\'e d\'evelopp\'es par Martin Porter \cite{snowball}.
@@ -50,10 +53,10 @@ Le langage ainsi que l'algorithme pour la langue anglaise ont \'et\'e d\'evelopp
 \GT{Pr\'ef\'erable si tu pouvais donner une r\'ef\'erence, avec $\backslash$cite\{...\}, pour cet algorithme.}
 %
 L'origine des algorithmes pour les langues latines, incluant la langue fran\c{c}aise, n'est pas donn\'ee, mais semble venir aussi de Porter et de contributeurs.
-Les algorithmes Snowball sont plut\^ot simples comme on peut le voir \`a l'exemple \ref{code:snowball-exemple}.
+Les algorithmes Snowball sont plut\^ot simples comme on peut le voir dans l'exemple de code~\ref{code:snowball-exemple}.
 Cet exemple ex\'ecute une \'etape pr\'eliminaire \`a la racination, soit la gestion des voyelles.
 Les lettres en majuscules ne seront plus consid\'er\'ees comme des voyelles pour la racination.
-L'algorithme au complet est disponible \`a l'adresse \url{https://raw.githubusercontent.com/snowballstem/snowball/master/algorithms/french.sbl}.
+L'algorithme au complet est disponible \`a l'adresse suivante: \url{https://raw.githubusercontent.com/snowballstem/snowball/master/algorithms/french.sbl}
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 define v 'aeiouy{a^}{a`}{e"}{e'}{e^}{e`}{i"}{i^}{o^}{u^}{u`}'
@@ -81,64 +84,74 @@ Parce que lorsqu'on lit un rapport/m\'emoire, ce qu'on lit devrait
 \^etre du texte relativement <<lisible>>, et pas trop de d\'etails ---
 trop d'arbres qui emp\^echent de voir la for\^et!}
 \PG{J'ai inclus un peu plus haut un lien vers l'algorithme complet Snowball. Pour un programmeur c'est plus simple \`a comprendre l'algorithme en Snowball que de le lire textuellement. J'ai enlev\'e beaucoup de d\'etail dans le texte ci-dessous, est-ce que le diagramme serait suffisant?}
+
 Les algorithmes Snowball sont structur\'es en plusieurs \'etapes.
-Ce qui suit explique les grandes lignes de l'algorithme de racination en fran\c{c}ais qui sont illust\'rées \`a la figure \ref{snowball-process}.
-Pour plus d'informations, voir \url{http://snowballstem.org/algorithms/french/stemmer.html}.
+Ce qui suit explique les grandes lignes de l'algorithme de racination en fran\c{c}ais, algorithme illustr\'e \`a la figure~\ref{snowball-process} sous forme d'un organigramme.%
+\footnote{Pour plus d'informations, voir \url{http://snowballstem.org/algorithms/french/stemmer.html}.}
+
 \begin{figure}[h!]
-  \includegraphics[scale=0.7]{images/snowball.png}
+  \includegraphics[scale=0.85]{images/snowball.png}
   \caption{Processus de racination Snowball pour la langue fran\c{c}aise.}
   \label{snowball-process}
 \end{figure}
 
+\newcommand{\ETAPE}[1]{\item{\emph{#1}}}
+
 \begin{itemize}
-\item{Pr\'eparation}
+\ETAPE{Pr\'eparation}
 En se basant sur la position des voyelles, on d\'etermine la section du mot qui pourrait \^etre un suffixe.
-\item{\'etape 1: Suffixes standards}
+\ETAPE{\'Etape 1: Suffixes standards}
 Cette \'etape sert \`a trouver la racine des mots, adjectifs, adverbes, etc.
 On enl\`eve les suffixes standards (logie, emment, atrice, etc.)
-\item{\'etape 2: Suffixes de verbes}
+\ETAPE{\'Etape 2: Suffixes de verbes}
 Cette \'etape trouve la racine d'un verbe.
 Il faut faire cette \'etape seulement si l'\'etape 1 n'a rien chang\'e ou si un des suffixes suivants a \'et\'e trouv\'e: amment, emment, ment et ments.
 \begin{itemize}
-\item{\'etape 2a: Suffixes d\'ebutant par i}
+\ETAPE{\'Etape 2a: Suffixes d\'ebutant par i}
+%
+\GT{Sur mon MacBook, le premier item, finissant par mes, g\'en\`ere un caract\`ere bizarre!?}
+%
 On trouve le suffixe qui d\'ebute par i (Ã®mes, ie, ira, etc.)
-\item{\'etape 2b: Autres suffixes de verbes}
+\ETAPE{\'Etape 2b: Autres suffixes de verbes}
 On trouve le suffixe de verbe (\'e, era, Ã®mes, aient, etc.)
 \end{itemize}
-\item{\'etape 3: Derni\`ere lettre}
+\ETAPE{\'Etape 3: Derni\`ere lettre}
 Si les \'etapes 1 ou 2 ont modifi\'e le mot, faire cette \'etape, sinon passer \`a l'\'etape 4.
 Si la derni\`ere lettre est un y, la remplacer par i.
 Si c'est un \c{c}, la remplacer par c.
-\item{\'etape 4: R\'esidue du suffixe}
-Il faut faire cette \'etape seulement si les \'etapes 1 \`a 3 n'ont pas modifi\'e le mot.
+\ETAPE{\'Etape 4: R\'esidu du suffixe}
+Il faut faire cette \'etape seulement si les \'etapes~1 \`a 3 n'ont pas modifi\'e le mot.
 Cette \'etape sert \`a enlever le pluriel et le f\'eminin des mots proches de leurs racines.
-\item{\'etape 5: D\'edoubler la lettre finale}
+\ETAPE{\'Etape 5: D\'edoubler la lettre finale}
 Les suppressions et remplacements des \'etapes pr\'ec\'edentes peuvent laisser une faute dans la racine du mot.
 Cette \'etape sert \`a enlever les lettres doubles de certaines finales de mots (enn, ell, eill, etc.).
-\item{\'etape 6: Accent final}
+\ETAPE{\'Etape 6: Accent final}
 Cette \'etape aussi sert \`a nettoyer la racine du mot.
-Si un mot se termine par la lettre \textbf{\`e ou \'e} suivi d'une ou plusieurs consonnes, enlever l'accent de ce \textbf{e}.
-\item{Finalisation}
+Si un mot se termine par la lettre {\`e ou \'e} suivi d'une ou plusieurs consonnes, enlever l'accent de ce {e}.
+\ETAPE{Finalisation}
 Finalement, on enl\`eve les majuscules sur les voyelles ajout\'ees durant l'\'etape de pr\'eparation.
 \end{itemize}
 Au final, on obtient la racine du mot.
-Lors de la comparaison de texte, il peut y avoir quelques probl\`emes.
+
+Tel que mentionn\'e plus haut, la racination est moins pr\'ecise que la lemmatisaion.
 Par exemple les mots \og acceptables \fg{} et \og accept\'e \fg{} ont la m\^eme racine: \og accept \fg{}.
-Par contre, le sens des deux mots est diff\'erent.
+Par contre, le sens des deux mots est tout \`a diff\'erent.
 
 \GT{Tu discutes beaucoup de la racination pour obtenir <<l'essence>>
 des mots-cl\'es.  Mais tu n'expliques peut-\^etre pas assez comment
 cela est utilis\'e dans ton processus/outil.}
 \PG{Voir chapitre ci-dessous.}
+
 \section{\texttt{php-stemmer} et son utilisation}
 \label{chap:phpstemmer}
-Le fichier \textit{README.md} du git de \texttt{php-stemmer} le d\'ecrit : \og \textit{PHP5 native implementation of Snowball stemmer} \fg{} \cite{phpstemmer}.
-En comparant le code de la librairie \texttt{php-stemmer} et les algorithmes Snowball nous pouvons remarquer que les algorithmes sont les m\^emes.
+Le fichier \texttt{README.md} du d\'ep\^ot git de \texttt{php-stemmer} le d\'ecrit comme \'etant \og \textit{[a] PHP5 native implementation of Snowball stemmer} \fg{}~\cite{phpstemmer}.
+
+En comparant le code de la biblioth\`eque \texttt{php-stemmer} et les algorithmes Snowball, on peut remarquer que les algorithmes sont les m\^emes.
 \texttt{php-stemmer} est donc une traduction PHP des algorithmes Snowball.
-Cette librairie nous servira \`a trouver la racine de chaque mot cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
+Cette biblioth\`eque nous servira \`a trouver la racine de chaque mot cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
 De cette mani\`ere, il sera possible de mettre en \'evidence chaque mot cl\'e dans la r\'eponse de l'\'etudiant, peu importe l'accord.
 Par exemple, si l'enseignant donne \og illumination \fg{} comme mot cl\'e et l'\'etudiant donne la r\'eponse \og Le pont Jacques-Cartier \`a \'et\'e illumin\'e pour le 375\textsuperscript{i\`eme} de la ville de Montr\'eal. \fg{}.
 La racine du mot cl\'e \og illumination \fg{}  est \og illumin \fg{}.
 En regardant la racine de chaque mot dans la r\'eponse de l'\'etudiant, on remarque que la racine du mot \og illumin\'e \fg{} est aussi \og illumin \fg{}.
 Il faudrait donc mettre en \'evidence le mot \og illumin\'e \fg{} lorsqu'on affiche la r\'eponse au correcteur.
-Le module d'extension devra afficher la r\'eponse de l'\'etudiant avec le mot ilumi\'e en \'evidence tel qu'illustr\'e dans la phrase suivante: \og Le pont Jacques-Cartier \`a \'et\'e \textbf{\underline{illumin\'e}} pour le 375\textsuperscript{i\`eme} de la ville de Montr\'eal. \fg{} 
+Le module d'extension devra afficher la r\'eponse de l'\'etudiant avec le mot illumin\'e en \'evidence tel qu'illustr\'e dans la phrase suivante: \og Le pont Jacques-Cartier \`a \'et\'e \textbf{\underline{illumin\'e}} pour le 375\textsuperscript{i\`eme} de la ville de Montr\'eal. \fg{} 
