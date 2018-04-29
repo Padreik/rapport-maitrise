@@ -1,17 +1,12 @@
-\chapter{D\'etection des mots-cl\'es}
+\chapter{D\'etection et analyse des mots-cl\'es}
 \label{chap:keywords}
 \PG{Je n'ai malheureusement aucune r\'ef\'erence qui appuie mon choix de prendre la lemmatization ou le stemming pour la d\'etection de mots cl\'es.
 Dois-je continuer mes recherches pour trouver une source ou dans ma conclusion j'indique mon manque de recherche avant de commencer?}
 Afin d'identifier les mots-cl\'es pr\'esents dans le texte d'un \'etudiant et les comparer avec ceux fournis par l'enseignant, nous avons d\'ecid\'e d'utiliser la racine de chaque mot.
 En utilisant la racine de chaque mot, nous pouvons trouver les mots-cl\'es, peu importe leur accord ou le temps de verbe.
 Deux techniques de recherche de racine d'un mot ont \'et\'e exammin\'ees: la lemmatisation et la racination (\textit{stemming}).
-\GT{Je crois qu'il pourrait \^etre int\'eressant d'illustrer \`a quoi
-ressemble un petit programme Snowball. De plus, la distinction entre
-Snowball et php-stemmer n'est pas claire: ce dernier s'inspire
-simplement de Snowball pour l'algorithme ou utilise directement le
-langage?}
-\PG{J'ai clarifi\'e et ajout\'e un exemple plus bas.}
-Lors du choix de la technique utilis\'ee, nous avons pris en consid\'eration les points suivants:
+
+Lors du choix de la technique utilis\'ee pour la d\'etection et analyse des mots-cl\'es, nous avons pris en consid\'eration les contraintes suivantes:
 \begin{enumerate}
   \item Le but du projet n'\'etant pas de faire de l'analyse linguistique, une biblioth\`eque devra \^etre utilis\'ee si possible;
   \item La biblioth\`eque doit \^etre \'ecrite en PHP, langage utilis\'e par Moodle, afin de faciliter l'installation du module d'extension d\'evelopp\'e;
@@ -36,23 +31,22 @@ La racination est moins pr\'ecise que la lemmatisation.
 Par exemple, la racine de \og courons \fg{} est la m\^eme que la racine de \og couronnement \fg{}, soit \og couron \fg{}.
 La lemmatisation ne fera pas la m\^eme erreur et trouvera les lemmes \og courir \fg{} et \og couronne \fg{}.
 En contrepartie, la recherche de la racine sera plus rapide avec un algorithme de racination qu'une recherche dans un dictionnaire de lemmes.
+
 Il existe quelques biblioth\`eques de racination en PHP.
 L'une d'entre elles est \texttt{php-stemmer}~\cite{phpstemmer} qui fait la racination en fran\c{c}ais, en anglais, et dans dix autres langues.
 Les algorithmes utilis\'es par \texttt{php-stemmer} sont une traduction en PHP des algorithmes \'ecrits en Snowball, un langage d\'evelopp\'e pour la racination.
-\GT{Il faudrait indiquer une r\'ef\'erence ci-haut. Celle indiqu\'ee
-par href n'est pas visible on dirait dans le PDF.}
-\PG{J'ai remplac\'e tous les href par des footnote-url. J'ai aussi essay\'e de clarifi\'e le lien entre php-stemmer et Snowball.}
+%
 Comme nous avons trouv\'e une biblioth\`eque de racination qui satisfait tous les crit\`eres et aucune biblioth\`eque de lemmatisation n'en fait autant, pour ce projet nous avons d\'ecid\'e d'utiliser \texttt{php-stemmer} pour la d\'ecouverte de mots-cl\'es.
 
 \section{Snowball}
 Snowball est un petit langage de traitement de texte pour la racination des mots.
 Une application Snowball peut \^etre compil\'ee en C ou en Java.
 Le site web de Snowball donne l'algorithme de racination pour plusieurs langues: anglais, fran\c{c}ais, espagnol, allemand, russe, etc.
-Le langage ainsi que l'algorithme pour la langue anglaise ont \'et\'e d\'evelopp\'es par Martin Porter \cite{snowball}.
-%
-\GT{Pr\'ef\'erable si tu pouvais donner une r\'ef\'erence, avec $\backslash$cite\{...\}, pour cet algorithme.}
+
+Le langage ainsi que l'algorithme pour la langue anglaise ont \'et\'e d\'evelopp\'es par Porter \cite{snowball}.
 %
 L'origine des algorithmes pour les langues latines, incluant la langue fran\c{c}aise, n'est pas donn\'ee, mais semble venir aussi de Porter et de contributeurs.
+
 Les algorithmes Snowball sont plut\^ot simples comme on peut le voir dans l'exemple de code~\ref{code:snowball-exemple}.
 Cet exemple ex\'ecute une \'etape pr\'eliminaire \`a la racination, soit la gestion des voyelles.
 Les lettres en majuscules ne seront plus consid\'er\'ees comme des voyelles pour la racination.
@@ -74,16 +68,6 @@ define prelude as repeat goto (
 \caption{Exemple de l'algorithme de racination en fran\c{c}ais en Snowball.}
 \label{code:snowball-exemple}
 \end{lstfloat}
-\GT{Je crois qu'il y a trop de d\'etails dans ce qui suit.  Je crois
-qu'il serait pr\'ef\'erable d'avoir tout d'abord un algorithme <<de
-haut niveau>>, i.e., une vue d'ensemble sans trop de d\'etails, par
-exemple, avec du pseudocode ou, peut-\^etre m\^eme, avec du code
-Snowball si c'est compr\'ehensible. Ensuite, les d\'etails pourraient
-\^etre donn\'es, mais soit dans une ou des figures, soit en annexe.
-Parce que lorsqu'on lit un rapport/m\'emoire, ce qu'on lit devrait
-\^etre du texte relativement <<lisible>>, et pas trop de d\'etails ---
-trop d'arbres qui emp\^echent de voir la for\^et!}
-\PG{J'ai inclus un peu plus haut un lien vers l'algorithme complet Snowball. Pour un programmeur c'est plus simple \`a comprendre l'algorithme en Snowball que de le lire textuellement. J'ai enlev\'e beaucoup de d\'etail dans le texte ci-dessous, est-ce que le diagramme serait suffisant?}
 
 Les algorithmes Snowball sont structur\'es en plusieurs \'etapes.
 Ce qui suit explique les grandes lignes de l'algorithme de racination en fran\c{c}ais, algorithme illustr\'e \`a la figure~\ref{snowball-process} sous forme d'un organigramme.%
@@ -137,22 +121,19 @@ Tel que mentionn\'e plus haut, la racination est moins pr\'ecise que la lemmatis
 Par exemple les mots \og acceptables \fg{} et \og accept\'e \fg{} ont la m\^eme racine: \og accept \fg{}.
 Par contre, le sens des deux mots est tout \`a diff\'erent.
 
-\GT{Tu discutes beaucoup de la racination pour obtenir <<l'essence>>
-des mots-cl\'es.  Mais tu n'expliques peut-\^etre pas assez comment
-cela est utilis\'e dans ton processus/outil.}
-\PG{Voir chapitre ci-dessous.}
 
-\section{\texttt{php-stemmer} et son utilisation}
+\section{La biblioth\`eque \texttt{php-stemmer} et son utilisation dans notre module}
 \label{chap:phpstemmer}
-Le fichier \texttt{README.md} du d\'ep\^ot git de \texttt{php-stemmer} le d\'ecrit comme \'etant \og \textit{[a] PHP5 native implementation of Snowball stemmer} \fg{}~\cite{phpstemmer}.
-
+Le fichier \texttt{README.md} du d\'ep\^ot \texttt{git} pour la biblioth\`eque \texttt{php-stemmer} la d\'ecrit comme \'etant \og \textit{[a] PHP5 native implementation of Snowball stemmer} \fg{}~\cite{phpstemmer}.
+%
 En comparant le code de la biblioth\`eque \texttt{php-stemmer} et les algorithmes Snowball, on peut remarquer que les algorithmes sont les m\^emes.
 \texttt{php-stemmer} est donc une traduction PHP des algorithmes Snowball.
-Cette biblioth\`eque nous servira \`a trouver la racine de chaque mot cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
+
+La biblioth\`eque \texttt{php-stemmer} nous servira donc \`a trouver la racine de chaque mot cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
 De cette mani\`ere, il sera possible de mettre en \'evidence chaque mot cl\'e dans la r\'eponse de l'\'etudiant, peu importe l'accord.
 
-Par exemple, si l'enseignant donne \og illumination \fg{} comme mot cl\'e et l'\'etudiant donne la r\'eponse \og Le pont Jacques-Cartier \`a \'et\'e illumin\'e pour le 375\textsuperscript{i\`eme} de la ville de Montr\'eal. \fg{}.
+Par exemple, supposons que l'enseignant donne \og illumination \fg{} comme mot cl\'e et l'\'etudiant donne la r\'eponse \og Le pont Jacques-Cartier \`a \'et\'e illumin\'e pour le 375\textsuperscript{e} de la ville de Montr\'eal. \fg{}.
 La racine du mot cl\'e \og illumination \fg{}  est \og illumin \fg{}.
-En regardant la racine de chaque mot dans la r\'eponse de l'\'etudiant, on remarque que la racine du mot \og illumin\'e \fg{} est aussi \og illumin \fg{}.
-Il faudrait donc mettre en \'evidence le mot \og illumin\'e \fg{} lorsqu'on affiche la r\'eponse au correcteur.
-Le module d'extension devra afficher la r\'eponse de l'\'etudiant avec le mot illumin\'e en \'evidence tel qu'illustr\'e dans la phrase suivante: \og Le pont Jacques-Cartier \`a \'et\'e \textbf{\underline{illumin\'e}} pour le 375\textsuperscript{i\`eme} de la ville de Montr\'eal. \fg{} 
+En examinant la racine de chaque mot dans la r\'eponse de l'\'etudiant, on constate que la racine du mot \og illumin\'e \fg{} est aussi \og illumin \fg{}.
+Il faut donc mettre en \'evidence le mot \og illumin\'e \fg{} lorsqu'on affiche la r\'eponse au correcteur.
+Le module d'extension devra afficher la r\'eponse de l'\'etudiant avec le mot illumin\'e en \'evidence tel qu'illustr\'e dans la phrase suivante: \og Le pont Jacques-Cartier \`a \'et\'e \textbf{\underline{illumin\'e}} pour le 375\textsuperscript{e} de la ville de Montr\'eal. \fg{} 

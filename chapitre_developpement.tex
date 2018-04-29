@@ -1,22 +1,8 @@
-\chapter{D\'eveloppement du module d'extension <<qtype\_essayhelper>>}
-\GT{Tu parles des fonctionnalit\'es, et des tests, mais tu ne parles
-pas vraiment de ce que tu as fait --- c'est comme si tu d\'ecrivais le
-<<quoi>> (fonctionnalit\'es et tests, les tests pouvant aussi \^etre
-vus comme des exemples d'utilisation, donc le <<quoi>>, mais tu ne
-d\'ecris le <<comment>> --- conception et mise en oeuvre (sauf pour
-les d\'etails de la racination.  En d'autres mots, je trouve
-qu'apr\`es lecture de ce chapitre, on ne comprend pas exactement
-comment ton module est structur\'e, comment il s'ins\`ere dans
-l'architecture.  Peut-\^etre le chapitre sur Moodle devrait discuter
-un peu plus --- peut-\^etre avec un graphique/diagramme --- de cette
-architecture modulaire.  Ensuite, ici, tu pourrais pr\'esenter de
-fa\c{c}on un peu plus sp\'ecifique la structure, l'organisation du
-code que tu as d\'evelopp\'e.  Parce que ce n'est pas clair je trouve.
-On voit mal l'envergure, le style d'organisation du code, etc.}
-\PG{J'ai ajout\'e une section architecture plus bas afin d'aider \`a comprendre un peu plus le <<Comment>>}
+\chapter{D\'eveloppement du module d'extension \texttt{qtype\_essayhelper}}
+
 Le site de Moodle donne une br\`eve introduction \`a la cr\'eation d'un nouveau type de question \footnote{\url{https://docs.moodle.org/dev/Question\_types\#Question\_type\_plug\_in\_development}}.
 Un gabarit est disponible afin d'aider \`a d\'ebuter, mais le site conseille de modifier ou copier un type de question existant s'il est similaire au type de question que l'on d\'esire d\'evelopper.
-Dans notre cas, nous allons utiliser le type de question \og qtype\_essay \fg{} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
+Dans notre cas, nous allons utiliser le type de question \texttt{qtype\_essay} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
 Les commentaires de \emph{copyrights} ont \'et\'e ajust\'es comme illustr\'e \`a l'exemple de code~\ref{code:commentaire}.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -39,10 +25,11 @@ Les commentaires de \emph{copyrights} ont \'et\'e ajust\'es comme illustr\'e \`a
 \label{code:commentaire}
 \end{lstfloat}
 
-\section{Fonctionnalit\'es de qtype\_essayhelper}
-Plusieurs fonctionnalit\'es du module d'extension \og qtype\_essay \fg{} ont \'et\'e enlev\'ees:
+\section{Fonctionnalit\'es du module d'extension \texttt{qtype\_essayhelper}}
+Pour obtenir notre nouveau module d'extension,
+certaines fonctionnalit\'es du module d'extension \texttt{qtype\_essay} ont \'et\'e enlev\'ees, notamment les suivantes:
 \begin{description}
-  \item[\'editeur de texte WYSIWIG]
+  \item[\'Editeur de texte WYSIWIG]
   
   Cet \'editeur permet de modifier facilement l'apparence du texte.
   Ceci permet, entre autres, de surligner, de souligner, de mettre en gras, de mettre en italique et plus encore.
@@ -84,10 +71,10 @@ Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
   les mots-cl\'es sont aussi mis en \'evidence.
 \end{description}
 
-\section{Architecture de qtype\_essayhelper}
+\section{Structure du code du module d'extension \texttt{qtype\_essayhelper}}
 \begin{figure}[htbp]
   \includegraphics[scale=0.7]{images/architecture.png}
-  \caption{Architecture \GT{\`a compl\'eter!}.}
+  \caption{Structure du code \GT{\`a compl\'eter!}.}
   \label{dev-architecture}
 \end{figure}
 
@@ -98,7 +85,7 @@ Deuxi\`emement, il faut se connecter sur Moodle en tant qu'administrateur.
 Moodle d\'etectera automatiquement qu'il y a un nouveau module d'extension.
 Finalement, Moodle proposera \`a l'administrateur d'installer le nouveau module d'extension avant que l'administrateur puisse acc\'eder au syst\`eme.
 \`A l'int\'erieur du r\'epertoire du module d'extension, chaque fichier doit avoir le bon nom et \^etre au bon endroit.
-L'architecture est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite ci-dessous
+La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite ci-dessous.
  
 \begin{description}
  \item[backup/moodle2]
@@ -107,7 +94,7 @@ L'architecture est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite
  
  \item[db]
  
- Contient un fichier \og install.xml \fg{} qui d\'efinit la table de base de donn\'ees \`a cr\'eer pour ce module d'extension.
+ Contient un fichier \texttt{install.xml} qui d\'efinit la table de base de donn\'ees \`a cr\'eer pour ce module d'extension.
  
  \item[lang]
  
@@ -164,31 +151,27 @@ L'architecture est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite
  
  Fichier contenant quatre informations:
  \begin{itemize}
-   \item \og component \fg{}
-   
+   \item \texttt{component}: 
    Nom du module d'extension qui sera utilis\'e dans la base de donn\'ees Moodle.
    Dans ce projet il s'agit de \og qtype\_essayhelper \fg{}.
    
-   \item \og version \fg{}
-   
+   \item \texttt{version}:
    Num\'ero de version du module d'extension dans le format \og aaaammjj00 \fg{} utilisant la date.
    Les deux derniers \og 0 \fg{} sont utilis\'es pour faire plus qu'une version par jour.
    Pour que Moodle prenne en compte les changements au fichier \og install.xml \fg{} (pour la base de donn\'ees), il faut changer le num\'ero de version.
    
-   \item \og requires \fg{}
-   
+   \item \texttt{requires}:
    Num\'ero de version Moodle n\'ecessaire au bon fonctionnement du module d'extension utilisant aussi le format \og aaaammjj00 \fg{}.
    Notre module d'extension utilise la m\^eme d\'ependance que \og qtype\_essay \fg{}, soit \og 2015111600 \fg{} qui repr\'esente Moodle 3.0.
    
-   \item \og maturity \fg{}
-   
+   \item \texttt{maturity}:
    La maturit\'e du module d'extension.
    Notre module d'extension se trouve encore en \texttt{MATURITY\_ALPHA}.
  \end{itemize}
 \end{description}
 Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de \og qtype\_essay \fg{} \`a \og qtype\_essayhelper \fg{}.
 
-\section{Code Moodle de qtype\_essayhelper}
+\section{Les classes du module \texttt{qtype\_essayhelper}}
 
 \begin{figure}[htbp]
   \includegraphics[scale=0.5]{images/class.png}

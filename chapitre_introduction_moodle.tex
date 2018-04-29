@@ -39,7 +39,7 @@ Voici une liste non exhaustive des types de questions:
   Affiche un champ texte multilignes, multilignes avec police monospace ou WYSIWYG (\textit{What You See Is What You Get}), dans lequel
   l'\'etudiant doit \'ecrire un texte \`a d\'eveloppement.
 \end{description}
-Toute question, sauf celles de type Composition, peut se corriger automatiquement \`a un moment d\'ecid\'e par l'enseignant.
+Toutes les questions, sauf celles de type Composition, peuvent se corriger automatiquement \`a un moment d\'ecid\'e par l'enseignant.
 La correction peut se faire \`a la saisie de la r\'eponse pour une r\'etroaction en direct ou apr\`es la soumission du questionnaire.
 Par exemple, dans un examen \`a choix de r\'eponses, les \'etudiants pourraient voir leur note d\`es qu'ils ont termin\'e leur examen.
 
@@ -75,12 +75,6 @@ Chaque type de question se corrige de mani\`ere un peu diff\'erente:
 \end{minipage}
 
 \section{Question de type Composition}
-\GT{Partie plus bas pas claire~: Tu dis qu'il faut corriger
-manuellement, mais tu dis que Moodle fournit un module de correction
-manuelle. Reformuler!  Du genre, fournit un module qui aide \`a
-effectuer la correction manuelle, qui aide le correcteur \`a traiter
-l'ensemble des r\'eponses, ou quelque chose du genre!?}
-\PG{J'ai ajout\'e plus de d\'etail sur la correction automatique dans le chapitre pr\'ec\'edent et enlev\'e une phrase douteuse dans le chapitre qui suit.}
 
 \begin{figure}[htbp]
   \includegraphics[scale=0.55]{images/correction-manuelle.png}
@@ -100,12 +94,9 @@ Notre projet consiste \`a faciliter le travail du correcteur en cr\'eant un nouv
   \item Surlignera les mots cl\'es, fournis par l'enseignant, tant dans la r\'eponse de l'\'etudiant que celle de l'enseignant;
   \item Utilisera la racination ou la lemmisation afin de mieux identifier les mots cl\'es, peu importe leur accord.
 \end{enumerate}
-Le module d'extension propos\'e sera donc utile pour les questions \`a d\'eveloppement pour les textes descriptifs, et aussi pour des segments de code (cours  de programmation), mais le sera moins pour les textes d'opinion o\`u il n'y a pas de \og bonne \fg{} r\'eponse.
+Le module d'extension propos\'e sera utile pour les questions \`a d\'eveloppement pour les textes descriptifs, et aussi pour des segments de code (en programmation), mais le sera moins pour les textes d'opinion o\`u il n'y a pas de \og bonne \fg{} r\'eponse.
 
 \section{Les modules d'extensions Moodle}
-\GT{Soit tu donnes, dans une note en bas de page, ce qui signifie
-SCORM, soit tu laisses tomber compl\`etement cet acronyme.}
-\PG{J'ai laiss\'e tomb\'e l'acronyme, \c{c}a n'a pas vraiment d'importance dans le cadre du projet.}
 L'aspect modulaire de Moodle existe tant pour les enseignants que pour les programmeurs.
 Presque toutes les fonctionnalit\'es de Moodle sont configur\'ees \`a l'aide de modules d'extensions.
 Il y a des modules d'extensions pour changer l'apparence du site, pour exporter les donn\'ees, pour changer le fonctionnement des questions, etc.
@@ -150,11 +141,11 @@ Un comportement de question permet les op\'erations suivantes:
 Comme nous d\'esirons une correction manuelle, nous pouvons utiliser le comportement \og \emph{ManualGraded} \fg{}.
 De plus, comme il est possible de contr\^oler directement l'apparence de la r\'eponse et de la question avec un module d'extension type de question, il n'est pas n\'ecessaire de cr\'eer un module d'extension \og Comportement de question \fg{}.
 
-\section{Choix des modules d'extensions \`a cr\'eer}
+\section{Choix du module d'extension \`a cr\'eer}
 Un module d'extension type de question est obligatoire dans ce projet afin d'ajouter les champs mots-cl\'es et r\'eponse de l'enseignant.
 Nous n'avons pas besoin des fonctionnalit\'es qu'offre le module d'extension comportement de question.
 Il reste \`a d\'eterminer s'il faut utiliser un module d'extension rapport de questionnaire ou non.
-En analysant le code du module d'extension de correction manuelle fournie de base avec Moodle (\texttt{quiz\_grading}), on d\'ecouvre que ce module fournit l'interface de correction, mais que la r\'eponse de chaque \'etudiant est g\'er\'ee par le type de question dans un affichage en lecture seulement.
+En analysant le code du module d'extension de correction manuelle fourni de base avec Moodle (\texttt{quiz\_grading}), on d\'ecouvre que ce module fournit l'interface de correction, mais que la r\'eponse de chaque \'etudiant est g\'er\'ee par le type de question dans un affichage en lecture seulement.
 Les fonctionnalit\'es pr\'evues peuvent donc se trouver autant dans le type de question que dans un rapport de questionnaire, la complexit\'e du code est la m\^eme pour les deux cas.
 Puisqu'il doit y avoir obligatoirement un module d'extension type de question et qu'un nouveau module d'extension rapport de questionnaire est facultatif, nous avons d\'ecid\'e de ne faire qu'un seul module d'extension.
 En outre, le fait d'avoir un seul module d'extension facilite grandement l'installation pour d'autres administrateurs Moodle.

@@ -1,16 +1,16 @@
-\chapter{Tests avec Moodle}
+\chapter{Tests Moodle}
 Moodle offre du support pour deux types de tests: des tests unitaires et des tests d'acceptation.
 La plateforme inclut plusieurs centaines de ces deux types de tests automatis\'es d\`es son installation.
 Ils seront tous effectu\'es avant le d\'ebut du d\'eveloppement afin de s'assurer que Moodle fonctionne correctement sans le nouveau module d'extension.
 Une fois le d\'eveloppement termin\'e, les tests seront effectu\'es de nouveau afin de valider que le nouveau module d'extension ne r\'egresse pas les autres fonctionnalit\'es de Moodle.
 
-L'environnement utilis\'e afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise \`a jour en date du 14 d\'ecembre 2017.
+L'environnement utilis\'e afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise \`a jour en date du 14 d\'ecembre~2017.
 La version de PHP est la version~7.0.22.
 Le moteur de base de donn\'ees est MySQL version~5.7.20 install\'e avec les paquets Ubuntu.
 La base de donn\'ees utilise la collation \textit{utf8mb4\_unicode\_ci} comme conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
 La version de Moodle est la derni\`ere version stable \`a ce jour, soit la version~3.4.
-Moodle a \'et\'e install\'e avec \texttt{git} \`a partir de la branche \textit{MOODLE\_34\_STABLE}, \textit{commit} a45c466\footnote{\url{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}} d\'eploy\'e le 14 d\'ecembre 2017.
-Les tests ont \'et\'e ex\'ecut\'es une seule fois avant le d\'eveloppement du module d'extension afin de confirmer le fonctionnement de l'environnement.
+Moodle a \'et\'e install\'e avec \texttt{git} \`a partir de la branche \texttt{MOODLE\_34\_STABLE}, \textit{commit} a45c466\footnote{\url{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}} d\'eploy\'e le 14 d\'ecembre~2017.
+Les tests ont \'et\'e ex\'ecut\'es une seule fois \textbf{avant} le d\'eveloppement du module d'extension afin de confirmer le fonctionnement de l'environnement.
 
 \section{Tests unitaires}
 Les tests unitaires effectuent des v\'erifications \`a petite \'echelle.
@@ -30,7 +30,7 @@ class qtype_essay_question_test extends advanced_testcase {
     }
 }
 \end{lstlisting}
-\caption{Exemple de test unitaire du module d'extension \textit{qtype\_essay}.}
+\caption{Exemple de test unitaire du module d'extension \texttt{qtype\_essay}.}
 \label{code:unittest}
 \end{lstfloat}
 
@@ -66,8 +66,6 @@ Il faut donc ajouter un autre type de test, les tests d'acceptation, afin de s'a
 Un test d'acceptation valide que l'application satisfait aux exigences du logiciel.
 Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`ere qu'un humain pourrait tester le logiciel --- il s'agit donc d'un test qui ex\'ecute le logiciel <<de bout en bout>>~\cite{tremblay16}.
 
-\GT{Il faudrait donner une r\'ef\'erence pour tests unitaires, BDD, etc.}
-\PG{J'ai ajout\'e des r\'ef\'erences vers vos notes de cours. J'ai un peu ajust\'e mes d\'efinitions apr\`es mes lectures.}
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extensions qui en ont.
 %
 Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}. \PG{Je ne retrouve plus mon livre de BDD que j'ai lu...}
@@ -135,7 +133,7 @@ Feature: Test creating an Essay question
       | Response format          | HTML editor                    |
     Then I should see "essay-001"
 \end{lstlisting}
-\caption{Test d'acceptation du module d'extension \textit{qtype\_essay}.}
+\caption{Test d'acceptation du module d'extension \texttt{qtype\_essay}.}
 \label{code:behattest}
 \end{lstfloat}
 La s\'erie de tests d'acceptation de Moodle a \'et\'e ex\'ecut\'ee avant le d\'eveloppement du module d'extension.
@@ -162,14 +160,8 @@ Voici une description des erreurs rencontr\'ees ainsi que leur influence sur le 
 \end{enumerate}
 Comme aucun des six cas n'est probl\'ematique, le d\'eveloppement peut se poursuivre sans probl\`eme.
 Lors de l'ex\'ecution finale des tests, il ne devrait y avoir que ces six m\^emes erreurs.
-\GT{De ce que tu \'ecrit plus haut, ce n'est pas clair si tu as
-uniquement ex\'ecut\'e les tests d\'ej\`a disponibles ou si tu en as
-toi-m\^eme d\'efini d'autres.  De ce qu'on comprend de ce que tu
-\'ecris dans le chapitre suivant, tu en as d\'efini donc il faudrait
-clarifier cela d\`es \`a pr\'esent.}
-\PG{Voir prochain chapitre.}
 
 \section{Tests dans un module d'extension}
-Chaque module d'extension d\'efinit ses propres tests unitaires et d'acceptation.
-Le nouveau module d'extension devra donc lui aussi d\'efinir des tests unitaires et d'acceptation afin de valider son bon fonctionnement.
-Les tests ajout\'es sont pr\'esent\'es \`a la section~\ref{dev_test}.
+Chaque module d'extension doit aussi d\'efinir ses propres tests unitaires et tests d'acceptation.
+Notre nouveau module d'extension devra donc lui aussi d\'efinir des tests appropri\'es afin de valider son bon fonctionnement.
+Ces tests pour notre module sont d\'ecrits \`a la section~\ref{dev_test}.
