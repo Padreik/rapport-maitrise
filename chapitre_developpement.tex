@@ -183,7 +183,7 @@ L'architecture est illustr\'ee \`a la figure \ref{dev-architecture} et d\'ecrite
    \item \og maturity \fg{}
    
    La maturit\'e du module d'extension.
-   Notre module d'extension se trouve encore en \textit{MATURITY\_ALPHA}.
+   Notre module d'extension se trouve encore en \texttt{MATURITY\_ALPHA}.
  \end{itemize}
 \end{description}
 Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de \og qtype\_essay \fg{} \`a \og qtype\_essayhelper \fg{}.
@@ -311,9 +311,10 @@ Cet exemple illustre l'ouverture d'un questionnaire par un \'etudiant.
 \end{landscape}
 
 \section{D\'etection des mots cl\'es}
-Comme cit\'e dans le \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
-Pour trouver la racine de tous les mots du texte, il faut d\'ebuter par les isoler.
+Comme indiqu\'e dans le \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
+Pour ce faire, il faut d\'ebuter par isoler chacun des mots du texte.
 Les caract\`eres non alphanum\'eriques sont remplac\'es par des espaces et le texte est d\'ecoup\'e par des caract\`eres d'espacement (espace, saut de ligne, tabulation, etc.) tel qu'illustr\'e dans l'extrait de code \ref{code:isoler}.
+
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $sentence));
@@ -321,6 +322,7 @@ $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $
 \caption{Isoler les mots du texte.}
 \label{code:isoler}
 \end{lstfloat}
+
 Ensuite, chaque mot est associ\'e avec sa racine trouv\'ee avec l'algorithme Snowball tel qu'illustr\'e dans l'extrait de code \ref{code:racinationsnowball}.
 Chaque mot-cl\'e a, pr\'ealablement, aussi \'et\'e r\'eduit \`a sa racine avec l'algorithme Snowball.
 \begin{lstfloat}
@@ -345,7 +347,9 @@ foreach ($words as $word) {
 \caption{Racination des mots avec Snowball.}
 \label{code:racinationsnowball}
 \end{lstfloat}
-Finalement les mots-cl\'es trouv\'es dans le texte sont mis en \'evidence.
+
+Finalement, les mots-cl\'es trouv\'es dans le texte sont mis en \'evidence.
+
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 $usedKeywords = array_intersect(array_keys($stems), $keywords);
@@ -361,15 +365,15 @@ foreach ($usedKeywords as $keyword) {
 \end{lstfloat}
 
 \section{Tests} \label{dev_test}
-Les tests du module d'extension \og qtype\_essay \fg{} ont \'et\'e conserv\'es et adapt\'es \`a ce nouveau module d'extension.
-Le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a donc facilement \'et\'e test\'e.
-Il ne restait plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
+Les tests du module d'extension \og qtype\_essay \fg{} ont \'et\'e conserv\'es et adapt\'es \`a notre nouveau module d'extension.
+Par cons\'equent, le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a pu facilement \^etre test\'e.
+Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
 
 \subsection{Tests d'acceptation} \label{dev_test_acceptation}
-Les tests d'acceptation r\'ecup\'er\'es du module d'extension \textit{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
-Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \textit{qtype\_essayhelper}.
-Le probl\`eme venait d'un dossier manquant dans le nouveau module d'extension.
-Le dossier \textit{backup} dans le module d'extension \textit{qtype\_essayhelper} ne contiens pas des copies de sauvegardes du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
+Les tests d'acceptation r\'ecup\'er\'es du module d'extension \texttt{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
+Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \texttt{qtype\_essayhelper}.
+Le probl\`eme venait d'un dossier manquant dans le nouveau module.
+Le dossier \textit{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
 
 \subsection{Tests unitaires} \label{dev_test_unitaire}
 La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'e unitairement et valid\'e \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
