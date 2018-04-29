@@ -1,4 +1,4 @@
-\chapter{D\'eveloppement du module d'extension \texttt{qtype\_essayhelper}}
+\chapter{Mise en oeuvre et tests du module d'extension \texttt{qtype\_essayhelper}}
 
 Le site de Moodle donne une br\`eve introduction \`a la cr\'eation d'un nouveau type de question \footnote{\url{https://docs.moodle.org/dev/Question\_types\#Question\_type\_plug\_in\_development}}.
 Un gabarit est disponible afin d'aider \`a d\'ebuter, mais le site conseille de modifier ou copier un type de question existant s'il est similaire au type de question que l'on d\'esire d\'evelopper.
@@ -153,29 +153,29 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  \begin{itemize}
    \item \texttt{component}: 
    Nom du module d'extension qui sera utilis\'e dans la base de donn\'ees Moodle.
-   Dans ce projet il s'agit de \og qtype\_essayhelper \fg{}.
+   Dans ce projet il s'agit de \texttt{qtype\_essayhelper}.
    
    \item \texttt{version}:
    Num\'ero de version du module d'extension dans le format \og aaaammjj00 \fg{} utilisant la date.
    Les deux derniers \og 0 \fg{} sont utilis\'es pour faire plus qu'une version par jour.
-   Pour que Moodle prenne en compte les changements au fichier \og install.xml \fg{} (pour la base de donn\'ees), il faut changer le num\'ero de version.
+   Pour que Moodle prenne en compte les changements au fichier \texttt{install.xml} (pour la base de donn\'ees), il faut changer le num\'ero de version.
    
    \item \texttt{requires}:
    Num\'ero de version Moodle n\'ecessaire au bon fonctionnement du module d'extension utilisant aussi le format \og aaaammjj00 \fg{}.
-   Notre module d'extension utilise la m\^eme d\'ependance que \og qtype\_essay \fg{}, soit \og 2015111600 \fg{} qui repr\'esente Moodle 3.0.
+   Notre module d'extension utilise la m\^eme d\'ependance que \texttt{qtype\_essay}, soit \og 2015111600 \fg{} qui repr\'esente Moodle 3.0.
    
    \item \texttt{maturity}:
    La maturit\'e du module d'extension.
    Notre module d'extension se trouve encore en \texttt{MATURITY\_ALPHA}.
  \end{itemize}
 \end{description}
-Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de \og qtype\_essay \fg{} \`a \og qtype\_essayhelper \fg{}.
+Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de \texttt{qtype\_essay} \`a \texttt{qtype\_essayhelper}.
 
 \section{Les classes du module \texttt{qtype\_essayhelper}}
 
 \begin{figure}[htbp]
   \includegraphics[scale=0.5]{images/class.png}
-  \caption{Principales classes associ\'ees au module \texttt{qtype\_essayhelper}.}
+  \caption{Les principales classes associ\'ees au module \texttt{qtype\_essayhelper}.}
   \label{dev-class}
 \end{figure}
 
@@ -331,7 +331,7 @@ foreach ($words as $word) {
 \label{code:racinationsnowball}
 \end{lstfloat}
 
-Finalement, les mots-cl\'es trouv\'es dans le texte sont mis en \'evidence.
+Finalement, les mots-cl\'es trouv\'es dans le texte sont mis en \'evidence, tel qu'illustr\'e dans l'extrait de code~\ref{code:mots-cles}.
 
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -348,7 +348,7 @@ foreach ($usedKeywords as $keyword) {
 \end{lstfloat}
 
 \section{Tests} \label{dev_test}
-Les tests du module d'extension \og qtype\_essay \fg{} ont \'et\'e conserv\'es et adapt\'es \`a notre nouveau module d'extension.
+Les tests du module d'extension \texttt{qtype\_essay} ont \'et\'e conserv\'es et adapt\'es \`a notre nouveau module d'extension.
 Par cons\'equent, le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a pu facilement \^etre test\'e.
 Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
 
