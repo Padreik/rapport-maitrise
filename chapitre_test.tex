@@ -68,12 +68,7 @@ Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`
 
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extensions qui en ont.
 %
-Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}. \PG{Je ne retrouve plus mon livre de BDD que j'ai lu...}
-\GT{Est-ce @Book{Smart15,
-  author =    {Smart, J.F.},
-  title =        {{BDD} In Action},
-  publisher =    {Manning},
-  year =         2015}}
+Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}.
 
 
 
@@ -105,6 +100,12 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
         Ensuite, le \textit{When} d\'efinit l'action \`a ex\'ecuter pour ce test.
         Finalement, le \textit{Then} d\'efinit le comportement attendu suite \`a l'ex\'ecution de l'action.
 \end{itemize}
+
+\GT{Ajouter dans la figure l'autre Scenario + Expliquer que le
+background factorise/regroupe un when pour plusieurs sc\'enarios}
+
+
+
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
 @qtype @qtype_essay
