@@ -75,7 +75,7 @@ Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og f
 Un serveur ou une application Selenium ex\'ecutera les tests en ligne de commande ou dans un navigateur web, selon le besoin.
 Les tests sont \'ecrits sous forme textuelle anglaise, g\'en\'eralement compr\'ehensibles par tous les intervenants.
 Chaque instruction et v\'erification doit \^etre, pr\'ealablement, configur\'ee en PHP.
-La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exemple se trouve dans l'extrait de code~\ref{code:behattest}, p.~\pageref{code:behattest}):
+La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exemple se trouve à l'annexe~\ref{annexe_behat_exist}, p.~\pageref{annexe_behat_exist}):
 \begin{itemize}
   \item La premi\`ere ligne avec les \verb|@| permet de cat\'egoriser chaque fichier de test.
         Ceci permet d'ex\'ecuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
@@ -101,42 +101,13 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
         Finalement, le \textit{Then} d\'efinit le comportement attendu suite \`a l'ex\'ecution de l'action.
 \end{itemize}
 
+Une particularité de \texttt{behat} est qu'il permet d'avoir un seul \textit{Given} (\textit{Background}) pour plusieurs \textit{When} et \textit{Then} (\textit{Scenario}).
+Le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario}\footnote{\url{http://docs.behat.org/en/latest/user\_guide/writing\_scenarios.html\#user-guide-writing-scenarios-backgrounds}}.
+
 \GT{Ajouter dans la figure l'autre Scenario + Expliquer que le
 background factorise/regroupe un when pour plusieurs sc\'enarios}
+\PG{Voir ci-dessus.}
 
-
-
-\begin{lstfloat}
-\begin{lstlisting}[frame=l]
-@qtype @qtype_essay
-Feature: Test creating an Essay question
-  As a teacher
-  In order to test my students
-  I need to be able to create an Essay question
-  Background:
-    Given the following "users" exist:
-      | username | firstname | lastname | email               |
-      | teacher1 | T1        | Teacher1 | teacher1@moodle.com |
-    And the following "courses" exist:
-      | fullname | shortname | category |
-      | Course 1 | C1        | 0        |
-    And the following "course enrolments" exist:
-      | user     | course | role           |
-      | teacher1 | C1     | editingteacher |
-    And I log in as "teacher1"
-    And I follow "Course 1"
-    And I navigate to "Question bank" node in "Course administration"
-  Scenario: Create an Essay question with Response format set to 'HTML editor'
-    When I add a "Essay" question filling the form with:
-      | Question name            | essay-001                      |
-      | Question text            | Write an essay with 500 words. |
-      | General feedback         | This is general feedback       |
-      | Response format          | HTML editor                    |
-    Then I should see "essay-001"
-\end{lstlisting}
-\caption{Test d'acceptation du module d'extension \texttt{qtype\_essay}.}
-\label{code:behattest}
-\end{lstfloat}
 La s\'erie de tests d'acceptation de Moodle a \'et\'e ex\'ecut\'ee avant le d\'eveloppement du module d'extension.
 Il y a un total de 1~771 sc\'enarios pour un total de 43~824~\'etapes.
 Parmi ceux-ci, 4 sc\'enarios et 102 \'etapes ont \'et\'e ignor\'es et 6 \'etapes et 6 sc\'enarios ont \'echou\'e.
