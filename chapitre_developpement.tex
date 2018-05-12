@@ -1,4 +1,4 @@
-﻿\chapter{Mise en oeuvre et tests du module d'extension \texttt{qtype\_essayhelper}}
+\chapter{Mise en oeuvre et tests du module d'extension \texttt{qtype\_essayhelper}}
 Le site de Moodle donne une br\`eve introduction \`a la cr\'eation d'un nouveau type de question \footnote{\url{https://docs.moodle.org/dev/Question\_types\#Question\_type\_plug\_in\_development}}.
 Un gabarit est disponible afin d'aider \`a d\'ebuter, mais le site conseille de modifier ou copier un type de question existant s'il est similaire au type de question que l'on d\'esire d\'evelopper.
 Dans notre cas, nous allons utiliser le type de question \texttt{qtype\_essay} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
@@ -61,11 +61,17 @@ Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
   \item[Mots-cl\'es]
   
   Les mots-cl\'es sont mis en \'evidence dans la r\'eponse de l'\'etudiant lors de la correction manuelle.
+  
   \item[R\'eponse officielle de l'enseignant]
   
   Cette r\'eponse de l'enseignant est 
   affich\'ee \`a droite de la r\'eponse de l'\'etudiant lors de la correction, et
   les mots-cl\'es sont aussi mis en \'evidence.
+  
+  \item[Langue de racination]
+  
+  La librairie \texttt{php-stemmer} supporte plusieurs langues.
+  Toutes ces langues sont disponibles lors de la cr\'eation de la question.
 \end{description}
 \section{Structure des fichiers pour le module d'extension \texttt{qtype\_essayhelper}}
 \begin{figure}[htbp]
@@ -336,21 +342,33 @@ Les tests du module d'extension \texttt{qtype\_essay} ont \'et\'e conserv\'es et
 Par cons\'equent, le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a facilement \'et\'e test\'e.
 Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
 \subsection{Tests d'acceptation} \label{dev_test_acceptation}
+Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, le code est disponible \`a l'annexe~\ref{annexe_behat_new}, p.~\pageref{annexe_behat_new}.
+Ce test v\'erifie qu'un enseignant peut voir l'aide \`a la correction (r\'eponse de l'enseignant et mots-cl\'es) mais qu'un \'etudiant n'y a pas acc\`es.
+L'ex\'ecution de ce test avec \texttt{behat} confirme que les acc\`es fonctionnent correctement.
+
 Les tests d'acceptation r\'ecup\'er\'es du module d'extension \texttt{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
 Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \texttt{qtype\_essayhelper}.
 Le probl\`eme venait d'un dossier manquant dans le nouveau module.
 Le dossier \textit{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
-Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, le code est disponible \`a l'annexe~\ref{annexe_behat_new}, p.~\pageref{annexe_behat_new}.
-Ce test v\'erifie qu'un enseignant peut voir l'aide \`a la correction (r\'eponse de l'enseignant et mots-cl\'es) mais qu'un \'etudiant n'y a pas acc\`es.
+
+Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'es, les m\^emes que d\'ecrits \`a la section \ref{test_acceptation}.
+Les fonctionnalit\'es test\'es par ces tests ne n'impactent pas le module d'extension \texttt{qtype\_essayhelper}.
+L'ajout de ce nouveau type de question n'\`a pas impact\'e le reste de Moodle selon les tests d'acceptation.
+Les tests unitaires pourront confirmer le bon fonctionnement de Moodle.
+
 \subsection{Tests unitaires} \label{dev_test_unitaire}
 La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'e unitairement et valid\'e \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
 Il ne restait donc qu'\`a tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
 Cette int\'egration se retrouve dans la classe \texttt{qtype\_essayhelper\_stemmer} qui est test\'e dans la classe \texttt{qtype\_essayhelper\_stemmer\_test}.
 Le code de cette derni\`ere se retrouve \`a l'annexe~\ref{annexe_unittest}, p.~\pageref{annexe_unittest}.
-La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faudrait tester, car chacune effectue un traitement important \`a la d\'etection de mots cl\'es.
+La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faut tester, car chacune effectue un traitement important \`a la d\'etection de mots cl\'es.
 Il faut donc utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser la fonction prot\'eg\'e ou priv\'e d'un objet.
-La r\'eflexion ne permet pas de modifier un objet \`a l'ex\'ecution, mais permet de consulter son \'etat et ce qu'il contient (variables, constantes, classes h\'erit\'ees, interfaces impl\'ement\'ees, m\'ethodes, etc.).
+La r\'eflexion ne modifie pas l'objet \`a l'ex\'ecution, mais permet de consulter son \'etat et ce qu'il contient (variables, constantes, classes h\'erit\'ees, interfaces impl\'ement\'ees, m\'ethodes, etc.).
+Dans notre situation, la r\'eflexion cr\'ee un pointeur vers la fonction qui lui, est accessible.
+
 Tous les tests Moodle ont \'et\'e ex\'ecut\'es \`a la fin du d\'eveloppement.
 Il y avait une erreur de plus que celle d\'etect\'ee au d\'ebut et d\'ecrite au chapitre \ref{test-unitaires}, p.~\pageref{test-unitaires}.
 Le nouveau test qui \'echoue compare la liste de module d'extension de base et compare \`a ceux qui sont pr\'esentement install\'es.
 Comme il y a maintenant l'extension \texttt{qtype\_essayhelper} de plus le test \'echoue.
+
+Comme les tests unitaires et d'acceptation de Moodle passent tous, le module d'extension \texttt{qtype\_essayhelper} ne r\'egresse pas les fonctionnalit\'es existantes de Moodle.
