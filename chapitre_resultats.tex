@@ -1,35 +1,28 @@
-\chapter{R\'esultats et limites}
-
-L'affichage de la réponse de l'enseignant et de l'étudiant côte à côte en plus des instructions au correcteur devraient aider le correcteur dans sa tâche de correction.
+﻿\chapter{R\'esultats et limites}
+L'affichage de la r\'eponse de l'enseignant et de l'\'etudiant c\^ote \`a c\^ote en plus des instructions au correcteur devraient aider le correcteur dans sa t\^ache de correction.
 De plus, la possibilit\'e de choisir la langue de racination permet aux enseignants d'utiliser l'aide \`a la correction dans la langue de leur choix.
-
 Un probl\`eme a \'et\'e d\'etect\'e vers la fin du projet.
-La s\'eparation du texte en mots peut causer probl\`eme.
-On s\'epare chaque mot en utilisant tout symbole non-alphanum\'erique et les caract\`eres d'espacements.
-Donc le mot \og aujourd'hui \fg{} est consid\'er\'e comme deux mots car l'apostrophe est un symbole non-alphanum\'erique.
-Par contre, \og qu'autruis \fg{} doit \^etre consid\'er\'e comme deux mots diff\'erents.
+La s\'eparation du texte en mots peut poser probl\`eme.
+On s\'epare chaque mot en utilisant tout symbole non alphanum\'erique et les caract\`eres d'espacements.
+Donc le mot \og aujourd'hui \fg{} est consid\'er\'e comme deux mots, car l'apostrophe est un symbole non alphanum\'erique.
+Par contre, \og qu'autrui \fg{} doit \^etre consid\'er\'e comme deux mots diff\'erents.
 De plus, comme le module d'extension supporte plusieurs langues, chaque langue comporte ses particularit\'es.
 Par exemple en anglais le mot \og wasn't \fg{} est une compression des mots \og was \fg{} et \og not \fg{} ce qui ne sera pas bien g\'er\'e.
 Ce probl\`eme n'est pas assez majeur pour nuire \`a la majorit\'e des situations.
 M\^eme si \og aujourd'hui \fg{} est consid\'er\'e comme deux mots, la mise en \'evidence se fera sur chacun de ces deux mots.
-
 Un probl\`eme technique \`a \'et\'e d\'ecouvert vers la fin du projet.
 Pour mettre en \'evidence les mots, on se base sur un dictionnaire qui associe le mot \`a la racine.
 Si un mot-cl\'e est \og aimer \fg{} et le texte contient les mots \og aimera \fg{} et \og aimerait \fg{} les deux mots seront mis en \'evidence.
-Par contre, la partie du mot \og aimera \fg{} du mot \og aimerait \fg{} sera mis en \'evidence deux fois car il contient l'autre mot qui doit \^etre mis en \'evidence (la mise en \'evidence fait un simple remplacement de cha\^ine du mot par ce m\^eme mot entour\'e de balises \texttt{HTML} comme le d\'emontre l'exemple de code \ref{code:mots-cles}).
-
-Plusieurs petites am\'eliorations pourraient \^etre ajout\'es au module d'extension:
-La mise en évidence des mots clés est encore simple, elle pourrait être configurable via l'interface d'administration afin de changer le style de mise en évidence.
-La racination utilisée est aussi limitée~: le correcteur doit lire le contexte afin de confirmer si le mot-clé est valide, problème qui pourrait être éliminé avec un outil de lemmatisation.
-Finalement, les mots-clés en soit ne sont pas affichés au correcteur, ce qui pourrait être un ajout intéressant.
-
-Dans la planification du projet, il était prévu de pouvoir comparer les textes des étudiants entre eux (au lieu de seulement comparer à l'enseignant).
-Par contre, cette idée demandait une analyse syntaxique qui sortait du cadre du projet.
-Cet ajout pourrait être un projet intéressant pour un futur étudiant.
-
-Toutes ces limitations et correctifs à apporter mettent en doute la complétude du module d'extension développé.
-Il ne sera donc pas soumis au répertoire des modules d'extensions Moodle.
-Après améliorations, il pourrait toutefois devenir un ajout intéressant pour les enseignants et correcteurs du monde entier.
-
-Le code source est disponible sur GitHub comme le stipule les règles de développement Moodle.
-Il se trouve à l'adresse \url{https://github.com/Padreik/moodle-qtype_essayhelper}.
+Par contre, la partie du mot \og aimera \fg{} du mot \og aimerait \fg{} sera mise en \'evidence deux fois, car il contient l'autre mot qui doit \^etre mis en \'evidence (la mise en \'evidence fait un simple remplacement de cha\^ine du mot par ce m\^eme mot entour\'e de balises \texttt{HTML} comme le d\'emontre l'exemple de code \ref{code:mots-cles}).
+Plusieurs petites am\'eliorations pourraient \^etre ajout\'ees au module d'extension:
+La mise en \'evidence des mot-clés est encore simple, elle pourrait \^etre configurable via l'interface d'administration afin de changer le style de mise en \'evidence.
+La racination utilis\'ee est aussi limit\'ee~: le correcteur doit lire le contexte afin de confirmer si le mot-cl\'e est valide, probl\`eme qui pourrait \^etre \'elimin\'e avec un outil de lemmatisation.
+Finalement, les mots-cl\'es en soi ne sont pas affich\'es au correcteur, ce qui pourrait \^etre un ajout int\'eressant.
+Dans la planification du projet, il \'etait pr\'evu de pouvoir comparer les textes des \'etudiants entre eux (au lieu de seulement comparer \`a l'enseignant).
+Par contre, cette id\'ee demandait une analyse syntaxique qui sortait du cadre du projet.
+Cet ajout pourrait \^etre un projet int\'eressant pour un futur \'etudiant.
+Toutes ces limitations et correctifs \`a apporter mettent en doute la compl\'etude du module d'extension d\'evelopp\'e.
+Il ne sera donc pas soumis au r\'epertoire des modules d'extensions Moodle.
+Apr\`es am\'eliorations, il pourrait toutefois devenir un ajout int\'eressant pour les enseignants et correcteurs du monde entier.
+Le code source est disponible sur GitHub comme le stipule les r\`egles de d\'eveloppement Moodle.
+Il se trouve \`a l'adresse \url{https://github.com/Padreik/moodle-qtype_essayhelper}.

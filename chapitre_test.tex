@@ -7,7 +7,7 @@ Une fois le d\'eveloppement termin\'e, les tests seront effectu\'es de nouveau a
 L'environnement utilis\'e afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise \`a jour en date du 14 d\'ecembre~2017.
 La version de PHP est la version~7.0.22.
 Le moteur de base de donn\'ees est MySQL version~5.7.20 install\'e avec les paquets Ubuntu.
-La base de donn\'ees utilise la collation \textit{utf8mb4\_unicode\_ci} comme conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
+La base de donn\'ees utilise la collation \texttt{utf8mb4\_unicode\_ci} comme conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
 La version de Moodle est la derni\`ere version stable \`a ce jour, soit la version~3.4.
 Moodle a \'et\'e install\'e avec \texttt{git} \`a partir de la branche \texttt{MOODLE\_34\_STABLE}, \textit{commit} a45c466\footnote{\url{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}} d\'eploy\'e le 14 d\'ecembre~2017.
 Les tests ont \'et\'e ex\'ecut\'es une seule fois \textbf{avant} le d\'eveloppement du module d'extension afin de confirmer le fonctionnement de l'environnement.
@@ -70,7 +70,7 @@ Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`
 
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extensions qui en ont.
 %
-Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \og framework \fg{} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}.
+Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \textit{framework} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}.
 
 
 
@@ -105,10 +105,6 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
 
 Une particularité de \texttt{behat} est qu'il permet d'avoir un seul \textit{Given} (\textit{Background}) pour plusieurs \textit{When} et \textit{Then} (\textit{Scenario}).
 Le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario}\footnote{\url{http://docs.behat.org/en/latest/user\_guide/writing\_scenarios.html\#user-guide-writing-scenarios-backgrounds}}.
-
-\GT{Ajouter dans la figure l'autre Scenario + Expliquer que le
-background factorise/regroupe un when pour plusieurs sc\'enarios}
-\PG{Voir ci-dessus.}
 
 La s\'erie de tests d'acceptation de Moodle a \'et\'e ex\'ecut\'ee avant le d\'eveloppement du module d'extension.
 Il y a un total de 1~771 sc\'enarios pour un total de 43~824~\'etapes.

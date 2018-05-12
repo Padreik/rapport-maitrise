@@ -1,6 +1,6 @@
 \chapter{Introduction \`a Moodle}
 Moodle est un environnement d'apprentissage en ligne (LMS, \textit{Learning Management System}) cr\'e\'e par Martin Dougiamas.
-Cette plateforme est un logiciel libre d\'evelopp\'e en PHP sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
+Cette plateforme est un logiciel libre d\'evelopp\'e en \texttt{PHP} sous \href{http://docs.moodle.org/dev/License}{licence GPL (\textit{GNU Public License})} dont le code source se trouve sur \href{https://github.com/moodle/moodle}{GitHub}.
 Moodle est un outil modulaire o\`u chaque enseignant peut cr\'eer ses cours comme il le souhaite.
 Chaque cours est d\'ecompos\'e en sections d\'efinies en semaines, modules, th\`emes ou selon diverses autres configurations.
 Chaque section comporte plusieurs activit\'es: un texte \`a lire, des documents \`a t\'el\'echarger, un forum pour \'echanger, un sondage ou questionnaire en ligne \`a compl\'eter, un devoir \`a remettre, et plus encore.
@@ -36,7 +36,7 @@ Voici une liste non exhaustive des types de questions:
   
   \item[Composition]
   
-  Affiche un champ texte multilignes, multilignes avec police monospace ou WYSIWYG (\textit{What You See Is What You Get}), dans lequel
+  Affiche un champ texte multilignes, multilignes avec police monospace ou \textit{WYSIWYG (What You See Is What You Get)}, dans lequel
   l'\'etudiant doit \'ecrire un texte \`a d\'eveloppement.
 \end{description}
 Toutes les questions, sauf celles de type Composition, peuvent se corriger automatiquement \`a un moment d\'ecid\'e par l'enseignant.
@@ -127,7 +127,7 @@ Chaque type de question poss\`ede des champs personnalis\'es et change l'apparen
 On ne voulait pas modifier le module d'extension \og Type de question Composition \fg{} car les nouvelles fonctionnalit\'es ne seront pas utiles pour tous les types de texte: un texte d'opinion pour un cours de philosophie, par exemple, n'aura pas n\'ecessairement besoin d'une liste de mots-cl\'es et d'une fonctionnalit\'e de comparaison de textes.
 La possibilit\'e de cr\'eer un module d'extension qui ajoute un nouveau type de question qui \'etend les fonctionnalit\'es du \og Type de question Composition \fg{} par h\'eritage a \'et\'e analys\'ee, mais il semble que ce n'est pas possible avec Moodle.
 Seule alternative restante: se baser sur le \og Type de question Composition \fg{} pour cr\'eer un tout nouveau module d'extension.
-Ce nouveau module d'extension utilise les m\^emes fonctionnalit\'es que le \og Type de question Composition \fg{}, mais en enlevant quelques fonctionnalit\'es (remise de pi\`ece jointe et \'ecriture dans un WYSIWIG) et en ajoutant quelques autres (mots-cl\'es et r\'eponse de l'enseignant).
+Ce nouveau module d'extension utilise les m\^emes fonctionnalit\'es que le \og Type de question Composition \fg{}, mais en enlevant quelques fonctionnalit\'es (remise de pi\`ece jointe et \'ecriture dans un \textit{WYSIWIG}) et en ajoutant quelques autres (mots-cl\'es et r\'eponse de l'enseignant).
 
 \subsection{Module d'extension comportement de question (\textit{Question behaviour})}
 Un comportement de question permet les op\'erations suivantes:
@@ -138,7 +138,7 @@ Un comportement de question permet les op\'erations suivantes:
   
   \item Modifier l'affichage des questions, par exemple, afficher une question suppl\'ementaire si l'\'etudiant a plusieurs fautes ou donner des indices \`a l'\'etudiant sous r\'eserve d'une perte de points.
 \end{enumerate}
-Comme nous d\'esirons une correction manuelle, nous pouvons utiliser le comportement \og \emph{ManualGraded} \fg{}.
+Comme nous d\'esirons une correction manuelle, nous pouvons utiliser le comportement \texttt{ManualGraded}.
 De plus, comme il est possible de contr\^oler directement l'apparence de la r\'eponse et de la question avec un module d'extension type de question, il n'est pas n\'ecessaire de cr\'eer un module d'extension \og Comportement de question \fg{}.
 
 \section{Choix du module d'extension \`a cr\'eer}
