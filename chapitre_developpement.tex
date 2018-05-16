@@ -72,13 +72,14 @@ Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
   
   La librairie \texttt{php-stemmer} supporte plusieurs langues.
   Toutes ces langues sont disponibles lors de la cr\'eation de la question.
+  La langue s\'electionn\'e par d\'efaut est la langue de Moodle choisi par l'utilisateur.
 \end{description}
 \section{Structure des fichiers pour le module d'extension \texttt{qtype\_essayhelper}}
 \begin{figure}[htbp]
    \begin{center}
   \includegraphics[scale=1]{images/architecture.png}
   \end{center}
-  \caption{Structure des fichiers du module d'extension \texttt{qtype\_essayhelper} \GT{\`a compl\'eter!}.}
+  \caption{Structure des fichiers du module d'extension \texttt{qtype\_essayhelper}.}
   \label{dev-architecture}
 \end{figure}
 L'installation d'un module d'extension dans Moodle est relativement simple.
@@ -342,14 +343,22 @@ Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl
 \subsection{Tests d'acceptation} \label{dev_test_acceptation}
 Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, le code est disponible \`a l'annexe~\ref{annexe_behat_new}, p.~\pageref{annexe_behat_new}.
 Ce test v\'erifie qu'un enseignant peut voir l'aide \`a la correction (r\'eponse de l'enseignant et mots-cl\'es) mais qu'un \'etudiant n'y a pas acc\`es.
-L'ex\'ecution de ce test avec \texttt{behat} confirme que les acc\`es fonctionnent correctement.
+Dans le \textit{Background}, on crée le questionnaire avec une question de type \texttt{qtype\_essayhelper}.
+Par la suite nous avons deux \textit{Scenarios}.
+On rappel que le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario} et qu'ils sont ind\'ependants.
+Le premier \textit{Scenario} se connecte avec un compte \'etudiant et r\'epond au questionnaire.
+Pendant que l'\'etudiant r\'epond au questionnaire et lorsque l'\'etudiant peut consulter son questionnaire termin\'e (pour voir la correction par exemple), nous v\'erifions que l'aide \`a la correction n'est pas pr\'esente en v\'erifiant la pr\'esence de la r\'eponse de l'enseignant.
+Le deuxi\`eme \textit{Scenario} se connecte aussi en tant qu'\'etudiant afin d'enregistrer une r\'eponse.
+Par la suite l'\'etudiant se d\'econnecte et l'enseignant se connecte à Moodle.
+L'enseignant consulte la r\'eponse de l'\'etudiant avec le module d'extension de correction manuelle et devrait voir l'aide \`a la correction.
+Finalement, nous avons ex\'ecut\'es les tests avec \texttt{behat} ce qui nous a confirm\'e la validit\'e des acc\`es \`a l'aide \`a la correction.
 
 Les tests d'acceptation r\'ecup\'er\'es du module d'extension \texttt{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
 Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \texttt{qtype\_essayhelper}.
 Le probl\`eme venait d'un dossier manquant dans le nouveau module.
 Le dossier \textit{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
 
-Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'es, les m\^emes que d\'ecrits \`a la section \ref{test_acceptation}.
+Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'es, les m\^emes que d\'ecrits \`a la section \ref{test_acceptation}, p.~\pageref{test_acceptation}.
 Les fonctionnalit\'es test\'es par ces tests ne n'impactent pas le module d'extension \texttt{qtype\_essayhelper}.
 L'ajout de ce nouveau type de question n'\`a pas impact\'e le reste de Moodle selon les tests d'acceptation.
 Les tests unitaires pourront confirmer le bon fonctionnement de Moodle.
