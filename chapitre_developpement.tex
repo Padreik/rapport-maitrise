@@ -1,7 +1,7 @@
 \chapter{Mise en oeuvre et tests du module d'extension \texttt{qtype\_essayhelper}}
 Le site de Moodle donne une br\`eve introduction \`a la cr\'eation d'un nouveau type de question \footnote{\url{https://docs.moodle.org/dev/Question\_types\#Question\_type\_plug\_in\_development}}.
 Un gabarit est disponible afin d'aider \`a d\'ebuter, mais le site conseille de modifier ou copier un type de question existant s'il est similaire au type de question que l'on d\'esire d\'evelopper.
-Dans notre cas, nous allons utiliser le type de question \texttt{qtype\_essay} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
+Dans notre cas, nous avons utilis\'e le type de question \texttt{qtype\_essay} comme base, car il poss\`ede presque toutes les fonctionnalit\'es d\'esir\'ees.
 Les commentaires de \emph{copyrights} ont \'et\'e ajust\'es comme illustr\'e \`a l'exemple de code~\ref{code:commentaire}.
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -84,8 +84,8 @@ Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
 \end{figure}
 L'installation d'un module d'extension dans Moodle est relativement simple.
 Premi\`erement, il faut mettre le r\'epertoire du module d'extension au bon endroit.
-Par exemple, un type de question doit se trouver dans le dossier \og question/type \fg{}.
-Deuxi\`emement, il faut se connecter sur Moodle en tant qu'administrateur.
+Par exemple, un type de question doit se trouver dans le dossier \texttt{question/type}.
+Deuxi\`emement, il faut se connecter \`a Moodle en tant qu'administrateur.
 Moodle d\'etectera automatiquement qu'il y a un nouveau module d'extension.
 Finalement, Moodle proposera \`a l'administrateur d'installer le nouveau module d'extension avant que l'administrateur puisse acc\'eder au syst\`eme.
 \`A l'int\'erieur du r\'epertoire du module d'extension, chaque fichier doit avoir le bon nom et \^etre au bon endroit.
@@ -94,7 +94,7 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
 \begin{description}
  \item[backup/moodle2]
  Fichier qui g\`ere la sauvegarde et la restauration des questions de ce type.
- Le sous-dossier moodle2 indique que cette fonctionnalit\'e existe seulement pour la version 2 de Moodle et les suivantes.
+ Le sous-dossier \texttt{moodle2} indique que cette fonctionnalit\'e existe seulement pour la version 2 de Moodle et les suivantes.
  
  \item[db]
  
@@ -102,7 +102,7 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  
  \item[lang]
  
- Contient un sous-dossier par langue support\'ee sois \og fr \fg{} et \og en \fg{} dans ce projet.
+ Contient un sous-dossier par langue support\'ee soit \texttt{fr} et \texttt{en} dans ce projet.
  Chaque sous-dossier contient un fichier PHP qui d\'efinit les cha\^ines de traduction.
  Ce dossier de traduction est valide pour les fonctionnalit\'es Moodle, pas pour la racination.
  
@@ -123,13 +123,13 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  
  \item[edit\_essayhelper\_form.php]
  
- D\'efinit le formulaire que l'enseignant remplit lorsqu'il cr\'e une question de ce type.
+ D\'efinit le formulaire que l'enseignant remplit lorsqu'il cr\'ee une question de ce type.
  Il faut uniquement d\'efinir les champs sp\'ecifiques au type de question actuel, Moodle ajoute automatiquement les champs de base comme le nom de la question et la valeur (points) de la question dans le questionnaire.
  
  \item[question.php]
  
  G\`ere la r\'eponse \`a une question.
- D\'efinit le comportement de question \`a utiliser, comment afficher la r\'eponse (appel renderer.php) et valide la pr\'esence d'une r\'eponse.
+ D\'efinit le comportement de question \`a utiliser, comment afficher la r\'eponse (appel \texttt{renderer.php}) et valide la pr\'esence d'une r\'eponse.
  
  \item[questiontype.php]
  
@@ -140,7 +140,7 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  G\`ere l'affichage d'une question et des r\'eponses.
  Permet de contr\^oler la zone de texte pour une nouvelle r\'eponse ou pour la modifier.
  Permet aussi de changer l'affichage de la r\'eponse pour le correcteur.
- C'est principalement dans ce fichier que nous allons travailler.
+ C'est principalement dans ce fichier que nous avons travaill\'e.
  
  \item[stemmer.php]
  
@@ -149,7 +149,7 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  
  \item[styles.css]
  
- Fichier css pour notre module d'extension.
+ Fichier \texttt{CSS} pour notre module d'extension.
  
  \item[version.php]
  
@@ -177,7 +177,9 @@ Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de
 \section{Les classes du module \texttt{qtype\_essayhelper}}
 Le code du module d'extension est peu complexe.
 Ce qui cause de la complexit\'e dans le projet r\'eside dans l'interaction entre le coeur de Moodle et ces classes.
-La figure~\ref{dev-class} illustre les diff\'erentes classes qui seront d\'etaill\'ees dans les prochaines pages.
+La figure~\ref{dev-class} illustre les diff\'erentes classes qui
+seront d\'etaill\'ees dans les prochaines pages.
+
 \begin{landscape}
 \begin{figure}[htbp]
   \includegraphics[scale=0.77]{images/class.png}
@@ -185,9 +187,10 @@ La figure~\ref{dev-class} illustre les diff\'erentes classes qui seront d\'etail
   \label{dev-class}
 \end{figure}
 \end{landscape}
+
 \subsection*{Classe \texttt{qtype\_essayhelper\_edit\_form}}
 Cette classe g\`ere le formulaire de cr\'eation et modification de question pour ce type de question.
-Elle poss\`ede deux fonctions, la premi\`ere est \texttt{definition\_inner} qui permet d'ajouter des champs au formulaire de base de cr\'eation de questions.
+Elle poss\`ede deux fonctions. La premi\`ere est \texttt{definition\_inner} qui permet d'ajouter des champs au formulaire de base de cr\'eation de questions.
 Le formulaire de base comporte quelques champs tels que le titre de la question, le texte de la question ainsi que le nombre de points que vaut cette question.
 La gestion des champs de base se fait automatiquement par Moodle, il ne reste donc qu'\`a ajouter les champs suppl\'ementaires pour notre type de question.
 L'ajout de champs se fait avec un objet formulaire fourni par Moodle.
@@ -225,7 +228,7 @@ $question->keywords = $question->options->keywords;
 \label{code:formpreprocessing}
 \end{lstfloat}
 \subsection*{Classe \texttt{qtype\_essayhelper\_question}}
-Cette classe g\`ere la r\'eponse \`a une question, que ce soit pour une nouvelle r\'eponse, une modification de r\'eponse ou afficher la r\'eponse au correcteur.
+Cette classe g\`ere la r\'eponse \`a une question, que ce soit pour une nouvelle r\'eponse, une modification de r\'eponse ou pour afficher la r\'eponse au correcteur.
 Les fonctions d\'efinies dans cette classe sont les suivantes:
 \begin{description}
   \item[\texttt{make\_behaviour}] Retourne le comportement utilis\'e par le type de question. \texttt{manualgraded} dans ce cas.
@@ -238,7 +241,7 @@ Les fonctions d\'efinies dans cette classe sont les suivantes:
 \end{description}
 \subsection*{Classe \texttt{qtype\_essayhelper}}
 Cette classe g\`ere les options du type de question ainsi que les interactions \`a la base de donn\'ees.
-Les fonctions d'interactions avec la base de donn\'ees sont les suivantes:
+Les fonctions d'interaction avec la base de donn\'ees sont les suivantes:
 \begin{description}
   \item[\texttt{is\_manual\_graded}] Retourne \texttt{vrai} dans notre cas pour indiquer que la question doit se corriger manuellement.
   \item[\texttt{get\_question\_options}] R\'ecup\`ere les options pour la question d\'efinie dans la base de donn\'ees. Nous retournons simplement le r\'esultat de la requ\^ete.
@@ -253,7 +256,7 @@ Les fonctions qui d\'efinissent les options sont les suivantes:
   \item[\texttt{response\_required\_options}] Retourne deux options soit \og Requiert la saisie d'un texte par le participant \fg{} et \og Saisie de texte optionnelle \fg{}.
   \item[\texttt{response\_sizes}] Donne le nombre de lignes par d\'efaut que contiendra le champ de r\'eponse. Nous donnons les options de 5 \`a 40 avec des intervalles de 5.
   \item[\texttt{stemming\_languages\_options}] R\'ecup\`ere toutes les langues disponibles pour la racination et les traduit dans la langue de l'utilisateur avec la fonction \texttt{PHP Locale::getDisplayName}.
-  \item[\texttt{stemming\_languages\_default}] Trouve la langue de racination par d\'efaut en se basant sur la langue actuelle de l'utilisateur. Si la langue n'est pas reconnue, l'anglais est utilis\'ee.
+  \item[\texttt{stemming\_languages\_default}] Trouve la langue de racination par d\'efaut en se basant sur la langue actuelle de l'utilisateur. Si la langue n'est pas reconnue, l'anglais est utilis\'e.
 \end{description}
 \subsection*{Classe \texttt{qtype\_essayhelper\_renderer}}
 Cette classe g\`ere l'affichage de la question aux \'etudiants lorsqu'ils r\'epondent ainsi que l'affichage de la r\'eponse de l'\'etudiant lors de la relecture de celui-ci ou lors de la correction.
@@ -267,8 +270,8 @@ Cette classe g\`ere la r\'eponse de l'\'etudiant.
 \begin{description}
   \item[\texttt{textarea}] Fonction prot\'eg\'ee qui construit la zone de texte lorsqu'un \'etudiant r\'epond \`a la question.
   \item[\texttt{class\_name}] Fonction prot\'eg\'ee qui retourne le nom de la classe css \`a appliquer sur la balise \texttt{HTML} englobant la question et la r\'eponse.
-  \item[\texttt{response\_area\_read\_only}] Fonction qui affiche le texte de la r\'eponse pour consultation seulement. Si c'est un enseignant ou un correcteur qui consulte la question dans le module de correction manuel on affiche la r\'eponse de l'enseignant \`a c\^ot\'e de la r\'eponse de l'\'etudiant et on met en \'evidence les mots-cl\'es
-  \item[\texttt{response\_area\_input}] Affiche la zone de texte cr\'e\'e par la fonction \texttt{textarea} afin que l'\'etudiant puisse r\'epondre \`a la question.
+  \item[\texttt{response\_area\_read\_only}] Fonction qui affiche le texte de la r\'eponse pour consultation seulement. Si c'est un enseignant ou un correcteur qui consulte la question dans le module de correction manuel, on affiche la r\'eponse de l'enseignant \`a c\^ot\'e de la r\'eponse de l'\'etudiant et on met en \'evidence les mots-cl\'es
+  \item[\texttt{response\_area\_input}] Affiche la zone de texte cr\'e\'ee par la fonction \texttt{textarea} afin que l'\'etudiant puisse r\'epondre \`a la question.
   \item[\texttt{highlight\_keywords}] Met en \'evidence les mots-cl\'es trouv\'es dans le texte par la racination.
 \end{description}
 La classe \texttt{qtype\_essayhelper\_format\_monospaced\_renderer} h\'erite de la classe \texttt{qtype\_essayhelper\_format\_plain\_renderer} et red\'efinit seulement la fonction \texttt{class\_name}.
@@ -286,6 +289,7 @@ Cet exemple illustre l'ouverture d'un questionnaire par un \'etudiant.
 Comme indiqu\'e dans le \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
 Pour ce faire, il faut d\'ebuter par isoler chacun des mots du texte.
 Les caract\`eres non alphanum\'eriques sont remplac\'es par des espaces et le texte est d\'ecoup\'e par les apostrophes et les caract\`eres d'espacement (espace, saut de ligne, tabulation, etc.) tel qu'illustr\'e dans l'extrait de code \ref{code:isoler}.
+
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[frame=l]
 $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $sentence));
@@ -293,6 +297,7 @@ $words = preg_split('/(\s|\')/', preg_replace('/[^[:alnum:][:space:]]/u', ' ', $
 \caption{Isoler les mots du texte.}
 \label{code:isoler}
 \end{lstfloat}
+
 Ensuite, chaque mot est associ\'e avec sa racine trouv\'ee avec l'algorithme Snowball tel qu'illustr\'e dans l'extrait de code \ref{code:racinationsnowball}.
 Chaque mot-cl\'e a, pr\'ealablement, aussi \'et\'e r\'eduit \`a sa racine avec l'algorithme Snowball.
 \begin{lstfloat}[htbp]
@@ -363,10 +368,10 @@ Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas
 Le probl\`eme venait d'un dossier manquant dans le nouveau module.
 Le dossier \texttt{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
 
-Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'e, soit les m\^emes que d\'ecrits \`a la section \ref{test_acceptation} (p.~\pageref{test_acceptation}).
-Les fonctionnalit\'es test\'ees par ces tests n'ont aucun impact sur notre module d'extension \texttt{qtype\_essayhelper}.
-L'ajout de ce nouveau type de question n'a donc eu aucun impact sur le reste de Moodle, selon les tests d'acceptation.
-Les tests unitaires, d\'ecrits ci-bas, confirment aussi le bon fonctionnement de Moodle.
+Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ecut\'es de nouveau. Six tests ont \'echou\'e, soit les m\^emes que d\'ecrits \`a la section \ref{test_acceptation} (p.~\pageref{test_acceptation}).
+Tel que mentionn\'e pr\'ec\'edemment, les fonctionnalit\'es test\'ees par ces tests n'ont aucun impact sur notre module d'extension \texttt{qtype\_essayhelper}.
+L'ajout de ce nouveau type de question n'a donc aucun impact sur le reste de Moodle, selon les tests d'acceptation.
+Les tests unitaires, d\'ecrits ci-bas, confirment aussi le bon fonctionnement de Moodle en pr\'esence de notre module d'extension.
 
 \subsection{Tests unitaires} \label{dev_test_unitaire}
 La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'ee de fa\c{c}on unitaire et valid\'ee \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
@@ -381,6 +386,6 @@ Dans notre cas, la r\'eflexion cr\'ee un pointeur vers la fonction qui, lui, est
 Tous les tests Moodle ont \'et\'e ex\'ecut\'es \`a la fin du d\'eveloppement.
 Nous avons d\'etect\'e une erreur de plus que celle d\'etect\'ee au d\'ebut et d\'ecrite au chapitre \ref{test-unitaires} (p.~\pageref{test-unitaires}).
 Le nouveau test qui \'echoue compare la liste des modules d'extension de base \`a celles des modules qui sont pr\'esentement install\'es.
-Comme il y a maintenant l'extension \texttt{qtype\_essayhelper} un plus, le test \'echoue, ce qui est normal.
+Comme il y a maintenant l'extension \texttt{qtype\_essayhelper} en plus, le test \'echoue, ce qui est normal.
 
-Comme les tests unitaires et les tests d'acceptation de Moodle passent tous, le module d'extension \texttt{qtype\_essayhelper} ne r\'egresse donc pas les fonctionnalit\'es existantes de Moodle.
+Comme les tests unitaires et les tests d'acceptation de Moodle passent tous, le module d'extension \texttt{qtype\_essayhelper} ne cr\'ee donc pas de r\'egression dans les fonctionnalit\'es existantes de Moodle.
