@@ -1,13 +1,13 @@
-\chapter{Tests Moodle}
+\chapter{Tests pour int\'egration \`a Moodle d'un module d'extension}
 Moodle offre du support pour deux types de tests: des tests unitaires et des tests d'acceptation.
 La plateforme inclut plusieurs centaines de ces deux types de tests automatis\'es d\`es son installation.
-Ils seront tous effectu\'es avant le d\'ebut du d\'eveloppement afin de s'assurer que Moodle fonctionne correctement sans le nouveau module d'extension.
-Une fois le d\'eveloppement termin\'e, les tests seront effectu\'es de nouveau afin de valider que le nouveau module d'extension ne r\'egresse pas les autres fonctionnalit\'es de Moodle.
+Ils ont tous effectu\'es avant le d\'ebut du d\'eveloppement afin de s'assurer que Moodle fonctionne correctement sans la pr\'esence du nouveau module d'extension.
+Une fois le d\'eveloppement termin\'e, les tests ont \'et\'e effectu\'es de nouveau afin de valider que le nouveau module d'extension ne r\'egresse pas les autres fonctionnalit\'es de Moodle.
 
 L'environnement utilis\'e afin de rouler les tests est une machine virtuelle Xubuntu~16.04 mise \`a jour en date du 14 d\'ecembre~2017.
 La version de PHP est la version~7.0.22.
 Le moteur de base de donn\'ees est MySQL version~5.7.20 install\'e avec les paquets Ubuntu.
-La base de donn\'ees utilise la collation \texttt{utf8mb4\_unicode\_ci} comme conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
+La base de donn\'ees utilise la collation \texttt{utf8mb4\_unicode\_ci} telle que conseill\'ee dans la documentation\footnote{\url{https://docs.moodle.org/34/en/MySQL}}.
 La version de Moodle est la derni\`ere version stable \`a ce jour, soit la version~3.4.
 Moodle a \'et\'e install\'e avec \texttt{git} \`a partir de la branche \texttt{MOODLE\_34\_STABLE}, \textit{commit} a45c466\footnote{\url{https://github.com/moodle/moodle/commit/a45c46600021667691dbb4bce5420a2f65d3239c}} d\'eploy\'e le 14 d\'ecembre~2017.
 Les tests ont \'et\'e ex\'ecut\'es une seule fois \textbf{avant} le d\'eveloppement du module d'extension afin de confirmer le fonctionnement de l'environnement.
@@ -19,7 +19,7 @@ Chaque fonction dans le code est test\'ee de fa\c{c}on isol\'ee.
 Dans certains cas, pour tester de fa\c{c}on isol\'ee une fonction, il faut remplacer les d\'ependances par des \textit{stubs}.
 Un \textit{stub} va simuler la d\'ependance utilis\'ee par la fonction en retournant une valeur fixe.
 De cette mani\`ere, il est possible de tester cette fonction uniquement sans \^etre impact\'e par les autres fonctions.
-Plusieurs tests peuvent \^etre effectu\'es afin de valider tous les cas possibles. \cite{tremblay16}
+Plusieurs tests peuvent \^etre effectu\'es afin de valider tous les cas possibles~\cite{tremblay16}.
 
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[frame=l]
@@ -57,9 +57,9 @@ Cette erreur peut poser probl\`eme dans les questions de type num\'erique ainsi 
 Par exemple, on ne peut pas entrer les unit\'es \og km \fg{} et \og Km \fg{} dans les r\'eponses possibles, car la base de donn\'ees consid\`ere ces unit\'es comme \'etant identiques.
 Par contre, la correction de la question, ex\'ecut\'ee en PHP, distingue les deux unit\'es.
 Un \'etudiant qui r\'epond avec l'unit\'e \og 10~KM \fg{} alors que l'enseignant a enregistr\'e la r\'eponse \og 10~km \fg{} aura donc une erreur.
-Comme le module d'extension d\'evelopp\'e n'utilisera pas la comparaison de texte \`a partir de la base de donn\'ees, le d\'eveloppement peut continuer sans probl\`eme.
+Comme le module d'extension d\'evelopp\'e n'utilisera pas la comparaison de texte \`a partir de la base de donn\'ees, le d\'eveloppement a pu continuer sans probl\`eme.
 
-Si notre application est enti\`erement test\'ee avec des tests unitaires, nous sommes assur\'es qu'il ne devrait pas y avoir de probl\`eme de code dans les fonctions.
+Lorsque notre application est enti\`erement test\'ee avec des tests unitaires, nous sommes assur\'es qu'il ne devrait pas y avoir de probl\`eme de code dans les fonctions.
 Par contre, si on compare les tests \`a une \'equipe sportive, les tests unitaires analysent chaque joueur, mais ne consid\`erent pas le travail d'\'equipe.
 Il faut donc ajouter un autre type de test, les tests d'acceptation, afin de s'assurer de l'efficacit\'e du travail d'\'equipe.
 
@@ -70,7 +70,7 @@ Ce type de test peut s'ex\'ecuter \`a partir de l'interface, de la m\^eme mani\`
 
 Moodle vient aussi avec plusieurs de ces tests, mais ce ne sont pas tous les modules d'extension qui en ont.
 %
-Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \textit{framework} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}.
+Les tests d'acceptation sont ex\'ecut\'es \`a l'aide de \texttt{behat}, un \textit{framework} PHP d'automatisation de tests qui se base sur le \og \textit{Behavior Driven Development} (BDD) \fg{}~\cite{tremblay16}.
 
 
 
@@ -79,13 +79,13 @@ Les tests sont \'ecrits sous forme textuelle anglaise, g\'en\'eralement compr\'e
 Chaque instruction et v\'erification doit \^etre, pr\'ealablement, configur\'ee en PHP.
 La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exemple se trouve à l'annexe~\ref{annexe_behat_exist}, p.~\pageref{annexe_behat_exist}):
 \begin{itemize}
-  \item La premi\`ere ligne avec les \verb|@| permet de cat\'egoriser chaque fichier de test.
+  \item La premi\`ere ligne avec un \verb|@| permet de cat\'egoriser chaque fichier de test.
         Ceci permet d'ex\'ecuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
         
   \item La ligne d\'ebutant par \textit{Feature} donne le titre du test afin de le retrouver facilement;
   
-  \item Les trois lignes suivantes permettent de d\'ecrire le test au lecteur.
-        Comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit:
+  \item Les trois lignes suivantes permettent de d\'ecrire le test au lecteur, \`a un haut niveau d'abstraction.
+        Comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit, donc \`a l'aide d'un r\'ecit utilisateur:
         
         \begin{itemize}
           \item \og \textit{As a ...} \fg{} d\'ecrit quel type d'utilisateur est cibl\'e par ce test;
@@ -93,18 +93,18 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
           \item \og \textit{I need to ...} \fg{} d\'ecrit ce qu'il faut v\'erifier.
         \end{itemize}
         
-  \item Ensuite, on d\'ebute le \textit{Background} qui pr\'epare le test.
+  \item Ensuite, on d\'ebute le \textit{Background} qui pr\'epare le sc\'enario sp\'ecifique de test.
         La premi\`ere action de cette section d\'ebutera par \textit{Given} et toutes les autres par \textit{And}.
-        Chaque action pr\'epare l'environnement pour le test, par exemple: ajouter un enregistrement dans la base de donn\'ees, naviguer \`a une certaine page, cliquer sur un bouton, etc;
+        Chaque action pr\'epare l'environnement pour le sc\'enario de test, par exemple: ajouter un enregistrement dans la base de donn\'ees, naviguer \`a une certaine page, cliquer sur un bouton, etc;
         
-  \item Ensuite, il y a une ou plusieurs sections \textit{Scenario} qui d\'efinissent chaque test \`a effectuer.
+  \item Ensuite, il y a une ou plusieurs sections \textit{Scenario} qui d\'efinissent chaque sc\'enario sp\'ecifique de test \`a effectuer.
         Sur la m\^eme ligne que le \textit{Scenario}, il y a une description du test pour le lecteur.
-        Ensuite, le \textit{When} d\'efinit l'action \`a ex\'ecuter pour ce test.
+        Ensuite, le \textit{When} d\'efinit l'action \`a ex\'ecuter.
         Finalement, le \textit{Then} d\'efinit le comportement attendu suite \`a l'ex\'ecution de l'action.
 \end{itemize}
 
-Une particularité de \texttt{behat} est qu'il permet d'avoir un seul \textit{Given} (\textit{Background}) pour plusieurs \textit{When} et \textit{Then} (\textit{Scenario}).
-Le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario}\footnote{\url{http://docs.behat.org/en/latest/user\_guide/writing\_scenarios.html\#user-guide-writing-scenarios-backgrounds}}.
+Une particularité de \texttt{behat} est qu'il permet d'avoir un seul \textit{Given} (\textit{Background}) pour plusieurs \textit{When} et \textit{Then} (\textit{Scenario}), donc
+le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario}\footnote{\url{http://docs.behat.org/en/latest/user\_guide/writing\_scenarios.html\#user-guide-writing-scenarios-backgrounds}}.
 
 La s\'erie de tests d'acceptation de Moodle a \'et\'e ex\'ecut\'ee avant le d\'eveloppement du module d'extension.
 Il y a un total de 1~771 sc\'enarios pour un total de 43~824~\'etapes.
@@ -128,7 +128,7 @@ Voici une description des erreurs rencontr\'ees ainsi que leur influence sur le 
   \item Erreur dans la liste des \'etudiants, l'enseignant ne voit pas quels \'etudiants sont actifs.
         Notre module d'extension ne touche pas \`a la liste des \'etudiants, ce cas n'est donc pas probl\'ematique.
 \end{enumerate}
-Comme aucun des six cas n'est probl\'ematique, le d\'eveloppement peut se poursuivre sans probl\`eme.
+Comme aucun des six cas n'est probl\'ematique, le d\'eveloppement a pu se poursuivre sans probl\`eme.
 Lors de l'ex\'ecution finale des tests, il ne devrait y avoir que ces six m\^emes erreurs.
 
 \section{Tests dans un module d'extension}
