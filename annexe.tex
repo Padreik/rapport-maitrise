@@ -40,7 +40,7 @@ Feature: Test creating an Essay question
     Then I should see "essay-002"
 \end{lstlisting}
 
-\chapter{Test d'acceptation de \texttt{qtype\_essayhelper}}
+\chapter{Test d'acceptation pour notre module \texttt{qtype\_essayhelper}}
 \label{annexe_behat_new}
 
 \begin{lstlisting}[language=behat,frame=l,style=default]
@@ -114,7 +114,7 @@ Feature: Validate Essay with correction helper special features
     Then "//b/u[contains(text(), 'frog')]" "xpath_element" should exist
 \end{lstlisting}
 
-\chapter{Exemple de test unitaire de \texttt{qtype\_essayhelper}}
+\chapter{Exemple de test unitaire pour notre module \texttt{qtype\_essayhelper}}
 \label{annexe_unittest}
 
 \begin{lstlisting}[language=php,frame=l,style=default]
@@ -184,9 +184,7 @@ class qtype_essayhelper_stemmer_test extends basic_testcase {
         $snowball_stemmer->method('stem')->willReturn('test');
 
         $snowball_utf8 = new qtype_essayhelper_stemmer_utf8_mock();
-
         $make_stem_array = $this->get_protected_function($stemmer, 'make_stem_array');
-
         $stemmed_array = $make_stem_array->invokeArgs($stemmer, array("test asdf", $snowball_stemmer, $snowball_utf8));
         $expected_stemmed_array = array("test" => array("test", "asdf"));
 
