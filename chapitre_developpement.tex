@@ -70,9 +70,9 @@ Finalement, les fonctionnalit\'es suivantes ont \'et\'e ajout\'ees:
   
   \item[Langue de racination]
   
-  La librairie \texttt{php-stemmer} supporte plusieurs langues.
+  La biblioth\`eque \texttt{php-stemmer} supporte plusieurs langues.
   Toutes ces langues sont disponibles lors de la cr\'eation de la question.
-  La langue s\'electionn\'e par d\'efaut est la langue de Moodle choisi par l'utilisateur.
+  La langue s\'electionn\'ee par d\'efaut est la langue de Moodle choisie par l'utilisateur.
 \end{description}
 \section{Structure des fichiers pour le module d'extension \texttt{qtype\_essayhelper}}
 \begin{figure}[htbp]
@@ -336,46 +336,51 @@ foreach ($usedKeywords as $keyword) {
   \caption{Mise en \'evidence des mots-cl\'es dans \texttt{qtype\_essayhelper}.}
   \label{dev-correction-screenshot}
 \end{figure}
+
 \section{Tests} \label{dev_test}
 Les tests du module d'extension \texttt{qtype\_essay} ont \'et\'e conserv\'es et adapt\'es \`a notre nouveau module d'extension.
-Par cons\'equent, le fonctionnement de base d'un module d'extension (cr\'eation de question, modification de question, r\'epondre \`a la question, etc.) a facilement \'et\'e test\'e.
+Par cons\'equent, le fonctionnement de base d'un module d'extension (cr\'eation de questions, modification de questions, r\'eponse \`a une question, etc.) a facilement pu \^etre test\'e.
 Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl\'es et d'affichage de la r\'eponse de l'enseignant.
+
 \subsection{Tests d'acceptation} \label{dev_test_acceptation}
-Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, le code est disponible \`a l'annexe~\ref{annexe_behat_new}, p.~\pageref{annexe_behat_new}.
+Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, dont le code est disponible \`a l'annexe~\ref{annexe_behat_new} (p.~\pageref{annexe_behat_new}).
 Ce test v\'erifie qu'un enseignant peut voir l'aide \`a la correction (r\'eponse de l'enseignant et mots-cl\'es) mais qu'un \'etudiant n'y a pas acc\`es.
 Dans le \textit{Background}, on crée le questionnaire avec une question de type \texttt{qtype\_essayhelper}.
-Par la suite nous avons deux \textit{Scenarios}.
-On rappel que le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario} et qu'ils sont ind\'ependants.
-Le premier \textit{Scenario} se connecte avec un compte \'etudiant et r\'epond au questionnaire.
-Pendant que l'\'etudiant r\'epond au questionnaire et lorsque l'\'etudiant peut consulter son questionnaire termin\'e (pour voir la correction par exemple), nous v\'erifions que l'aide \`a la correction n'est pas pr\'esente en v\'erifiant la pr\'esence de la r\'eponse de l'enseignant.
-Le deuxi\`eme \textit{Scenario} se connecte aussi en tant qu'\'etudiant afin d'enregistrer une r\'eponse.
-Par la suite l'\'etudiant se d\'econnecte et l'enseignant se connecte à Moodle.
-L'enseignant consulte la r\'eponse de l'\'etudiant avec le module d'extension de correction manuelle et devrait voir l'aide \`a la correction.
-Finalement, nous avons ex\'ecut\'es les tests avec \texttt{behat} ce qui nous a confirm\'e la validit\'e des acc\`es \`a l'aide \`a la correction.
+Par la suite, on a deux \textit{Scenarios}; rappelons que le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario} et qu'ils sont ind\'ependants.
+
+Le premier \textit{Scenario} effectue une connexion avec un compte \'etudiant et r\'epond au questionnaire.
+Pendant que l'\'etudiant r\'epond au questionnaire et lorsque l'\'etudiant veut consulter son questionnaire termin\'e (pour voir la correction par exemple), on v\'erifie que l'aide \`a la correction n'est pas pr\'esente, en v\'erifiant la pr\'esence de la r\'eponse de l'enseignant.
+
+\GT{Fin de phrase pr\'ec\'edente pas claire.}
+
+Le deuxi\`eme \textit{Scenario} effectue aussi une connexion en tant qu'\'etudiant afin d'enregistrer une r\'eponse.
+Par la suite, l'\'etudiant se d\'econnecte et l'enseignant se connecte à Moodle.
+L'enseignant consulte la r\'eponse de l'\'etudiant avec le module d'extension de correction manuelle et doit voir l'aide \`a la correction.
+Nous avons ex\'ecut\'e ces deux sc\'enarios de tests avec \texttt{behat}, ce qui nous a confirm\'e la validit\'e des acc\`es \`a l'aide \`a la correction.
 
 Les tests d'acceptation r\'ecup\'er\'es du module d'extension \texttt{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
 Par exemple, la fonctionnalit\'e \textit{Backup and restore} ne fonctionnait pas pour les questions avec le nouveau type de question \texttt{qtype\_essayhelper}.
 Le probl\`eme venait d'un dossier manquant dans le nouveau module.
-Le dossier \textit{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
+Le dossier \texttt{backup} dans le module d'extension \texttt{qtype\_essayhelper} ne contient pas de copies de sauvegarde du module d'extension, mais plusieurs versions de la fonctionnalit\'e \textit{Backup and restore}.
 
-Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'es, les m\^emes que d\'ecrits \`a la section \ref{test_acceptation}, p.~\pageref{test_acceptation}.
-Les fonctionnalit\'es test\'es par ces tests ne n'impactent pas le module d'extension \texttt{qtype\_essayhelper}.
-L'ajout de ce nouveau type de question n'\`a pas impact\'e le reste de Moodle selon les tests d'acceptation.
-Les tests unitaires pourront confirmer le bon fonctionnement de Moodle.
+Une fois ce probl\`eme r\'esolu, les tests ont \'et\'e ex\'ectu\'es de nouveau. Six tests ont \'echou\'e, soit les m\^emes que d\'ecrits \`a la section \ref{test_acceptation} (p.~\pageref{test_acceptation}).
+Les fonctionnalit\'es test\'ees par ces tests n'ont aucun impact sur notre module d'extension \texttt{qtype\_essayhelper}.
+L'ajout de ce nouveau type de question n'a donc eu aucun impact sur le reste de Moodle, selon les tests d'acceptation.
+Les tests unitaires, d\'ecrits ci-bas, confirment aussi le bon fonctionnement de Moodle.
 
 \subsection{Tests unitaires} \label{dev_test_unitaire}
-La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'e unitairement et valid\'e \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
+La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'ee de fa\c{c}on unitaire et valid\'ee \`a l'aide d'un dictionnaire qui associe les mots \`a leurs racines.
 Il ne restait donc qu'\`a tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
-Cette int\'egration se retrouve dans la classe \texttt{qtype\_essayhelper\_stemmer} qui est test\'e dans la classe \texttt{qtype\_essayhelper\_stemmer\_test}.
-Le code de cette derni\`ere se retrouve \`a l'annexe~\ref{annexe_unittest}, p.~\pageref{annexe_unittest}.
+Cette int\'egration se retrouve dans la classe \texttt{qtype\_essayhelper\_stemmer} qui est test\'ee dans la classe \texttt{qtype\_essayhelper\_stemmer\_test}.
+Le code de cette derni\`ere se retrouve \`a l'annexe~\ref{annexe_unittest} (p.~\pageref{annexe_unittest}).
 La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faut tester, car chacune effectue un traitement important \`a la d\'etection de mots cl\'es.
-Il faut donc utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser la fonction prot\'eg\'e ou priv\'e d'un objet.
+Il faut donc utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser une fonction prot\'eg\'ee ou priv\'ee d'un objet.
 La r\'eflexion ne modifie pas l'objet \`a l'ex\'ecution, mais permet de consulter son \'etat et ce qu'il contient (variables, constantes, classes h\'erit\'ees, interfaces impl\'ement\'ees, m\'ethodes, etc.).
-Dans notre situation, la r\'eflexion cr\'ee un pointeur vers la fonction qui lui, est accessible.
+Dans notre cas, la r\'eflexion cr\'ee un pointeur vers la fonction qui, lui, est accessible.
 
 Tous les tests Moodle ont \'et\'e ex\'ecut\'es \`a la fin du d\'eveloppement.
-Il y avait une erreur de plus que celle d\'etect\'ee au d\'ebut et d\'ecrite au chapitre \ref{test-unitaires}, p.~\pageref{test-unitaires}.
-Le nouveau test qui \'echoue compare la liste de module d'extension de base et compare \`a ceux qui sont pr\'esentement install\'es.
-Comme il y a maintenant l'extension \texttt{qtype\_essayhelper} de plus le test \'echoue.
+Nous avons d\'etect\'e une erreur de plus que celle d\'etect\'ee au d\'ebut et d\'ecrite au chapitre \ref{test-unitaires} (p.~\pageref{test-unitaires}).
+Le nouveau test qui \'echoue compare la liste des modules d'extension de base \`a celles des modules qui sont pr\'esentement install\'es.
+Comme il y a maintenant l'extension \texttt{qtype\_essayhelper} un plus, le test \'echoue, ce qui est normal.
 
-Comme les tests unitaires et d'acceptation de Moodle passent tous, le module d'extension \texttt{qtype\_essayhelper} ne r\'egresse pas les fonctionnalit\'es existantes de Moodle.
+Comme les tests unitaires et les tests d'acceptation de Moodle passent tous, le module d'extension \texttt{qtype\_essayhelper} ne r\'egresse donc pas les fonctionnalit\'es existantes de Moodle.
