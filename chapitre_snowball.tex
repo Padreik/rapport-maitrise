@@ -1,14 +1,14 @@
 \chapter{D\'etection et analyse des mots-cl\'es}
 \label{chap:keywords}
 Afin d'identifier les mots-cl\'es pr\'esents dans le texte d'un \'etudiant et les comparer avec ceux fournis par l'enseignant, nous avons d\'ecid\'e d'utiliser la racine de chaque mot.
-En utilisant la racine de chaque mot, nous pouvons trouver les mots-cl\'es, peu importe leur accord ou le temps de verbe.
+Ce faisant, nous pouvons identifier les mots-cl\'es, peu importe l'accord ou le temps de verbe.
 Deux techniques de recherche de racine d'un mot ont \'et\'e examin\'ees: la lemmatisation et la racination (\textit{stemming}).
 
-Lors du choix de la technique utilis\'ee pour la d\'etection et analyse des mots-cl\'es, nous avons pris en consid\'eration les contraintes suivantes:
+Lors du choix de la technique utilis\'ee pour la d\'etection et l'analyse des mots-cl\'es, nous avons pris en consid\'eration les contraintes suivantes:
 \begin{enumerate}
   \item Le but du projet n'\'etant pas de faire de l'analyse linguistique, une biblioth\`eque devra \^etre utilis\'ee si possible;
   \item La biblioth\`eque doit \^etre \'ecrite en PHP, langage utilis\'e par Moodle, afin de faciliter l'installation du module d'extension d\'evelopp\'e;
-  \item La biblioth\`eque doit permettre de trouver la racine des mots en fran\c{c}ais, en anglais, et en plusieurs autres langues si possible, et ce afin de permettre l'utilisation du module d'extension \`a travers le monde.
+  \item La biblioth\`eque doit permettre de trouver la racine des mots en fran\c{c}ais, en anglais, et dans d'autres langues si possible, et ce afin de permettre l'utilisation du module d'extension \`a travers le monde.
 \end{enumerate}
 
 \section{La lemmatisation}
@@ -34,7 +34,7 @@ Il existe quelques biblioth\`eques de racination en PHP.
 L'une d'entre elles est \texttt{php-stemmer}~\cite{phpstemmer} qui fait la racination en fran\c{c}ais, en anglais, et dans dix autres langues.
 Les algorithmes utilis\'es par \texttt{php-stemmer} sont une traduction en PHP des algorithmes \'ecrits en Snowball, un langage d\'evelopp\'e pour la racination.
 %
-Comme nous avons trouv\'e une biblioth\`eque de racination qui satisfait tous les crit\`eres et aucune biblioth\`eque de lemmatisation n'en fait autant, pour ce projet nous avons d\'ecid\'e d'utiliser \texttt{php-stemmer} pour la d\'ecouverte de mots-cl\'es.
+Comme nous avons trouv\'e une biblioth\`eque de racination qui satisfait tous les crit\`eres et aucune biblioth\`eque de lemmatisation n'en fait autant, pour ce projet nous avons d\'ecid\'e d'utiliser \texttt{php-stemmer} pour l'identification des mots-cl\'es.
 
 \section{Snowball}
 Snowball est un petit langage de traitement de texte pour la racination des mots.
@@ -47,7 +47,7 @@ L'origine des algorithmes pour les langues latines, incluant la langue fran\c{c}
 
 Les algorithmes Snowball sont plut\^ot simples comme on peut le voir dans l'exemple de code~\ref{code:snowball-exemple}.
 Cet exemple ex\'ecute une \'etape pr\'eliminaire \`a la racination, soit la gestion des voyelles.
-Les lettres en majuscules ne seront plus consid\'er\'ees comme des voyelles pour la racination.
+Les lettres en majuscules ne sont plus consid\'er\'ees comme des voyelles pour la racination.
 L'algorithme au complet est disponible \`a l'adresse suivante: \url{https://raw.githubusercontent.com/snowballstem/snowball/master/algorithms/french.sbl}
 \begin{lstfloat}
 \begin{lstlisting}[frame=l]
@@ -68,8 +68,8 @@ define prelude as repeat goto (
 \end{lstfloat}
 
 Les algorithmes Snowball sont structur\'es en plusieurs \'etapes.
-Ce qui suit explique les grandes lignes de l'algorithme de racination en fran\c{c}ais, algorithme illustr\'e \`a la figure~\ref{snowball-process} sous forme d'un organigramme.%
-\footnote{Pour plus d'informations, voir \url{http://snowballstem.org/algorithms/french/stemmer.html}.}
+Ce qui suit explique les grandes lignes de l'algorithme de racination en fran\c{c}ais, algorithme illustr\'e aussi \`a la figure~\ref{snowball-process} sous forme d'un organigramme%
+\footnote{Pour plus d'informations, voir \url{http://snowballstem.org/algorithms/french/stemmer.html}.}.
 
 \begin{figure}[h!]
   \includegraphics[scale=0.85]{images/snowball.png}
@@ -101,7 +101,7 @@ Si c'est un \c{c}, la remplacer par c.
 \ETAPE{\'Etape 4: R\'esidu du suffixe}
 Il faut faire cette \'etape seulement si les \'etapes~1 \`a 3 n'ont pas modifi\'e le mot.
 Cette \'etape sert \`a enlever le pluriel et le f\'eminin des mots proches de leurs racines.
-\ETAPE{\'Etape 5: D\'edoubler la lettre finale}
+\ETAPE{\'Etape 5: Doublon de la lettre finale}
 Les suppressions et remplacements des \'etapes pr\'ec\'edentes peuvent laisser une faute dans la racine du mot.
 Cette \'etape sert \`a enlever les lettres doubles de certaines finales de mots (enn, ell, eill, etc.).
 \ETAPE{\'Etape 6: Accent final}
