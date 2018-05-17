@@ -31,7 +31,7 @@ certaines fonctionnalit\'es du module d'extension \texttt{qtype\_essay} ont \'et
   
   Cet \'editeur permet de modifier facilement l'apparence du texte.
   Ceci permet, entre autres, de surligner, de souligner, de mettre en gras, de mettre en italique et plus encore.
-  Comme on ne peut pas enlever des options \textit{WYSIWIG} pour un seul module d'extension, cela devient complexe de trouver une mise en forme qui permet de mettre en \'evidence les mots cl\'es, car un \'etudiant pourrait, par erreur, reproduire la m\^eme mise en forme.
+  Comme on ne peut pas enlever des options \textit{WYSIWIG} pour un seul module d'extension, cela devient complexe de trouver une mise en forme qui permet de mettre en \'evidence les mots-cl\'es, car un \'etudiant pourrait, par erreur, reproduire la m\^eme mise en forme.
   
   \item[Remise de fichier]
   
@@ -267,7 +267,7 @@ Cette classe g\`ere la r\'eponse de l'\'etudiant.
 \begin{description}
   \item[\texttt{textarea}] Fonction prot\'eg\'ee qui construit la zone de texte lorsqu'un \'etudiant r\'epond \`a la question.
   \item[\texttt{class\_name}] Fonction prot\'eg\'ee qui retourne le nom de la classe css \`a appliquer sur la balise \texttt{HTML} englobant la question et la r\'eponse.
-  \item[\texttt{response\_area\_read\_only}] Fonction qui affiche le texte de la r\'eponse pour consultation seulement. Si c'est un enseignant ou un correcteur qui consulte la question dans le module de correction manuel on affiche la r\'eponse de l'enseignant \`a c\^ot\'e de la r\'eponse de l'\'etudiant et on met en \'evidence les mots cl\'es
+  \item[\texttt{response\_area\_read\_only}] Fonction qui affiche le texte de la r\'eponse pour consultation seulement. Si c'est un enseignant ou un correcteur qui consulte la question dans le module de correction manuel on affiche la r\'eponse de l'enseignant \`a c\^ot\'e de la r\'eponse de l'\'etudiant et on met en \'evidence les mots-cl\'es
   \item[\texttt{response\_area\_input}] Affiche la zone de texte cr\'e\'e par la fonction \texttt{textarea} afin que l'\'etudiant puisse r\'epondre \`a la question.
   \item[\texttt{highlight\_keywords}] Met en \'evidence les mots-cl\'es trouv\'es dans le texte par la racination.
 \end{description}
@@ -282,7 +282,7 @@ Cet exemple illustre l'ouverture d'un questionnaire par un \'etudiant.
   \label{dev-diagramme}
 \end{figure}
 \end{landscape}
-\section{D\'etection des mots cl\'es}
+\section{D\'etection des mots-cl\'es}
 Comme indiqu\'e dans le \autoref{chap:keywords}, nous utilisons la biblioth\`eque \texttt{php-stemmer} afin de trouver la racine de chaque mot.
 Pour ce faire, il faut d\'ebuter par isoler chacun des mots du texte.
 Les caract\`eres non alphanum\'eriques sont remplac\'es par des espaces et le texte est d\'ecoup\'e par les apostrophes et les caract\`eres d'espacement (espace, saut de ligne, tabulation, etc.) tel qu'illustr\'e dans l'extrait de code \ref{code:isoler}.
@@ -373,7 +373,7 @@ La biblioth\`eque de racination \texttt{php-stemmer} est d\'ej\`a test\'ee de fa
 Il ne restait donc qu'\`a tester l'int\'egration entre Moodle et la biblioth\`eque de racination.
 Cette int\'egration se retrouve dans la classe \texttt{qtype\_essayhelper\_stemmer} qui est test\'ee dans la classe \texttt{qtype\_essayhelper\_stemmer\_test}.
 Le code de cette derni\`ere se retrouve \`a l'annexe~\ref{annexe_unittest} (p.~\pageref{annexe_unittest}).
-La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faut tester, car chacune effectue un traitement important \`a la d\'etection de mots cl\'es.
+La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faut tester, car chacune effectue un traitement important \`a la d\'etection de mots-cl\'es.
 Il faut donc utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser une fonction prot\'eg\'ee ou priv\'ee d'un objet.
 La r\'eflexion ne modifie pas l'objet \`a l'ex\'ecution, mais permet de consulter son \'etat et ce qu'il contient (variables, constantes, classes h\'erit\'ees, interfaces impl\'ement\'ees, m\'ethodes, etc.).
 Dans notre cas, la r\'eflexion cr\'ee un pointeur vers la fonction qui, lui, est accessible.
