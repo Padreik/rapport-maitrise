@@ -124,11 +124,11 @@ Le fichier \texttt{README.md} du d\'ep\^ot \texttt{git} pour la biblioth\`eque \
 En comparant le code de la biblioth\`eque \texttt{php-stemmer} et les algorithmes Snowball, on peut remarquer que les algorithmes sont les m\^emes.
 \texttt{php-stemmer} est donc une traduction PHP des algorithmes Snowball.
 
-La biblioth\`eque \texttt{php-stemmer} nous servira donc \`a trouver la racine de chaque mot cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
-De cette mani\`ere, il sera possible de mettre en \'evidence chaque mot cl\'e dans la r\'eponse de l'\'etudiant, peu importe l'accord.
+La biblioth\`eque \texttt{php-stemmer} nous servira donc \`a trouver la racine de chaque mot-cl\'e, de chaque mot dans la r\'eponse de l'\'etudiant ainsi que dans chaque mot dans la r\'eponse de l'enseignant.
+De cette mani\`ere, il sera possible de mettre en \'evidence chaque mot-cl\'e dans la r\'eponse de l'\'etudiant, peu importe l'accord.
 
-Par exemple, supposons que l'enseignant donne \og illumination \fg{} comme mot cl\'e et l'\'etudiant donne la r\'eponse \og Le pont Jacques-Cartier \`a \'et\'e illumin\'e pour le 375\textsuperscript{e} de la ville de Montr\'eal. \fg{}.
-La racine du mot cl\'e \og illumination \fg{}  est \og illumin \fg{}.
+Par exemple, supposons que l'enseignant donne \og illumination \fg{} comme mot-cl\'e et l'\'etudiant donne la r\'eponse \og Le pont Jacques-Cartier \`a \'et\'e illumin\'e pour le 375\textsuperscript{e} de la ville de Montr\'eal. \fg{}.
+La racine du mot-cl\'e \og illumination \fg{}  est \og illumin \fg{}.
 En examinant la racine de chaque mot dans la r\'eponse de l'\'etudiant, on constate que la racine du mot \og illumin\'e \fg{} est aussi \og illumin \fg{}.
 Il faut donc mettre en \'evidence le mot \og illumin\'e \fg{} lorsqu'on affiche la r\'eponse au correcteur.
 Le module d'extension devra afficher la r\'eponse de l'\'etudiant avec le mot illumin\'e en \'evidence tel qu'illustr\'e dans la phrase suivante: \og Le pont Jacques-Cartier \`a \'et\'e \textbf{\underline{illumin\'e}} pour le 375\textsuperscript{e} de la ville de Montr\'eal. \fg{} 
