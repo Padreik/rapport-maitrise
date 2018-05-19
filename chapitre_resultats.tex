@@ -1,4 +1,42 @@
 \chapter{R\'esultats obtenus et limites de notre module de correction}
+Les exemples des chapitres pr\'ec\'edents \'etaient tous en fran\c{c}ais, l'exemple qui suite est en anglais afin de d\'emontrer le c\^ot\'e multilangue du module d'extension.
+
+L'interface de configuration d'une question de type \texttt{qtype\_essayhelper} est simple.
+Si nous prenons seulement les configurations importantes, la configuration de base de la question, telle qu'illustr\'ee \`a la figure \ref{questionform_base}, est la m\^eme qu'avec les autres types de questions.
+Rappel: Le nom de la question est disponible pour l'enseignant seulement afin de retrouver la question dans la banque de questions Moodle, le texte de la question sera affich\'e \`a l'\'etudiant afin de r\'epondre \`a la question et la note par d\'efaut indique que la question est corrig\'ee sur 10 points.
+\begin{figure}[htbp]
+  \includegraphics[scale=0.85]{images/questionform_base.png}
+  \caption{Interface de configuration de base d'une question de type \texttt{qtype\_essayhelper}.}
+  \label{questionform_base}
+\end{figure}
+
+La figure \ref{questionform_helper} montre les champs propres \`a \texttt{qtype\_essayhelper}.
+Nous pouvons y voir:
+\begin{enumerate}
+  \item La r\'eponse officielle de l'enseignant qui sera affich\'e \`a c\^ot\'e de la r\'eponse de l'\'etudiant, le texte provient de la documentation Moodle\footnote{\url{https://docs.moodle.org/35/en/About_Moodle}};
+  \item Les mots-cl\'es qui seront mis en \'evidence, dans l'exemple donn\'e il y en a quatre: \textit{LMS}, \textit{open-source}, \textit{education} et \textit{personalisation};
+  \item La langue pour la d\'etection des mots-cl\'es qui sera utilis\'ee par \texttt{phpstemmer}.
+    Par d\'efaut la langue s\'electionn\'e est la langue de l'utilisateur mais nous avons s\'electionn\'e manuellement anglais dans cet exemple.
+\end{enumerate}
+\begin{figure}[htbp]
+  \includegraphics[scale=0.85]{images/questionform_helper.png}
+  \caption{Interface de configuration pour l'aide \`a la correction d'une question de type \texttt{qtype\_essayhelper}.}
+  \label{questionform_helper}
+\end{figure}
+
+Une fois que les \'etudiants r\'epondent, l'enseignant peut corriger avec l'aide \`a la correction en passant par le module d'extension de correction manuelle.
+Un aperçu est disponible \`a la figure \ref{questionform_correction}.
+La r\'eponse de l'\'etudiant provient de Wikip\'edia\footnote{url{https://en.wikipedia.org/wiki/Moodle}}.
+Nous pouvons y voir les mots-cl\'es mis en \'evidence (ils sont en caract\`eres gras et soulign\'es).
+Pour le mot-cl\'e \textit{personalisation} nous pouvons voir le mot \textit{personalised} de mis en \'evidence car ils ont la m\^eme racine.
+Pour le mot-cl\'e \textit{education} nous pouvons voir les mots \textit{educators} et \textit{education} de mis en \'evidence car il ont la m\^eme racine: \og educ \fg{} .
+
+\begin{figure}[htbp]
+  \includegraphics[scale=0.85]{images/questionform_correction.png}
+  \caption{Interface de correction avec l'aide \`a la correction d'une question de type \texttt{qtype\_essayhelper}.}
+  \label{questionform_correction}
+\end{figure}
+
 L'affichage de la r\'eponse de l'enseignant et de l'\'etudiant c\^ote \`a c\^ote, en plus des instructions au correcteur, devrait aider le correcteur dans sa t\^ache de correction.
 De plus, la possibilit\'e de choisir la langue de racination permet aux enseignants d'utiliser l'aide \`a la correction dans la langue de leur choix.
 
@@ -7,12 +45,12 @@ Plusieurs raisons pour ce manque:
 \begin{itemize}
   \item Professeure Magda Fusaro, qui avait sorti l'id\'ee du projet avec mon directeur de ma\^itrise, professeur Guy Tremblay, est devenue rectrice de l'UQAM durant le projet. Elle n'a donc pas pu collaborer \`a la mise en place d'un essai r\'eel;
   \item Les quelques cours que je donne au C\'egep R\'egional de Lanaudi\`ere \`a Joliette n'ont pas d'examen ou d'atelier qui pourraient \^etre utilis\'es avec le module d'extension d'aide \`a la correction.
-    Les examens sont de nature pratiques (programmer une petite application, reproduire un document Microsoft Word, etc.) ce qui n'est pas utile dans ce contexte.
+    Les examens sont de nature pratique (programmer une petite application, reproduire un document Microsoft Word, etc.) ce qui n'est pas utile dans ce contexte.
 \end{itemize}
 De tels essais auraient \'et\'e int\'eressants \`a faire.
 
 Un probl\`eme a \'et\'e d\'etect\'e vers la fin du projet: la s\'eparation du texte en mots peut poser probl\`eme.
-Plus pr\'ecis\'ement, on s\'epare chaque mot en utilisant les symboles non alphanum\'erique et les caract\`eres d'espacement.
+Plus pr\'ecis\'ement, on s\'epare chaque mot en utilisant les symboles non alphanum\'eriques et les caract\`eres d'espacement.
 Donc, le mot \og aujourd'hui \fg{} est consid\'er\'e comme deux mots, car l'apostrophe est un symbole non alphanum\'erique, alors que c'est en fait un seul mot.
 Par contre, \og qu'autrui \fg{} est aussi consid\'er\'e comme deux mots, ce qui est correct dans ce cas.
 De plus, comme le module d'extension supporte plusieurs langues, chaque langue comporte ses particularit\'es.
