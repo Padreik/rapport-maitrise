@@ -1,9 +1,13 @@
 \chapter{R\'esultats obtenus et limites de notre module de correction}
-Les exemples des chapitres pr\'ec\'edents \'etaient tous en fran\c{c}ais, l'exemple qui suite est en anglais afin de d\'emontrer le c\^ot\'e multilangue du module d'extension.
+
+\section{R\'esultats: Un exemple illustrant les fonctionnalit\'es de notre module de correction}
+
+Les exemples des chapitres pr\'ec\'edents \'etaient en fran\c{c}ais; l'exemple qui suit est en anglais afin de d\'emontrer le c\^ot\'e multilangue du module d'extension, et montrer aussi les fonctionnalit\'es de notre module.
 
 L'interface de configuration d'une question de type \texttt{qtype\_essayhelper} est simple.
-Si nous prenons seulement les configurations importantes, la configuration de base de la question, telle qu'illustr\'ee \`a la figure \ref{questionform_base}, est la m\^eme qu'avec les autres types de questions.
-Rappel: Le nom de la question est disponible pour l'enseignant seulement afin de retrouver la question dans la banque de questions Moodle, le texte de la question sera affich\'e \`a l'\'etudiant afin de r\'epondre \`a la question et la note par d\'efaut indique que la question est corrig\'ee sur 10 points.
+Si on prend seulement les configurations importantes, la configuration de base de la question, telle qu'illustr\'ee \`a la figure \ref{questionform_base}, est la m\^eme qu'avec les autres types de questions.
+
+Rappel: le nom de la question est disponible pour l'enseignant seulement afin de retrouver la question dans la banque de questions Moodle, le texte de la question sera affich\'e \`a l'\'etudiant afin de r\'epondre \`a la question et la note par d\'efaut indique que la question est corrig\'ee sur 10 points.
 \begin{figure}[htbp]
   \includegraphics[scale=0.85]{images/questionform_base.png}
   \caption{Interface de configuration de base d'une question de type \texttt{qtype\_essayhelper}.}
@@ -11,12 +15,12 @@ Rappel: Le nom de la question est disponible pour l'enseignant seulement afin de
 \end{figure}
 
 La figure \ref{questionform_helper} montre les champs propres \`a \texttt{qtype\_essayhelper}.
-Nous pouvons y voir:
+On peut y voir les \'el\'ements suivants:
 \begin{enumerate}
-  \item La r\'eponse officielle de l'enseignant qui sera affich\'e \`a c\^ot\'e de la r\'eponse de l'\'etudiant, le texte provient de la documentation Moodle\footnote{\url{https://docs.moodle.org/35/en/About_Moodle}};
-  \item Les mots-cl\'es qui seront mis en \'evidence, dans l'exemple donn\'e il y en a quatre: \textit{LMS}, \textit{open-source}, \textit{education} et \textit{personalisation};
+  \item La r\'eponse officielle de l'enseignant, qui sera affich\'ee \`a c\^ot\'e de la r\'eponse de l'\'etudiant. Le texte indiqu\'e dans cet exemple provient de la documentation Moodle\footnote{\url{https://docs.moodle.org/35/en/About_Moodle}};
+  \item Les mots-cl\'es qui seront mis en \'evidence. Dans l'exemple donn\'e il y en a quatre: \textit{LMS}, \textit{open-source}, \textit{education} et \textit{personalisation};
   \item La langue pour la d\'etection des mots-cl\'es qui sera utilis\'ee par \texttt{phpstemmer}.
-    Par d\'efaut la langue s\'electionn\'e est la langue de l'utilisateur mais nous avons s\'electionn\'e manuellement anglais dans cet exemple.
+    Par d\'efaut la langue s\'electionn\'ee est la langue de l'utilisateur mais ici nous avons s\'electionn\'e manuellement l'anglais pour cet exemple.
 \end{enumerate}
 \begin{figure}[htbp]
   \includegraphics[scale=0.85]{images/questionform_helper.png}
@@ -26,10 +30,10 @@ Nous pouvons y voir:
 
 Une fois que les \'etudiants r\'epondent, l'enseignant peut corriger avec l'aide \`a la correction en passant par le module d'extension de correction manuelle.
 Un aperçu est disponible \`a la figure \ref{questionform_correction}.
-La r\'eponse de l'\'etudiant provient de Wikip\'edia\footnote{url{https://en.wikipedia.org/wiki/Moodle}}.
-Nous pouvons y voir les mots-cl\'es mis en \'evidence (ils sont en caract\`eres gras et soulign\'es).
-Pour le mot-cl\'e \textit{personalisation} nous pouvons voir le mot \textit{personalised} de mis en \'evidence car ils ont la m\^eme racine.
-Pour le mot-cl\'e \textit{education} nous pouvons voir les mots \textit{educators} et \textit{education} de mis en \'evidence car il ont la m\^eme racine: \og educ \fg{} .
+Dans l'exemple, la r\'eponse de l'\'etudiant provient de Wikip\'edia\footnote{\url{https://en.wikipedia.org/wiki/Moodle}}.
+On peut y voir les mots-cl\'es mis en \'evidence --- ils sont en caract\`eres gras et soulign\'es.
+Pour le mot-cl\'e \textit{personalisation}, on peut voir le mot \textit{personalised} mis en \'evidence, car ils ont la m\^eme racine.
+Pour le mot-cl\'e \textit{education}, on peut voir les mots \textit{educators} et \textit{education} mis en \'evidence, car ils ont tous la m\^eme racine \og educ \fg{} .
 
 \begin{figure}[htbp]
   \includegraphics[scale=0.85]{images/questionform_correction.png}
@@ -40,6 +44,7 @@ Pour le mot-cl\'e \textit{education} nous pouvons voir les mots \textit{educator
 L'affichage de la r\'eponse de l'enseignant et de l'\'etudiant c\^ote \`a c\^ote, en plus des instructions au correcteur, devrait aider le correcteur dans sa t\^ache de correction.
 De plus, la possibilit\'e de choisir la langue de racination permet aux enseignants d'utiliser l'aide \`a la correction dans la langue de leur choix.
 
+\section{Limites et am\'eliorations possibles}
 Malheureusement, aucun test n'a \'et\'e effectu\'e avec de vrai.e.s
 \'etudiant.e.s dans un contexte r\'eel.  Bien que cela aurait \'et\'e
 int\'eressant, plusieurs raisons expliquent pourquoi nous n'en avons
