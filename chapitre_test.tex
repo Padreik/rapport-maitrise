@@ -80,12 +80,12 @@ Chaque instruction et v\'erification doit \^etre, pr\'ealablement, configur\'ee 
 La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exemple se trouve à l'annexe~\ref{annexe_behat_exist}, p.~\pageref{annexe_behat_exist}):
 \begin{itemize}
   \item La premi\`ere ligne avec un \verb|@| permet de cat\'egoriser chaque fichier de test.
-        Ceci permet d'ex\'ecuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
+        Par exemple, ceci permet d'ex\'ecuter les tests d'acceptations pour un seul module d'extension ou pour un type de module d'extension;
         
-  \item La ligne d\'ebutant par \textit{Feature} donne le titre du test afin de le retrouver facilement;
+  \item La ligne d\'ebutant par \textit{Feature} donne le titre (le nom) du test afin de le retrouver facilement;
   
   \item Les trois lignes suivantes permettent de d\'ecrire le test au lecteur, \`a un haut niveau d'abstraction.
-        Comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit, donc \`a l'aide d'un r\'ecit utilisateur:
+        Comme dans de nombreuses autres formes de tests d'acceptation, on les \'ecrit habituellement comme suit, donc \`a l'aide d'un r\'ecit utilisateur (\emph{user story}):
         
         \begin{itemize}
           \item \og \textit{As a ...} \fg{} d\'ecrit quel type d'utilisateur est cibl\'e par ce test;
@@ -95,12 +95,12 @@ La structure des tests d'acceptation avec \texttt{behat} est comme suit (un exem
         
   \item Ensuite, on d\'ebute le \textit{Background} qui pr\'epare le sc\'enario sp\'ecifique de test.
         La premi\`ere action de cette section d\'ebutera par \textit{Given} et toutes les autres par \textit{And}.
-        Chaque action pr\'epare l'environnement pour le sc\'enario de test, par exemple: ajouter un enregistrement dans la base de donn\'ees, naviguer \`a une certaine page, cliquer sur un bouton, etc;
+        Chaque action pr\'epare l'environnement pour le sc\'enario de test, par exemple, ajouter un enregistrement dans la base de donn\'ees, naviguer \`a une certaine page, cliquer sur un bouton, etc;
         
   \item Ensuite, il y a une ou plusieurs sections \textit{Scenario} qui d\'efinissent chaque sc\'enario sp\'ecifique de test \`a effectuer.
         Sur la m\^eme ligne que le \textit{Scenario}, il y a une description du test pour le lecteur.
-        Ensuite, le \textit{When} d\'efinit l'action \`a ex\'ecuter.
-        Finalement, le \textit{Then} d\'efinit le comportement attendu suite \`a l'ex\'ecution de l'action.
+        Ensuite, le \textit{When} d\'efinit l'action \`a ex\'ecuter pour ce sc\'enario de test.
+        Finalement, le \textit{Then} d\'efinit le comportement attendu suite \`a l'ex\'ecution de l'action pour ce sc\'enario.
 \end{itemize}
 
 Une particularité de \texttt{behat} est qu'il permet d'avoir un seul \textit{Given} (\textit{Background}) pour plusieurs \textit{When} et \textit{Then} (\textit{Scenario}), donc
