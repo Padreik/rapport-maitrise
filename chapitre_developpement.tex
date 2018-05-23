@@ -174,6 +174,8 @@ La structure du code est illustr\'ee \`a la figure \ref{dev-architecture} et d\'
  \end{itemize}
 \end{description}
 Dans tous les fichiers, nous avons d\^u adapter un peu le code afin de passer de \texttt{qtype\_essay} \`a \texttt{qtype\_essayhelper}.
+
+\pagebreak
 \section{Les classes du module \texttt{qtype\_essayhelper}}
 Le code du module d'extension est peu complexe.
 Ce qui cause de la complexit\'e dans le projet r\'eside dans l'interaction entre le coeur de Moodle et ces classes.
@@ -227,6 +229,7 @@ $question->keywords = $question->options->keywords;
 \caption{Extrait du code de la fonction \texttt{data\_preprocessing} de la classe \texttt{qtype\_essayhelper\_edit\_form}.}
 \label{code:formpreprocessing}
 \end{lstfloat}
+
 \subsection*{Classe \texttt{qtype\_essayhelper\_question}}
 Cette classe g\`ere la r\'eponse \`a une question, que ce soit pour une nouvelle r\'eponse, une modification de r\'eponse ou pour afficher la r\'eponse au correcteur.
 Les fonctions d\'efinies dans cette classe sont les suivantes:
@@ -239,6 +242,7 @@ Les fonctions d\'efinies dans cette classe sont les suivantes:
   \item[\texttt{is\_complete\_response}] V\'erifie si l'\'etudiant a r\'epondu \`a la question. Nous v\'erifions simplement s'il y a une r\'eponse non-vide.
   \item[\texttt{is\_same\_response}] D\'etermine si l'\'etudiant a modifi\'e sa r\'eponse.
 \end{description}
+
 \subsection*{Classe \texttt{qtype\_essayhelper}}
 Cette classe g\`ere les options du type de question ainsi que les interactions \`a la base de donn\'ees.
 Les fonctions d'interaction avec la base de donn\'ees sont les suivantes:
@@ -249,6 +253,8 @@ Les fonctions d'interaction avec la base de donn\'ees sont les suivantes:
   \item[\texttt{initialise\_question\_instance}] Initialise l'instance de la question en ajoutant les options \`a l'objet repr\'esentant la question.
   \item[\texttt{delete\_question}] Supprime la question de la base de donn\'ees. Notre type de question n'utilise qu'une seule table, il s'agit donc d'une seule requ\^ete \texttt{DELETE}.
 \end{description}
+
+\begin{minipage}{\linewidth}
 Les options du type de question sont des listes d\'eroulantes dans le formulaire de cr\'eation et modification de question.
 Les fonctions qui d\'efinissent les options sont les suivantes:
 \begin{description}
@@ -258,6 +264,9 @@ Les fonctions qui d\'efinissent les options sont les suivantes:
   \item[\texttt{stemming\_languages\_options}] R\'ecup\`ere toutes les langues disponibles pour la racination et les traduit dans la langue de l'utilisateur avec la fonction \texttt{PHP Locale::getDisplayName}.
   \item[\texttt{stemming\_languages\_default}] Trouve la langue de racination par d\'efaut en se basant sur la langue actuelle de l'utilisateur. Si la langue n'est pas reconnue, l'anglais est utilis\'e.
 \end{description}
+\end{minipage}
+
+%\pagebreak
 \subsection*{Classe \texttt{qtype\_essayhelper\_renderer}}
 Cette classe g\`ere l'affichage de la question aux \'etudiants lorsqu'ils r\'epondent ainsi que l'affichage de la r\'eponse de l'\'etudiant lors de la relecture de celui-ci ou lors de la correction.
 Elle ne contient que deux fonctions:
@@ -351,15 +360,16 @@ Il ne restait donc plus qu'\`a tester les nouvelles fonctionnalit\'es de mots-cl
 Un test d'acceptation a \'et\'e \'ecrit pour les nouvelles fonctionnalit\'es du module d'extension, dont le code est disponible \`a l'annexe~\ref{annexe_behat_new} (p.~\pageref{annexe_behat_new}).
 Ce test v\'erifie qu'un enseignant peut voir l'aide \`a la correction (r\'eponse de l'enseignant et mots-cl\'es) mais qu'un \'etudiant n'y a pas acc\`es.
 Dans le \textit{Background}, on crée le questionnaire avec une question de type \texttt{qtype\_essayhelper}.
-Par la suite, on a deux \textit{Scenarios}; rappelons que le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario} et qu'ils sont ind\'ependants.
+Par la suite, on a deux \textit{Scenarios} --- rappelons que le \textit{Background} est ex\'ecut\'e avant chaque \textit{Scenario} et que les sc\'enarios sont ex\'ecut\'es de fa\c{c}on ind\'ependante.
 
 Le premier \textit{Scenario} effectue une connexion avec un compte \'etudiant et r\'epond au questionnaire.
-Pendant que l'\'etudiant r\'epond au questionnaire, nous v\'erifions que l'aide \`a la correction n'est pas pr\'esente.
-Nous effectuons la m\^eme v\'erification lorsque l'\'etudiant consulte sa copie une fois le questionnaire soumis.
+Pendant que l'\'etudiant r\'epond au questionnaire, on v\'erifie que l'aide \`a la correction n'est pas pr\'esente.
+On effectue la m\^eme v\'erification lorsque l'\'etudiant consulte sa copie une fois le questionnaire soumis.
 
 Le deuxi\`eme \textit{Scenario} effectue aussi une connexion en tant qu'\'etudiant afin d'enregistrer une r\'eponse.
 Par la suite, l'\'etudiant se d\'econnecte et l'enseignant se connecte à Moodle.
 L'enseignant consulte la r\'eponse de l'\'etudiant avec le module d'extension de correction manuelle et doit voir l'aide \`a la correction.
+
 Nous avons ex\'ecut\'e ces deux sc\'enarios de tests avec \texttt{behat}, ce qui nous a confirm\'e la validit\'e des acc\`es \`a l'aide \`a la correction.
 
 Les tests d'acceptation r\'ecup\'er\'es du module d'extension \texttt{qtype\_essay} ont permis de trouver quelques probl\`emes  dans le nouveau module d'extension.
@@ -378,7 +388,7 @@ Il ne restait donc qu'\`a tester l'int\'egration entre Moodle et la biblioth\`eq
 Cette int\'egration se retrouve dans la classe \texttt{qtype\_essayhelper\_stemmer} qui est test\'ee dans la classe \texttt{qtype\_essayhelper\_stemmer\_test}.
 Le code de cette derni\`ere se retrouve \`a l'annexe~\ref{annexe_unittest} (p.~\pageref{annexe_unittest}).
 La classe \texttt{qtype\_essayhelper\_stemmer} comporte plusieurs fonctions prot\'eg\'ees qu'il faut tester, car chacune effectue un traitement important \`a la d\'etection de mots-cl\'es.
-Il faut donc utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser une fonction prot\'eg\'ee ou priv\'ee d'un objet.
+Pour ce faire, il faut utiliser la r\'eflexion \texttt{PHP} qui permet, entre autres, d'utiliser une fonction prot\'eg\'ee ou priv\'ee d'un objet.
 La r\'eflexion ne modifie pas l'objet \`a l'ex\'ecution, mais permet de consulter son \'etat et ce qu'il contient (variables, constantes, classes h\'erit\'ees, interfaces impl\'ement\'ees, m\'ethodes, etc.).
 Dans notre cas, la r\'eflexion cr\'ee un pointeur vers la fonction qui, lui, est accessible.
 
