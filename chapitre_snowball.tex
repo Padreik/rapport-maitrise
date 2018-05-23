@@ -1,8 +1,8 @@
 \chapter{D\'etection et analyse de mots-cl\'es}
 \label{chap:keywords}
-Afin d'identifier les mots-cl\'es pr\'esents dans le texte d'un \'etudiant et les comparer avec ceux fournis par l'enseignant, nous avons d\'ecid\'e d'utiliser la racine de chaque mot.
+Afin d'identifier les mots-cl\'es pr\'esents dans le texte d'un.e \'etudiant.e et les comparer avec ceux fournis par l'enseignant ou l'enseignante, nous avons d\'ecid\'e d'utiliser la racine de chaque mot.
 Ce faisant, nous pouvons identifier les mots-cl\'es, peu importe l'accord ou le temps de verbe.
-Deux techniques de recherche de racine d'un mot ont \'et\'e examin\'ees: la lemmatisation et la racination (\textit{stemming}).
+Deux techniques de recherche de la racine d'un mot ont \'et\'e examin\'ees: la lemmatisation et la racination (\textit{stemming}).
 
 Lors du choix de la technique utilis\'ee pour la d\'etection et l'analyse des mots-cl\'es, nous avons pris en consid\'eration les contraintes suivantes:
 \begin{enumerate}
@@ -13,7 +13,7 @@ Lors du choix de la technique utilis\'ee pour la d\'etection et l'analyse des mo
 
 \section{La lemmatisation}
 La lemmatisation consiste \`a trouver le lemme de chaque mot.
-Le lemme est la forme canonique d'un mot, soit l'infinitif pour un verbe, le masculin singulier pour un adjectif, etc.
+Le \emph{lemme} est la forme canonique d'un mot, soit l'infinitif pour un verbe, le masculin singulier pour un adjectif, etc.
 Par exemple, le lemme du verbe \og aimerait \fg{} est \og aimer \fg{}.
 La  technique de lemmatisation utilise habituellement un dictionnaire qui associe toutes les conjugaisons possibles d'un mot \`a son lemme.
 Certaines biblioth\`eques vont m\^eme consid\'erer le contexte afin de trouver le bon lemme.
@@ -114,7 +114,7 @@ Au final, on obtient la racine du mot.
 
 Tel que mentionn\'e plus haut, la racination est moins pr\'ecise que la lemmatisaion.
 Par exemple les mots \og acceptables \fg{} et \og accept\'e \fg{} ont la m\^eme racine: \og accept \fg{}.
-Par contre, le sens des deux mots est tout \`a diff\'erent.
+Par contre, le sens des deux mots est diff\'erent.
 
 
 \section{La biblioth\`eque \texttt{php-stemmer} et son utilisation dans notre module}
