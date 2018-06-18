@@ -19,19 +19,10 @@
   \tableofcontents[hideallsubsections]
   \end{frame}
   
-  \section[Introduction]{Introduction au projet}
+  \section[Introduction]{Motivation au projet}
   \begin{frame}
   \frametitle{Introduction au projet}
-  
-  Id\'ee de d\'epart
-  \begin{itemize}
-    \item Par Guy Tremblay
-    \item Nouvelle interface web pour Oto
-  \end{itemize}
-  
-  \medskip
-  
-  Projet actuel:
+  Id\'ee de d\'epart:
   \begin{itemize}
     \item Par Guy Tremblay et Magda Fusaro
     \item Aide \`a la correction pour texte \`a d\'eveloppement
@@ -44,20 +35,22 @@
   \frametitle{\insertsection}
   \framesubtitle{Moodle}
   \begin{itemize}
-    \item Logiciel libre
     \item LMS (\textit{Learning Management System})
     \item Modulaire: Cours -> Sections -> Activit\'es
+    \item Logiciel libre
   \end{itemize}
   \end{frame}
   
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Activit\'e questionnaire de Moodle}
+  \framesubtitle{Les types de questions}
   Cr\'eation de formulaires en ligne
+  
   \medskip
+  
   Questions de types:
   \begin{itemize}
-    \item Choix multiple
+    \item Choix multiples
     \item R\'eponse courte
     \item Num\'erique
     \item Question Cloze
@@ -71,7 +64,7 @@
   \begin{itemize}
     \item Rapport de questionnaire (\textit{Quiz report})
     \item Type de question (\textit{Question type})
-    \item Comportement de question (\textit{Question behaviours})
+    \item Comportement de question (\textit{Question behaviour})
   \end{itemize}
   \end{frame}
   
@@ -108,7 +101,7 @@
     \item D\'evelopp\'e par Martin Porter
     \item Language de traitement de texte
     \item Compile en C ou en Java
-    \item Algorithmes de racination existants pour 12 langues, dont le fran\c{c}ais
+    \item Algorithmes de racination pour 12 langues, dont le fran\c{c}ais
   \end{itemize}
   \end{frame}
   
@@ -124,9 +117,9 @@
   \begin{frame}
   \frametitle{\insertsection}
   \framesubtitle{Tests unitaires}
-  V\'erifications \`a tr\`es petites \'echelles (m\'ethodes)
+  V\'erifications \`a petite \'echelle (m\'ethodes)
   
-  D\'ependances sont remplac\'es par des \textit{stubs}
+  D\'ependances remplac\'ees par des \textit{stubs}
   
   Ex\'ecut\'es avec \textit{PHPUnit}
   
@@ -205,6 +198,7 @@
     \includegraphics[scale=0.4]{../images/class-simple.png}
   \end{center}
   \end{frame}
+  
   \section[R\'esultats]{R\'esultats obtenus et limites de notre module de correction}
   \begin{frame}
   \frametitle{\insertsection}
@@ -226,7 +220,7 @@
   \begin{frame}
   \frametitle{\insertsection}
   \framesubtitle{Limites du projet 1/2}
-  Manque de tests:
+  Pas de tests réels:
   \begin{itemize}
     \item Professeure Fusaro est devenue Rectrice de l'UQAM
     \item Les \'evaluations dans mes cours n'ont pas de textes \`a d\'eveloppement
@@ -236,9 +230,9 @@
   
   La s\'eparation des mots est probl\'ematique:
   \begin{itemize}
-    \item aujourd'hui devient \og aujourd \fg{} et \og hui \fg{} 
-    \item qu'autrui devient \og qu \fg{} et \og autrui \fg{} 
-    \item wasn't devient \og wasn \fg{} et \og t \fg{} 
+    \item \og aujourd'hui \fg{} devient \og aujourd \fg{} et \og hui \fg{} 
+    \item \og qu'autrui \fg{} devient \og qu \fg{} et \og autrui \fg{} 
+    \item \og wasn't \fg{} devient \og wasn \fg{} et \og t \fg{} 
   \end{itemize}
   \end{frame}
   
@@ -247,7 +241,7 @@
   \framesubtitle{Limites du projet 2/2}
   Certains mots cl\'es peuvent \^etre mis en \'evidence plusieurs fois:
   \begin{itemize}
-    \item aimera accompagn\'e de aimerait avec mot-cl\'e aimer
+    \item \og aimera \fg{} accompagn\'e de \og aimerait \fg{} avec mot-cl\'e \og aimer \fg{}
   \end{itemize}
   \end{frame}
   
@@ -256,14 +250,14 @@
   \framesubtitle{Am\'eliorations possibles}
   Mise en \'evidence configurable via l'interface
   
-  Utiliser la lemmatisation
+  Utilisation de la lemmatisation
   
-  Comparer les r\'eponses des \'etudiants entre eux
+  Comparaison des r\'eponses des \'etudiants pour plagiat
   \end{frame}
-  \section[Conclusion]{Conclusion du projet}
+  \section[Conclusion]{Conclusion}
   \begin{frame}
   \frametitle{\insertsection}
-  Mise en pratique de:
+  Mise en pratique de nouveaux outils:
   \begin{itemize}
     \item Tests unitaires
     \item Tests d'acceptation
@@ -272,9 +266,9 @@
   
   Apprentissages:
   \begin{itemize}
-    \item Mieux analyser avant de se lancer
-    \item Mieux g\'erer mon horaire
-    \item M'aider dans l'\'ecriture de rapports et de notes de cours
+    \item Analyser avant de se lancer
+    \item G\'erer mon horaire
+    \item \'Ecrire des rapports et des notes de cours
   \end{itemize}
   \end{frame}
   
