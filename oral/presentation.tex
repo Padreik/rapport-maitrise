@@ -3,6 +3,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
+\newcommand{\GT}[1]{\alert{\emph{#1}}}
+
 \usetheme{Frankfurt}
 
 \title[Pr\'esentation du projet de ma\^itrise]{D\'eveloppement d'un module d'extension Moodle d'aide \`a la correction de questions\\de type \og texte long \fg{} }
@@ -19,36 +21,63 @@
   \tableofcontents[hideallsubsections]
   \end{frame}
   
-  \section[Introduction]{Motivation au projet}
+  \section[Introduction]{Motivation initiale du projet}
   \begin{frame}
-  \frametitle{Introduction au projet}
-  Id\'ee de d\'epart:
+  \frametitle{Motivation initiale du projet}
+
+\begin{block}{Id\'ee de d\'epart}
+Magda Fusaro~: cours avec de nombreux petits travaux 
+\end{block}
+
+\vfill
+
+\begin{block}{Objectifs}
   \begin{itemize}
-    \item Par Guy Tremblay et Magda Fusaro
-    \item Aide \`a la correction pour texte \`a d\'eveloppement
-    \item Microsoft Word ou Moodle
+    \item Aider \`a la correction de <<textes (courts) \`a d\'eveloppement>>
+    \item Microsoft Word ou Moodle \GT{Pas clair si c'est une
+    contrainte ou un objectif}
   \end{itemize}
+
+\end{block}
+\vfill
+
   \end{frame}
   
-  \section[Moodle]{Introduction \`a Moodle et \`a son architecture modulaire}
+  \section[Moodle]{Moodle et son architecture modulaire}
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Moodle}
+
+\begin{block}{Moodle}
   \begin{itemize}
-    \item LMS (\textit{Learning Management System})
-    \item Modulaire: Cours -> Sections -> Activit\'es
+    \item \textit{Learning Management System} (LMS)
+  \end{itemize}
+\end{block}
+
+\vfill
+
+\begin{block}{Principales caract\'eristiques}
+  \begin{itemize}
+    \item Modulaire: 
+\begin{itemize}
+\item Cours 
+\item Sections
+\item  Activit\'es
+\end{itemize}
     \item Logiciel libre
   \end{itemize}
+\end{block}
+\vfill
   \end{frame}
   
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Les types de questions}
-  Cr\'eation de formulaires en ligne
+  
+  \begin{block}{Permet la  cr\'eation de formulaires en ligne}
+  \end{block}
   
   \medskip
   
-  Questions de types:
+  \begin{block}{Permet diff\'erents types de questions}
   \begin{itemize}
     \item Choix multiples
     \item R\'eponse courte
@@ -56,6 +85,7 @@
     \item Question Cloze
     \item Composition
   \end{itemize}
+  \end{block}
   \end{frame}
   
   \begin{frame}
@@ -257,19 +287,21 @@
   \section[Conclusion]{Conclusion}
   \begin{frame}
   \frametitle{\insertsection}
-  Mise en pratique de nouveaux outils:
+  \begin{block}{Mise en pratique de nouveaux outils}
   \begin{itemize}
     \item Tests unitaires
     \item Tests d'acceptation
     \item \LaTeX
   \end{itemize}
+  \end{block}
   
-  Apprentissages:
+  \begin{block}{Apprentissages}
   \begin{itemize}
     \item Analyser avant de se lancer
     \item G\'erer mon horaire
     \item \'Ecrire des rapports et des notes de cours
   \end{itemize}
+  \end{block}
   \end{frame}
   
   \begin{frame}
