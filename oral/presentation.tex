@@ -14,203 +14,234 @@
 
 \begin{document}
   \begin{frame}[plain]
-  \titlepage
+    \titlepage
   \end{frame}
   
   \begin{frame}[plain]
-  \tableofcontents[hideallsubsections]
+    \tableofcontents[hideallsubsections]
   \end{frame}
   
   \section[Introduction]{Motivation initiale du projet}
   \begin{frame}
-  \frametitle{Motivation initiale du projet}
+    \frametitle{Motivation initiale du projet}
 
-\begin{block}{Id\'ee de d\'epart}
-Magda Fusaro~: cours avec de nombreux petits travaux 
-\end{block}
+    \begin{block}{Id\'ee de d\'epart}
+      Magda Fusaro~: cours avec de nombreux petits travaux 
+    \end{block}
 
-\vfill
+    \vfill
 
-\begin{block}{Objectifs}
-  \begin{itemize}
-    \item Aider \`a la correction de <<textes (courts) \`a d\'eveloppement>>
-    \item Microsoft Word ou Moodle \GT{Pas clair si c'est une
-    contrainte ou un objectif}
-  \end{itemize}
+    \begin{block}{Objectif}
+      \begin{itemize}
+        \item Aider \`a la correction de <<textes (courts) \`a d\'eveloppement>>
+      \end{itemize}
+    \end{block}
 
-\end{block}
-\vfill
+    \vfill
 
+    \begin{block}{Contrainte}
+      \begin{itemize}
+        \item Microsoft Word ou Moodle
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \section[Moodle]{Moodle et son architecture modulaire}
   \begin{frame}
-  \frametitle{\insertsection}
+    \frametitle{\insertsection}
 
-\begin{block}{Moodle}
-  \begin{itemize}
-    \item \textit{Learning Management System} (LMS)
-  \end{itemize}
-\end{block}
+    \begin{block}{Moodle}
+      \begin{itemize}
+        \item \textit{Learning Management System} (LMS)
+      \end{itemize}
+    \end{block}
 
-\vfill
+    \vfill
 
-\begin{block}{Principales caract\'eristiques}
-  \begin{itemize}
-    \item Modulaire: 
-\begin{itemize}
-\item Cours 
-\item Sections
-\item  Activit\'es
-\end{itemize}
-    \item Logiciel libre
-  \end{itemize}
-\end{block}
-\vfill
+    \begin{block}{Principales caract\'eristiques}
+      \begin{itemize}
+        \item Modulaire: 
+        \begin{itemize}
+          \item Cours 
+          \item Sections
+          \item  Activit\'es
+        \end{itemize}
+        \item Logiciel libre
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
+    \frametitle{\insertsection}
   
-  \begin{block}{Permet la  cr\'eation de formulaires en ligne}
-  \end{block}
+    \begin{block}{Permet la  cr\'eation de formulaires en ligne}
+    \end{block}
   
-  \medskip
+    \vfill
   
-  \begin{block}{Permet diff\'erents types de questions}
-  \begin{itemize}
-    \item Choix multiples
-    \item R\'eponse courte
-    \item Num\'erique
-    \item Question Cloze
-    \item Composition
-  \end{itemize}
-  \end{block}
+    \begin{block}{Permet diff\'erents types de questions}
+      \begin{itemize}
+        \item Choix multiples
+        \item R\'eponse courte
+        \item Num\'erique
+        \item Question Cloze
+        \item Composition
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Les modules d'extensions Moodle}
-  \begin{itemize}
-    \item Rapport de questionnaire (\textit{Quiz report})
-    \item Type de question (\textit{Question type})
-    \item Comportement de question (\textit{Question behaviour})
-  \end{itemize}
+    \frametitle{\insertsection}
+    \begin{block}{Les modules d'extensions Moodle}
+      \begin{itemize}
+        \item Rapport de questionnaire (\textit{Quiz report})
+        \item Type de question (\textit{Question type})
+        \item Comportement de question (\textit{Question behaviour})
+      \end{itemize}
+    \end{block}
   \end{frame}
   
   \section[Mots-cl\'es]{D\'etection et analyse de mots-cl\'es}
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{La lemmatisation et la racination}
-  La lemmatisation:
-  \begin{itemize}
-    \item Trouve le lemme
-    \item Forme canonique d'un mot
-    \item Aucune biblioth\`eque PHP fran\c{c}ais et anglais
-  \end{itemize}
+    \frametitle{\insertsection}
+    \begin{block}{Lemmatisation}
+      \begin{itemize}
+        \item Trouve le lemme
+        \item Forme canonique d'un mot
+        \item Aucune biblioth\`eque PHP fran\c{c}ais et anglais
+      \end{itemize}
+    \end{block}
   
-  \medskip
+    \vfill
   
-  La racination (\textit{stemming}):
-  \begin{itemize}
-    \item Trouve le radical (\textit{stem})
-    \item Racine du mot
-    \item Une biblioth\`eque multilingue PHP (\texttt{php-stemmer})
-  \end{itemize}
+    \begin{block}{Racination (\textit{stemming})}
+      \begin{itemize}
+        \item Trouve le radical (\textit{stem})
+        \item Racine du mot
+        \item Une biblioth\`eque multilingue PHP (\texttt{php-stemmer})
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Snowball}
-  \texttt{php-stemmer} est une traduction PHP des algorithmes Snowball
+    \frametitle{\insertsection}
+    \begin{block}{\texttt{php-stemmer}}
+      Traduction PHP des algorithmes Snowball
+    \end{block}
   
-  \bigskip
+    \vfill
   
-  Snowball:
-  \begin{itemize}
-    \item D\'evelopp\'e par Martin Porter
-    \item Language de traitement de texte
-    \item Compile en C ou en Java
-    \item Algorithmes de racination pour 12 langues, dont le fran\c{c}ais
-  \end{itemize}
+    \begin{block}{Snowball}
+      \begin{itemize}
+        \item D\'evelopp\'e par Martin Porter
+        \item Language de traitement de texte
+        \item Compile en C ou en Java
+        \item Algorithmes de racination pour 12 langues, dont le fran\c{c}ais
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \section[Tests]{Tests pour int\'egration \`a Moodle d'un module d'extension}
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Environnement de test}
-  Machine virtuelle Xubuntu, PHP 7.0.22 et MySQL 5.7.20
-  
-  Moodle 3.4 install\'e avec Git
+    \frametitle{\insertsection}
+    \begin{block}{Environnement de test}
+      Machine virtuelle Xubuntu, PHP 7.0.22 et MySQL 5.7.20
+      
+      Moodle 3.4 install\'e avec Git
+    \end{block}
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Tests unitaires}
-  V\'erifications \`a petite \'echelle (m\'ethodes)
+    \frametitle{\insertsection}
+    \begin{block}{Tests unitaires}
+      V\'erifications \`a petite \'echelle (m\'ethodes)
   
-  D\'ependances remplac\'ees par des \textit{stubs}
+      D\'ependances remplac\'ees par des \textit{stubs}
   
-  Ex\'ecut\'es avec \textit{PHPUnit}
+      Ex\'ecut\'es avec \textit{PHPUnit}
+    \end{block}
   
-  \bigskip
+    \vfill
   
-  8750 tests, 90 575 v\'erifications
+    \begin{block}{Ex\'ecution des tests unitaires}
+      8750 tests, 90 575 v\'erifications
   
-  8682 \textit{success}, 67 \textit{skipped} et 1 \textit{failure}:
-  \begin{itemize}
-    \item Encodage de la base de donn\'ees UTF8 non sensible \`a la casse
-  \end{itemize}
+      8682 \textit{success}, 67 \textit{skipped} et 1 \textit{failure}:
+      \begin{itemize}
+        \item Encodage de la base de donn\'ees UTF8 non sensible \`a la casse
+      \end{itemize}
+    \end{block}
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Tests d'acceptation}
-  Tests automatis\'es, comme si un humain les ex\'ecutait
+    \frametitle{\insertsection}
+    \begin{block}{Tests d'acceptation}
+      Tests automatis\'es, comme si un humain les ex\'ecutait
   
-  Tests \textit{behat} ex\'ecut\'es avec \textit{Selenium}
+      Tests \textit{behat} ex\'ecut\'es avec \textit{Selenium}
+    \end{block}
   
-  \bigskip
+    \vfill
   
-  1 771 sc\'enarios et 43 824 \'etapes
+    \begin{block}{Ex\'ecution des tests d'acceptation}
+      1 771 sc\'enarios et 43 824 \'etapes
   
-  4 sc\'enarios et 102 \'etapes ignor\'es
+      4 sc\'enarios et 102 \'etapes ignor\'es
   
-  6 sc\,énarios et 6 \'etapes \'echou\'es:
-  \begin{itemize}
-    \item Lorsqu'un \'etudiant passe d'une activit\'e \`a une autre
-    \item Filtre du calendrier mensuel
-    \item Navigation entre les modes de groupes
-    \item Solr non install\'e (2 erreurs)
-    \item L'enseignant ne voit pas quels \'etudiants sont actifs
-  \end{itemize}
+      6 sc\,énarios et 6 \'etapes \'echou\'es:
+      \begin{itemize}
+        \item Lorsqu'un \'etudiant passe d'une activit\'e \`a une autre
+        \item Filtre du calendrier mensuel
+        \item Navigation entre les modes de groupes
+        \item Solr non install\'e (2 erreurs)
+        \item L'enseignant ne voit pas quels \'etudiants sont actifs
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \section[Mise en oeuvre]{Mise en oeuvre et tests du module d'extension \texttt{qtype\_essayhelper}}
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Fonctionnalit\'es du module d'extension \texttt{qtype\_essayhelper}}
-  Module d'extension bas\'e sur \texttt{qtype\_essay}
+    \frametitle{\insertsection}
+    \begin{block}{Fonctionnalit\'es du module d'extension \texttt{qtype\_essayhelper}}
+      Module d'extension bas\'e sur \texttt{qtype\_essay}
+    \end{block}
+  \end{frame}
   
-  Fonctionnalit\'es retir\'ees:
-  \begin{itemize}
-    \item \'Editeur de texte \textit{WYSIWIG}
-    \item Remise de fichiers
-  \end{itemize}
+  \begin{frame}
+    \frametitle{\insertsection}
+    \begin{block}{Fonctionnalit\'es retir\'ees}
+      \begin{itemize}
+        \item \'Editeur de texte \textit{WYSIWIG}
+        \item Remise de fichiers
+      \end{itemize}
+    \end{block}
+    
+    \vfill
   
-  Fonctionnalit\'es conserv\'ees:
-  \begin{itemize}
-    \item R\'etroaction g\'en\'erale
-    \item Mod\`ele de r\'eponse
-    \item Information de l'\'evaluateur
-  \end{itemize}
+    \begin{block}{Fonctionnalit\'es conserv\'ees}
+      \begin{itemize}
+        \item R\'etroaction g\'en\'erale
+        \item Mod\`ele de r\'eponse
+        \item Information de l'\'evaluateur
+      \end{itemize}
+    \end{block}
+    
+    \vfill
   
-  Fonctionnalit\'es ajout\'ees:
-  \begin{itemize}
-    \item Mots-cl\'es
-    \item R\'eponse officielle de l'enseignant
-    \item Langue de racination
-  \end{itemize}
+    \begin{block}{Fonctionnalit\'es ajout\'ees}
+      \begin{itemize}
+        \item Mots-cl\'es
+        \item R\'eponse officielle de l'enseignant
+        \item Langue de racination
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \begin{frame}
@@ -248,42 +279,46 @@ Magda Fusaro~: cours avec de nombreux petits travaux
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Limites du projet 1/2}
-  Pas de tests réels:
-  \begin{itemize}
-    \item Professeure Fusaro est devenue Rectrice de l'UQAM
-    \item Les \'evaluations dans mes cours n'ont pas de textes \`a d\'eveloppement
-  \end{itemize}
+    \frametitle{Limites de notre module de correction}
+    \begin{block}{Pas de tests réels}
+      \begin{itemize}
+        \item Professeure Fusaro est devenue Rectrice de l'UQAM
+        \item Les \'evaluations dans mes cours n'ont pas de textes \`a d\'eveloppement
+      \end{itemize}
+    \end{block}
   
-  \bigskip
+    \vfill
   
-  La s\'eparation des mots est probl\'ematique:
-  \begin{itemize}
-    \item \og aujourd'hui \fg{} devient \og aujourd \fg{} et \og hui \fg{} 
-    \item \og qu'autrui \fg{} devient \og qu \fg{} et \og autrui \fg{} 
-    \item \og wasn't \fg{} devient \og wasn \fg{} et \og t \fg{} 
-  \end{itemize}
+    \begin{block}{La s\'eparation des mots est probl\'ematique}
+      \begin{itemize}
+        \item \og aujourd'hui \fg{} devient \og aujourd \fg{} et \og hui \fg{} 
+        \item \og qu'autrui \fg{} devient \og qu \fg{} et \og autrui \fg{} 
+        \item \og wasn't \fg{} devient \og wasn \fg{} et \og t \fg{} 
+      \end{itemize}
+    \end{block}
+    \vfill
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Limites du projet 2/2}
-  Certains mots cl\'es peuvent \^etre mis en \'evidence plusieurs fois:
-  \begin{itemize}
-    \item \og aimera \fg{} accompagn\'e de \og aimerait \fg{} avec mot-cl\'e \og aimer \fg{}
-  \end{itemize}
+    \frametitle{Limites de notre module de correction}
+    \begin{block}{Certains mots cl\'es peuvent \^etre mis en \'evidence plusieurs fois}
+      \begin{itemize}
+        \item \og aimera \fg{} accompagn\'e de \og aimerait \fg{} avec mot-cl\'e \og aimer \fg{}
+      \end{itemize}
+    \end{block}
   \end{frame}
   
   \begin{frame}
-  \frametitle{\insertsection}
-  \framesubtitle{Am\'eliorations possibles}
-  Mise en \'evidence configurable via l'interface
+    \frametitle{\insertsection}
+    \begin{block}{Am\'eliorations possibles}
+      Mise en \'evidence configurable via l'interface
   
-  Utilisation de la lemmatisation
+      Utilisation de la lemmatisation
   
-  Comparaison des r\'eponses des \'etudiants pour plagiat
+      Comparaison des r\'eponses des \'etudiants pour plagiat
+    \end{block}
   \end{frame}
+  
   \section[Conclusion]{Conclusion}
   \begin{frame}
   \frametitle{\insertsection}
