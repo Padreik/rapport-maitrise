@@ -7,6 +7,10 @@
 
 \usetheme{Frankfurt}
 
+%\setbeamertemplate{mini frames}{}
+% GT: Symboles de navigation pas vraiment utiles: je ne les ai jamais utilises!!
+\setbeamertemplate{navigation symbols}{}
+
 \title[Pr\'esentation du projet de ma\^itrise]{D\'eveloppement d'un module d'extension Moodle d'aide \`a la correction de questions\\de type \og texte long \fg{} }
 \author{Philippe Girard}
 \institute{Universit\'e du Qu\'ebec \`a Montr\'eal}
@@ -51,9 +55,11 @@
     \frametitle{\insertsection}
     \begin{block}{Fonctionnalit\'es}
       \begin{itemize}
-        \item Mise en \'evidence de mots-cl\'es
-        \item Afficher la r\'eponse de l'enseignant \`a c\^ot\'e de la r\'eponse de l'\'etudiant
-        \item Fonctionne en fran\c{c}ais et en anglais
+        \item Mise en \'evidence \alert{de mots-cl\'es}
+        \item[]
+        \item Affichage de la r\'eponse de l'enseignant \`a c\^ot\'e de celle de l'\'etudiant
+        \item[]
+        \item Fonctionnement en fran\c{c}ais et en anglais
       \end{itemize}
     \end{block}
   \end{frame}
@@ -115,24 +121,33 @@
     \end{block}
   \end{frame}
   
-  \section[Mots-cl\'es]{D\'etection et analyse de mots-cl\'es}
+  \section[Mots-cl\'es]{D\'etection et analyse des mots-cl\'es}
   \begin{frame}
     \frametitle{\insertsection}
     \begin{block}{Lemmatisation}
       \begin{itemize}
-        \item Trouve le lemme
-        \item Forme canonique d'un mot
-        \item Aucune biblioth\`eque PHP fran\c{c}ais et anglais
+        \item Trouve le lemme d'un mot
+              \begin{itemize}
+                      \item Lemme = Forme \alert{canonique} d'un mot
+                      \end{itemize}
+
+       \medskip
+       \item Aucune biblioth\`eque PHP fran\c{c}ais/anglais
       \end{itemize}
     \end{block}
   
     \vfill
+    \pause
   
     \begin{block}{Racination (\textit{stemming})}
       \begin{itemize}
-        \item Trouve le radical (\textit{stem})
-        \item Racine du mot
-        \item Une biblioth\`eque multilingue PHP (\texttt{php-stemmer})
+        \item Trouve le radical (\textit{stem}) d'un mot
+        \begin{itemize}
+        \item Radical = Racine du mot
+        \end{itemize}
+
+       \medskip
+        \item \texttt{php-stemmer}: biblioth\`eque multilingue PHP
       \end{itemize}
     \end{block}
     \vfill
@@ -160,9 +175,16 @@
   \section[Tests]{Tests pour int\'egration \`a Moodle d'un module d'extension}
   \begin{frame}
     \frametitle{\insertsection}
-    \begin{block}{Environnement de test}
-      Machine virtuelle Xubuntu, PHP 7.0.22 et MySQL 5.7.20
+    \begin{block}{Environnement de tests}
+      Machine virtuelle Xubuntu
+      \smallskip
+
+      PHP 7.0.22 
+      \smallskip
       
+      MySQL 5.7.20
+      \smallskip
+
       Moodle 3.4 install\'e avec Git
     \end{block}
   \end{frame}
@@ -181,7 +203,8 @@
   
     \begin{block}{Ex\'ecution des tests unitaires}
       8750 tests, 90 575 v\'erifications
-  
+      \medskip
+
       8682 \textit{success}, 67 \textit{skipped} et 1 \textit{failure}:
       \begin{itemize}
         \item Encodage de la base de donn\'ees UTF8 non sensible \`a la casse
@@ -192,7 +215,7 @@
   \begin{frame}
     \frametitle{\insertsection}
     \begin{block}{Tests d'acceptation}
-      Tests automatis\'es, comme si un humain les ex\'ecutait
+      Tests automatis\'es --- de bout en bout
   
       Tests \textit{behat} ex\'ecut\'es avec \textit{Selenium}
     \end{block}
@@ -201,17 +224,22 @@
   
     \begin{block}{Ex\'ecution des tests d'acceptation}
       1 771 sc\'enarios et 43 824 \'etapes
-  
+
+      \medskip
+
       4 sc\'enarios et 102 \'etapes ignor\'es
-  
+
+      \medskip
       6 sc\,énarios et 6 \'etapes \'echou\'es:
+      {\footnotesize
       \begin{itemize}
-        \item Lorsqu'un \'etudiant passe d'une activit\'e \`a une autre
+        \item Un \'etudiant passe d'une activit\'e \`a une autre
         \item Filtre du calendrier mensuel
         \item Navigation entre les modes de groupes
         \item Solr non install\'e (2 erreurs)
         \item L'enseignant ne voit pas quels \'etudiants sont actifs
       \end{itemize}
+    }
     \end{block}
     \vfill
   \end{frame}
@@ -228,7 +256,7 @@
     \frametitle{\insertsection}
     \begin{block}{Fonctionnalit\'es retir\'ees}
       \begin{itemize}
-        \item \'Editeur de texte \textit{WYSIWIG}
+        \item \'Edition de texte \textit{WYSIWIG}
         \item Remise de fichiers
       \end{itemize}
     \end{block}
@@ -257,64 +285,75 @@
   
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Structure des fichiers}
+
+\begin{columns}
+\begin{column}{0.38\textwidth}
+ \alert{Structure des fichiers~$\Rightarrow$}
+\end{column}
+\begin{column}{0.6\textwidth}
+\vspace*{-1cm}
   \begin{center}
-    \includegraphics[scale=0.5]{../images/architecture.png}
+    \includegraphics[scale=0.6]{../images/architecture.png}
   \end{center}
+\end{column}
+\end{columns}
+
   \end{frame}
   
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Principales classes}
-  \begin{center}
-    \includegraphics[scale=0.4]{../images/class-simple.png}
-  \end{center}
+  \alert{Principales classes}
+\vfill
+    \hspace*{-0.75cm}\includegraphics[scale=0.475]{../images/class-simple.png}
   \end{frame}
   
   \section[R\'esultats]{R\'esultats obtenus et limites de notre module de correction}
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Exemple de configuration}
-  \begin{center}
-    \includegraphics[scale=0.4]{../images/questionform_base.png}
+  \alert{Exemple de configuration}
+  \vfill
+
+    \hspace*{-0.9cm}\includegraphics[scale=0.4]{../images/questionform_base.png}
     \includegraphics[scale=0.4]{../images/questionform_helper.png}
-  \end{center}
   \end{frame}
   
   \begin{frame}
   \frametitle{\insertsection}
-  \framesubtitle{Exemple d'interface de correction}
+  \alert{Exemple d'interface de correction}\vfill
   \begin{center}
-    \includegraphics[scale=0.4]{../images/questionform_correction.png}
+    \includegraphics[scale=0.6]{../images/questionform_correction.png}
   \end{center}
   \end{frame}
   
   \begin{frame}
-    \frametitle{Limites de notre module de correction}
+    \frametitle{R\'esultats obtenus et limites de notre module de correction}
     \begin{block}{Pas de tests réels}
       \begin{itemize}
-        \item Professeure Fusaro est devenue Rectrice de l'UQAM
-        \item Les \'evaluations dans mes cours n'ont pas de textes \`a d\'eveloppement
+        \item Magda Fusaro est devenue Rectrice de l'UQAM
+        \item Les \'evaluations dans mes cours au C\'egep n'ont pas de textes \`a d\'eveloppement
       \end{itemize}
     \end{block}
   
     \vfill
+
+
+    \pause
   
-    \begin{block}{La s\'eparation des mots est probl\'ematique}
-      \begin{itemize}
-        \item \og aujourd'hui \fg{} devient \og aujourd \fg{} et \og hui \fg{} 
-        \item \og qu'autrui \fg{} devient \og qu \fg{} et \og autrui \fg{} 
-        \item \og wasn't \fg{} devient \og wasn \fg{} et \og t \fg{} 
-      \end{itemize}
+    \begin{block}{La s\'eparation des mots peut \^etre inexacte}
+      \begin{tabular}{lllll}
+       \og aujourd'hui \fg{} & $\Rightarrow$ & \og aujourd \fg{} & $+$ & \og hui \fg{} 
+        \\
+        \og qu'autrui \fg{} & $\Rightarrow$ &  \og qu \fg{} & $+$ & \og autrui \fg{} 
+        \\
+        \og wasn't \fg{} &$\Rightarrow$ & \og wasn \fg{} &  $+$ & \og t \fg{} 
+      \end{tabular}
     \end{block}
     \vfill
-  \end{frame}
-  
-  \begin{frame}
-    \frametitle{Limites de notre module de correction}
+
+    \pause
     \begin{block}{Certains mots cl\'es peuvent \^etre mis en \'evidence plusieurs fois}
       \begin{itemize}
-        \item \og aimera \fg{} accompagn\'e de \og aimerait \fg{} avec mot-cl\'e \og aimer \fg{}
+        \item \og aimera \fg{} $+$ \og aimerait \fg{} avec mot-cl\'e \og aimer \fg{}
       \end{itemize}
     \end{block}
   \end{frame}
@@ -323,8 +362,12 @@
     \frametitle{\insertsection}
     \begin{block}{Am\'eliorations possibles}
       Mise en \'evidence configurable via l'interface
+
+      \medskip
   
       Utilisation de la lemmatisation
+  
+      \medskip
   
       Comparaison des r\'eponses des \'etudiants pour plagiat
     \end{block}
@@ -340,6 +383,8 @@
     \item \LaTeX
   \end{itemize}
   \end{block}
+
+  \vfill
   
   \begin{block}{Apprentissages}
   \begin{itemize}
@@ -348,11 +393,19 @@
     \item \'Ecrire des rapports et des notes de cours
   \end{itemize}
   \end{block}
+  \vfill
   \end{frame}
   
   \begin{frame}
   \begin{center}
+  \Huge Merci!
+  \end{center}
+
+  \vfill
+
+  \begin{center}
   \Huge Questions?
   \end{center}
+  \vfill
   \end{frame}
 \end{document}
