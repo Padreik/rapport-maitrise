@@ -160,7 +160,7 @@
         \item Trouve le lemme d'un mot
               \begin{itemize}
                       \item Lemme = Forme \alert{canonique} d'un mot
-                      \item Exemple: aimerait => aimer
+                      \item Exemple: aimerait $\Rightarrow$ aimer
                       \end{itemize}
 
        \medskip
@@ -176,7 +176,7 @@
         \item Trouve le radical (\textit{stem}) d'un mot
         \begin{itemize}
         \item Radical = Racine du mot
-        \item Exemple: aimerait => aim
+        \item Exemple: aimerait $\Rightarrow$ aim
         \end{itemize}
 
        \medskip
@@ -340,19 +340,17 @@
     \hspace*{-0.75cm}\includegraphics[scale=0.475]{../images/class-simple.png}
   \end{frame}
   
-  \begin{frame}
-  \frametitle{\insertsection}
-  \alert{Flux d'interaction}
-\vfill
+  \begin{frame}[plain]
+  %\frametitle{\insertsection}
     \begin{center}
-    \includegraphics[scale=0.2]{../images/diagramme-flux.png}
+    \hspace*{-0.9cm}\includegraphics[scale=0.245]{../images/diagramme-flux.png}
     \end{center}
   \end{frame}
   
-  \begin{frame}[fragile]
-    \frametitle{\insertsection}
-    \alert{Exemple de test d'acceptation 1/2}
-\begin{lstlisting}[language=behat,frame=l]
+  \begin{frame}[fragile,plain]
+    %\frametitle{\insertsection}
+    \alert{Exemple de test d'acceptation \'ecrit avec \texttt{behat}}
+\begin{lstlisting}[language=behat,frame=l,numbers=none,basicstyle=\footnotesize]
 @qtype @qtype_essay
 Feature: Test creating an Essay question
   As a teacher
@@ -374,50 +372,19 @@ Feature: Test creating an Essay question
     And I navigate to "Question bank" node in "Course administration"
 \end{lstlisting}
 \end{frame}
-  \begin{frame}[fragile]
-    \frametitle{\insertsection}
-    \alert{Exemple de test d'acceptation 1/2}
-\begin{lstlisting}[language=behat,frame=l]
-  Scenario: Create an Essay question with Response format set to 'HTML editor'
-    When I add a "Essay" question filling the form with:
-      | Question name            | essay-001                      |
-      | Question text            | Write an essay with 500 words. |
-      | General feedback         | This is general feedback       |
-      | Response format          | HTML editor                    |
-    Then I should see "essay-001"
+ 
+ \begin{frame}[fragile,plain]
+    %\frametitle{\insertsection}
+\begin{lstlisting}[language=behat,frame=l,numbers=none,basicstyle=\footnotesize]
+Scenario: Create an Essay question with Response format set to 'HTML editor'
+  When I add a "Essay" question filling the form with:
+   | Question name    | essay-001                |
+   | Question text    | Write a 500 word essay.  |
+   | General feedback | This is general feedback |
+   | Response format  | HTML editor              |
+  Then I should see "essay-001"
 
-  Scenario: Create an Essay question with Response format set to 'HTML editor with the file picker'
-    When I add a "Essay" question filling the form with:
-      | Question name            | essay-002                      |
-      | Question text            | Write an essay with 500 words. |
-      | General feedback         | This is general feedback       |
-      | Response format          | HTML editor                    |
-    Then I should see "essay-002"
-\end{lstlisting}
-\end{frame}
-  
-  \begin{frame}[fragile]
-    \frametitle{\insertsection}
-    \alert{Exemple de test unitaire}
-    \vfill
-\begin{lstlisting}[language=php,frame=l,style=default]
-class qtype_essayhelper_stemmer_test extends basic_testcase {
-    public function test_get_stemmer_all_languages_exists() {
-        $stemmer = new qtype_essayhelper_stemmer();
-
-        // Set get_stemmer function accessible
-        $get_stemmer = $this->get_protected_function($stemmer, "get_stemmer");
-
-        // Get all available languages
-        $languages = PHPUnit\Framework\Assert::readAttribute($stemmer, "languages");
-
-        // Test all languages
-        foreach ($languages as $langCode => $lang) {
-            $langStemmer = $get_stemmer->invokeArgs($stemmer, array($langCode));
-            $this->assertEquals((new \ReflectionClass($langStemmer))->getShortName(), $lang);
-        }
-    }
-}
+  [...]
 \end{lstlisting}
 \end{frame}
   
