@@ -2,6 +2,37 @@
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{Gray}{RGB}{245,245,245}
+\definecolor{CPPGray}{RGB}{120,120,120}
+
+\lstdefinestyle{default}{
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{Gray},
+  numbers=left, numbersep=3pt, stepnumber=1, numberstyle=\tiny\color{CPPGray},
+  rulecolor=\color{CPPGray},
+  basicstyle=\tiny
+}
+
+\definecolor{dkblue}{rgb}{0,0,.6}
+
+\lstset{language=php,
+  keywordstyle = \color{dkblue},
+  style=default}
+  
+\lstdefinelanguage{behat}{
+    keywords={Feature,Background,Scenario,Given,When,Then,And}
+}
+\lstset{language=behat,
+  keywordstyle = \color{dkblue},
+  style=default}
 
 \newcommand{\GT}[1]{\alert{\emph{#1}}}
 
@@ -318,19 +349,77 @@
     \end{center}
   \end{frame}
   
-  \begin{frame}
+  \begin{frame}[fragile]
     \frametitle{\insertsection}
-    \alert{Exemple de test d'acceptation}
-    \vfill
-    \includegraphics[scale=0.4]{../images/test-behat.png}
-  \end{frame}
+    \alert{Exemple de test d'acceptation 1/2}
+\begin{lstlisting}[language=behat,frame=l]
+@qtype @qtype_essay
+Feature: Test creating an Essay question
+  As a teacher
+  In order to test my students
+  I need to be able to create an Essay question
+
+  Background:
+    Given the following "users" exist:
+      | username | firstname | lastname | email               |
+      | teacher1 | T1        | Teacher1 | teacher1@moodle.com |
+    And the following "courses" exist:
+      | fullname | shortname | category |
+      | Course 1 | C1        | 0        |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | teacher1 | C1     | editingteacher |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage
+    And I navigate to "Question bank" node in "Course administration"
+\end{lstlisting}
+\end{frame}
+  \begin{frame}[fragile]
+    \frametitle{\insertsection}
+    \alert{Exemple de test d'acceptation 1/2}
+\begin{lstlisting}[language=behat,frame=l]
+  Scenario: Create an Essay question with Response format set to 'HTML editor'
+    When I add a "Essay" question filling the form with:
+      | Question name            | essay-001                      |
+      | Question text            | Write an essay with 500 words. |
+      | General feedback         | This is general feedback       |
+      | Response format          | HTML editor                    |
+    Then I should see "essay-001"
+
+  Scenario: Create an Essay question with Response format set to 'HTML editor with the file picker'
+    When I add a "Essay" question filling the form with:
+      | Question name            | essay-002                      |
+      | Question text            | Write an essay with 500 words. |
+      | General feedback         | This is general feedback       |
+      | Response format          | HTML editor                    |
+    Then I should see "essay-002"
+\end{lstlisting}
+\end{frame}
   
-  \begin{frame}
+  \begin{frame}[fragile]
     \frametitle{\insertsection}
     \alert{Exemple de test unitaire}
     \vfill
-    \includegraphics[scale=0.4]{../images/test-unit.png}
-  \end{frame}
+\begin{lstlisting}[language=php,frame=l,style=default]
+class qtype_essayhelper_stemmer_test extends basic_testcase {
+    public function test_get_stemmer_all_languages_exists() {
+        $stemmer = new qtype_essayhelper_stemmer();
+
+        // Set get_stemmer function accessible
+        $get_stemmer = $this->get_protected_function($stemmer, "get_stemmer");
+
+        // Get all available languages
+        $languages = PHPUnit\Framework\Assert::readAttribute($stemmer, "languages");
+
+        // Test all languages
+        foreach ($languages as $langCode => $lang) {
+            $langStemmer = $get_stemmer->invokeArgs($stemmer, array($langCode));
+            $this->assertEquals((new \ReflectionClass($langStemmer))->getShortName(), $lang);
+        }
+    }
+}
+\end{lstlisting}
+\end{frame}
   
   \section[R\'esultats]{R\'esultats obtenus et limites de notre module de correction}
   \begin{frame}
